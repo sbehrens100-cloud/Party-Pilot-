@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PartyPilot – Feiern fertig gepackt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F6F3EE;--surface:#FFFFFF;--surface2:#FAF8F4;--ink:#17150F;--muted:#7A746A;--line:#E7E1D7;--line2:#D9D1C3;
+  --accent:#A8844C;--accent-ink:#FFFFFF;--accent-soft:#F3EBDD;--gold2:#C9A96E;--sun:#F3EBDD;--sun-ink:#6B5229;
+  --good:#3F6B4F;--good-bg:#E9F0EA;--warn:#8A6421;--warn-bg:#F6EEDC;--bad:#9A3B32;--bad-bg:#F6E6E3;--info:#45556B;--info-bg:#ECEFF3;
+  --shadow:0 1px 2px rgba(23,21,15,.04),0 8px 28px -12px rgba(23,21,15,.12);
+  --shadow-lg:0 2px 4px rgba(23,21,15,.04),0 24px 48px -20px rgba(23,21,15,.22);
+  --f-display:'Fraunces','Times New Roman',Georgia,serif;
+  --f-body:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --r:18px;color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#11100E;--surface:#1A1916;--surface2:#211F1B;--ink:#F2EDE4;--muted:#A39B8E;--line:#2E2B26;--line2:#3B3731;
+    --accent:#C9A96E;--accent-ink:#17150F;--accent-soft:#2A2419;--sun:#2A2419;--sun-ink:#E2CC9F;
+    --good:#8DBB9A;--good-bg:#1C2A21;--warn:#E0B972;--warn-bg:#2E2617;--bad:#E39A90;--bad-bg:#2F1C19;--info:#AFBBCB;--info-bg:#1E232A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 28px -12px rgba(0,0,0,.6);--shadow-lg:0 24px 48px -20px rgba(0,0,0,.7);color-scheme:dark}
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0px) max(20px,env(safe-area-inset-right,0px)) calc(56px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance;line-height:1.08;letter-spacing:-.015em}
+h3{font-size:1.25rem;letter-spacing:-.005em}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+small,.muted{color:var(--muted)}
+.mono{font-family:var(--f-body);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+::selection{background:var(--accent-soft)}
+
+/* Kopf */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;padding:22px 0 18px;border-bottom:1px solid var(--line);margin-bottom:34px}
+.brand{font-family:var(--f-display);font-weight:400;font-size:1.6rem;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;color:var(--ink)}
+.brand i{width:34px;height:34px;border-radius:50%;border:1px solid var(--accent);display:inline-grid;place-items:center;font-style:normal}
+.brand i::after{content:"P";font-family:var(--f-display);font-style:italic;font-size:1.05rem;color:var(--accent);line-height:1}
+.brand .adm{font-family:var(--f-body);font-size:.62rem;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 9px;letter-spacing:.14em}
+.tabs{display:flex;gap:2px 22px;flex-wrap:wrap;background:none;border:0;padding:0}
+.tab{border:0;background:transparent;padding:6px 0;border-radius:0;font-weight:600;font-size:.86rem;color:var(--muted);letter-spacing:.02em;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--ink)}
+.tab[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* Schritte */
+.steps{display:flex;flex-wrap:wrap;gap:6px 26px;list-style:none;margin:0 0 34px;padding:0}
+.steps button{border:0;background:none;padding:4px 0;font-size:.82rem;font-weight:600;color:var(--muted);display:flex;gap:10px;align-items:center;letter-spacing:.03em}
+.steps button b{width:26px;height:26px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-weight:600;font-size:.78rem}
+.steps .on button{color:var(--ink)}
+.steps .on button b{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.steps .done button{color:var(--ink)}
+.steps .done button b{border-color:var(--accent);color:var(--accent)}
+.steps button:disabled{cursor:default}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:36px}
+.hero h1{font-size:clamp(2.6rem,7.2vw,5rem);font-weight:300;line-height:1.02;letter-spacing:-.03em}
+.hero h1 em{font-style:italic;color:var(--accent);background:none}
+.hero p{color:var(--muted);max-width:44ch;margin-top:18px;font-size:1.02rem}
+.hero>div:first-child::before{content:"Eventplanung · Rhein-Neckar";display:block;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.nl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:12px;min-width:0;box-shadow:var(--shadow)}
+.nl label{font-family:var(--f-display);font-size:1.1rem}
+
+/* Formulare */
+textarea,input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],input[type=password],input[type=url],select{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;min-width:0;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea{resize:vertical;min-height:84px;line-height:1.5}
+input[type=range]{width:100%;accent-color:var(--accent);padding:0;border:0;background:none;-webkit-appearance:auto;appearance:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.74rem;font-weight:600;background:var(--accent-soft);color:var(--sun-ink);border-radius:999px;padding:3px 11px;border:0;letter-spacing:.02em}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;min-width:0;box-shadow:var(--shadow)}
+.grid-f{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.fld{display:grid;gap:7px;align-content:start;min-width:0}
+.fld>span{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.14em}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.chk{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 15px;font-size:.88rem;cursor:pointer;transition:border-color .2s,background .2s}
+.chk:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.chk input{accent-color:var(--accent);width:15px;height:15px;margin:0;flex:none}
+
+/* Buttons */
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:999px;padding:12px 24px;font-weight:600;font-size:.9rem;letter-spacing:.03em;text-decoration:none;display:inline-flex;align-items:center;gap:8px;justify-content:center;transition:transform .15s,background .2s,box-shadow .2s,opacity .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line2)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.danger{background:transparent;color:var(--bad);border-color:currentColor}
+.btn.sm{padding:7px 15px;font-size:.8rem}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sp{flex:1}
+.stack{display:grid;gap:18px;min-width:0}
+.sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px 24px;margin:4px 0 24px}
+.sec-h h2{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:300;letter-spacing:-.02em}
+.err,.note,.ok{border-radius:12px;padding:12px 16px;margin-bottom:16px;font-weight:600;font-size:.9rem}
+.err{background:var(--bad-bg);color:var(--bad)}
+.note{background:var(--warn-bg);color:var(--warn)}
+.ok{background:var(--good-bg);color:var(--good)}
+.info{background:var(--surface2);color:var(--muted);border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:12px;padding:13px 16px;font-size:.88rem}
+
+/* Pakete */
+.passes{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;align-items:start}
+.pass{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;min-width:0;box-shadow:var(--shadow);overflow:hidden}
+.pass.rec{border-color:var(--accent);box-shadow:var(--shadow-lg)}
+.pass.rec::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold2),var(--accent))}
+.pass-h{padding:28px 26px 20px;display:grid;gap:8px}
+.kicker{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{background:none;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px;font-weight:700;letter-spacing:.14em}
+.pass h3{font-size:2.1rem;font-weight:300;font-style:italic}
+.price{font-family:var(--f-display);font-weight:300;font-size:2.6rem;letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums;line-height:1.05}
+.pill{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.72rem;font-weight:600;letter-spacing:.02em;white-space:nowrap;border:1px solid transparent}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.info{background:var(--accent-soft);color:var(--sun-ink)}
+.pill.neutral{background:transparent;color:var(--muted);border-color:var(--line2)}
+.perf{border-top:1px solid var(--line);margin:0 26px}
+.items{list-style:none;margin:0;padding:20px 26px;display:grid;gap:14px;flex:1}
+.items li{display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:10px;align-items:baseline}
+.items .k{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)}
+.items .v{display:grid;min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.items .v b{font-weight:600}
+.items .v small{font-size:.78rem;margin-top:2px}
+.items .pr{font-size:.88rem;font-variant-numeric:tabular-nums;font-weight:500}
+.why{padding:0 26px 18px;font-size:.86rem;color:var(--muted);line-height:1.55}
+.pass-f{padding:0 26px 26px;display:grid;gap:8px}
+
+/* Anpassen */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}
+.blk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;display:grid;gap:12px;min-width:0;box-shadow:var(--shadow)}
+.blk.empty{background:transparent;border-style:dashed;border-color:var(--line2);box-shadow:none}
+.blk-h{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.blk-h h3{font-size:.72rem;font-family:var(--f-body);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.cur{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px}
+.cur>div{min-width:0;overflow-wrap:anywhere}
+.cur b{font-family:var(--f-display);font-weight:400;font-size:1.35rem;letter-spacing:-.01em}
+.cur .price{font-size:1.7rem!important}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+details summary{cursor:pointer;font-weight:600;font-size:.84rem;color:var(--accent);letter-spacing:.02em;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"– "}
+details ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.alt{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--surface2)}
+.alt>div{display:grid;min-width:0;overflow-wrap:anywhere}
+.alt.off{opacity:.55}
+.delta{font-size:.84rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.sum{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:grid;gap:16px}
+.sum .panel{display:grid;gap:14px}
+.lines{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.lines li{display:flex;justify-content:space-between;gap:14px;font-size:.92rem}
+.lines .n{overflow-wrap:anywhere;min-width:0}
+.lines .m{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+.lines.kv .n{flex:none;color:var(--muted)}.lines.kv .m{white-space:normal;text-align:right}
+.lines .tot{border-top:1px solid var(--ink);padding-top:12px;margin-top:4px;align-items:baseline}
+.lines .tot .n{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.lines .tot .m{font-family:var(--f-display);font-size:1.75rem;font-weight:300;letter-spacing:-.02em}
+.lines .dis .m{color:var(--good)}
+
+/* Ablauf */
+.tl{list-style:none;margin:0;padding:0;display:grid;position:relative}
+.tl li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:10px 0;position:relative}
+.tl li::before{content:"";position:absolute;left:62px;top:18px;width:7px;height:7px;border-radius:50%;background:var(--surface);border:1px solid var(--accent)}
+.tl li::after{content:"";position:absolute;left:65px;top:28px;bottom:-10px;width:1px;background:var(--line)}
+.tl li:last-child::after{display:none}
+.tl li>div{padding-left:18px}
+.tl time{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600;font-size:.88rem}
+.tl .evt{font-weight:600}
+
+/* Admin */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:26px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:grid;gap:6px;min-width:0;box-shadow:var(--shadow)}
+.kpi .l{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+.kpi .n{font-family:var(--f-display);font-weight:300;font-size:clamp(1.5rem,5vw,2.1rem);letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums;line-height:1.1}
+.kpi small{font-size:.78rem}
+.kpi.hi{border-color:var(--accent)}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%}
+.tbl table{min-width:660px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+th{font-size:.64rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:700}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:last-child td{border-bottom:0}
+tr.click{cursor:pointer;transition:background .15s}
+tr.click:hover td{background:var(--surface2)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-bottom:24px}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:1px;margin-bottom:26px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.pipe div{background:var(--surface);padding:14px;display:grid;gap:4px}
+.pipe b{font-family:var(--f-display);font-weight:300;font-size:1.7rem;line-height:1}
+.pipe small{font-size:.72rem;line-height:1.3}
+.stagebar{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
+.stagebar span{font-size:.7rem;font-weight:600;padding:4px 11px;border-radius:999px;color:var(--muted);border:1px solid var(--line2);letter-spacing:.02em}
+.stagebar span.done{color:var(--accent);border-color:var(--accent-soft);background:var(--accent-soft)}
+.stagebar span.now{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.todo{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.todo:last-child{border-bottom:0}
+.todo input{width:17px;height:17px;accent-color:var(--accent);margin:0}
+.todo.done .t{text-decoration:line-through;color:var(--muted)}
+.todo .d{font-size:.76rem;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+.todo .d.late{color:var(--bad);font-weight:700}
+.item{border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;background:var(--surface2)}
+.item .hd{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.item .hd .mono{font-size:.84rem;color:var(--muted)}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-height:300px;overflow:auto}
+.log li{font-size:.88rem;border-left:1px solid var(--accent);padding-left:12px}
+.log time{font-size:.72rem;color:var(--muted);display:block;letter-spacing:.03em}
+.foot{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;letter-spacing:.02em}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.04em}
+.linkbtn:hover{color:var(--accent)}
+.stars{display:flex;gap:2px}
+.stars button{border:0;background:none;font-size:1.25rem;padding:0 2px;color:var(--line2);line-height:1}
+.stars button.on{color:var(--accent)}
+.center{max-width:420px;margin:48px auto}
+.center h2{font-weight:300}
+@media (max-width:860px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:28px}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .sum{position:static}
+  .panel{padding:20px}
+  .top{margin-bottom:26px}
+}
+@media (prefers-reduced-motion:no-preference){.pass{transition:transform .25s ease,box-shadow .25s ease}.pass:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}}
+@media print{.top,.foot,.btn,.steps{display:none!important}body{background:#fff}.panel,.blk,.kpi{box-shadow:none}}
+
+</style>
+</head>
+<body>
+<div class="wrap"><div id="app"></div></div>
+<script>
+/* =====================================================================
+   PartyPilot – Vermittlungsplattform für Feiern (Rhein-Neckar)
+   Eine Datei: Kundenansicht + Admin (Datenbank, Prozess, Gewinn).
+   Daten liegen auf dem Server (Railway-Volume). Kunden sehen nur öffentliche Felder,
+   der Admin-Bereich braucht einen echten Login.
+   ===================================================================== */
+
+/* ---------- Stammdaten ---------- */
+const CATS={
+  location:{label:'Location'},
+  catering:{label:'Catering'},
+  getraenke:{label:'Getränke & Bar'},
+  dj:{label:'DJ / Musik'},
+  foto:{label:'Foto / Fotobox'},
+  deko:{label:'Deko & Verleih'},
+  personal:{label:'Service-Personal'}
+};
+const ORDER=['location','catering','getraenke','dj','foto','deko','personal'];
+const CITIES={
+  'Heidelberg':[49.398,8.672],'Mannheim':[49.487,8.466],'Schwetzingen':[49.383,8.570],'Weinheim':[49.549,8.667],
+  'Ludwigshafen':[49.477,8.445],'Speyer':[49.318,8.431],'Wiesloch':[49.294,8.698],'Leimen':[49.348,8.691],
+  'Ladenburg':[49.472,8.611],'Viernheim':[49.540,8.578],'Edingen-Neckarhausen':[49.457,8.607],'Eppelheim':[49.400,8.633],
+  'Bobenheim-Roxheim':[49.587,8.358],'Kraichgau (Sinsheim)':[49.253,8.879],'Region HD/MA (Ort prüfen)':[49.44,8.57]
+};
+const EVENT_CITIES=['Heidelberg','Mannheim','Schwetzingen','Weinheim','Ludwigshafen','Speyer','Wiesloch','Leimen','Ladenburg','Viernheim','Edingen-Neckarhausen','Eppelheim'];
+const STYLES=['gemütlich','rustikal','elegant','modern','gartenparty'];
+const OCCASIONS=[['Geburtstag',0],['Hochzeit',0],['Jubiläum',0],['Taufe / Kommunion',0],['Gartenparty / BBQ',0],['Weihnachtsfeier (Firma)',1],['Sommerfest (Firma)',1],['Teamevent (Firma)',1],['Firmenjubiläum',1]];
+const DIETS=['vegetarisch','vegan','glutenfrei','halal'];
+const PSTATUS=['Lead','Angefragt','Partner','Pausiert'];
+const STAGES=[
+  ['neu','Neu eingegangen','Anfrage eingegangen'],
+  ['angefragt','Bei Dienstleistern angefragt','Wir prüfen die Verfügbarkeit'],
+  ['bestaetigt','Alle Dienstleister bestätigt','Verfügbarkeit bestätigt'],
+  ['angebot','Angebot beim Kunden','Dein Angebot liegt bereit'],
+  ['gebucht','Gebucht (Zusage + Anzahlung)','Gebucht'],
+  ['abstimmung','Abstimmung läuft','Details werden abgestimmt'],
+  ['final','Final freigegeben','Alles steht'],
+  ['durchgefuehrt','Durchgeführt – Bewertung','Feier vorbei – danke!'],
+  ['abgeschlossen','Abgerechnet','Abgeschlossen']
+];
+const STAGE_IDX=Object.fromEntries(STAGES.map((s,i)=>[s[0],i]));
+
+/* Checklisten für die Abstimmung nach der Zusage (Tage relativ zum Eventdatum) */
+const CHECK_TPL={
+  _all:[[0,'Anzahlung vom Kunden erhalten (3 Tage nach Zusage)','Kunde','booked'],[-14,'Restzahlung erhalten','Kunde'],[-7,'Ablaufplan an Kunde und alle Dienstleister verschickt','Admin'],[-2,'Notfallnummern & Ansprechpartner vor Ort verteilt','Admin'],[2,'Bewertung bei Kunde angefragt','Admin'],[14,'Provisionen abgerechnet','Admin']],
+  location:[[-60,'Mietvertrag / Reservierung schriftlich bestätigt','Location'],[-30,'Aufbau- und Abbauzeiten bestätigt','Location'],[-14,'Raumplan & Bestuhlung festgelegt','Kunde'],[-3,'Schlüsselübergabe / Ansprechpartner vor Ort','Location']],
+  catering:[[-30,'Menü bzw. Buffet ausgewählt','Kunde'],[-14,'Allergien & Ernährungswünsche gemeldet','Kunde'],[-7,'Finale Gästezahl an Catering gemeldet','Kunde'],[-7,'Geschirr, Besteck & Servicepersonal geklärt','Catering']],
+  getraenke:[[-21,'Getränkeauswahl festgelegt','Kunde'],[-7,'Menge, Kommission & Kühlung geklärt','Getränke'],[-1,'Lieferzeit bestätigt','Getränke']],
+  dj:[[-30,'Musikwünsche & No-Gos übergeben','Kunde'],[-14,'Strom & Technik mit Location abgestimmt','DJ'],[-7,'Programmpunkte (Reden, Tanz, Torte) übergeben','Kunde']],
+  foto:[[-21,'Wichtige Personen & Motive (Shotlist)','Kunde'],[-7,'Zeiten & Standort Fotobox abgestimmt','Foto'],[14,'Bilder an Kunden geliefert','Foto']],
+  deko:[[-30,'Deko-Konzept & Farben festgelegt','Kunde'],[-7,'Aufbauzeit mit Location abgestimmt','Deko'],[1,'Abbau / Abholung erledigt','Deko']],
+  personal:[[-14,'Anzahl Kräfte & Schichten bestätigt','Personal'],[-7,'Dresscode & Einweisung geklärt','Personal'],[-1,'Namen der Servicekräfte erhalten','Personal']]
+};
+
+/* Die Dienstleister-Datenbank liegt auf dem Server (server/seed.js + Volume). */
+const DEFAULT_SET={
+  fee:4,feeCap:149,bundle:3,bundleMin:4,deposit:30,onlyPartners:false,replyHours:24,
+  comm:{location:8,catering:10,getraenke:10,dj:12,foto:12,deko:15,personal:8},
+  costs:{'Hosting & Software':30,'Versicherung':40,'Marketing / Werbung':300,'Telefon & Sonstiges':40},
+  calc:{events:4,value:4000},
+  company:{name:'PartyPilot',mail:'',tel:''}
+};
+
+/* ---------- Zustand ---------- */
+const KEY='partypilot-v2';
+const S={
+  view:'host',step:1,err:null,notice:null,flash:null,
+  admin:false,aview:'cockpit',akte:null,pinInput:'',loading:true,busy:[],lastBooking:null,pw:{old:'',new1:'',new2:''},
+  nlText:'60. Geburtstag meines Vaters, 60 Gäste, Raum Heidelberg, gemütlich, BBQ, max. 5.000 €',nlFound:[],
+  brief:{occasion:'Geburtstag',date:'',start:'17:00',hours:6,city:'Heidelberg',radius:25,guests:60,budget:5000,style:'gemütlich',diets:[],cats:{location:true,catering:true,getraenke:true,dj:true,foto:true,deko:false,personal:false}},
+  packages:[],tier:null,sel:{},
+  co:{type:'Privat',name:'',email:'',phone:'',company:'',address:'',vat:'',po:'',msg:'',privacy:false},
+  bookingId:null,track:{id:'',mail:'',res:null},
+  db:{providers:[],bookings:[],set:null,demoRemoved:false},
+  flt:{cat:'',city:'',status:'',q:''},pe:null,note:''
+};
+function clone(o){return JSON.parse(JSON.stringify(o))}
+async function api(path,opts){
+  opts=opts||{};
+  const r=await fetch(path,{method:opts.method||'GET',credentials:'same-origin',headers:opts.body?{'Content-Type':'application/json'}:{},body:opts.body?JSON.stringify(opts.body):undefined});
+  let d={};try{d=await r.json()}catch(e){}
+  if(!r.ok){const err=new Error(d.error||('Fehler '+r.status));err.status=r.status;throw err}
+  return d;
+}
+function applyAdmin(d){
+  S.db.providers=d.providers||[];S.db.bookings=d.bookings||[];
+  S.db.set=Object.assign(clone(DEFAULT_SET),d.set||{});S.db.demoRemoved=!!d.demoRemoved;S.db.rev=d.rev||0;
+}
+async function loadPublic(){
+  const d=await api('/api/public');
+  S.db.providers=d.providers||[];S.db.bookings=[];S.busy=d.busy||[];
+  S.db.set=Object.assign(clone(DEFAULT_SET),{comm:{}},d.set||{});
+  return d.admin;
+}
+async function loadAdmin(){
+  const d=await api('/api/admin/db');applyAdmin(d);S.admin=true;
+  if(!S.db.bookings.length&&!S.db.demoRemoved){makeDemo();save()}
+}
+async function load(){
+  try{
+    const isAdm=await loadPublic();
+    if(isAdm){try{await loadAdmin()}catch(e){S.admin=false}}
+    S.loadErr=null;
+  }catch(e){S.loadErr='Die Daten konnten nicht geladen werden. Bitte Seite neu laden.'}
+  S.loading=false;
+}
+/* Speichern: nur im Admin-Modus, gebündelt und nacheinander */
+let saveTimer=null,saving=false,saveAgain=false;
+function save(){if(!S.admin)return;clearTimeout(saveTimer);saveTimer=setTimeout(flushSave,350);setSaveState('pending')}
+async function flushSave(){
+  if(saving){saveAgain=true;return}
+  saving=true;saveAgain=false;setSaveState('saving');
+  try{
+    const d=await api('/api/admin/db',{method:'PUT',body:{baseRev:S.db.rev,providers:S.db.providers,bookings:S.db.bookings,set:S.db.set,demoRemoved:S.db.demoRemoved}});
+    S.db.rev=d.rev;
+    if(d.merged){S.db.bookings=d.bookings;S.flash=d.merged+' neue Anfrage(n) eingegangen.';render()}
+    setSaveState('ok');
+  }catch(e){
+    setSaveState('err',e.status===401?'Sitzung abgelaufen – bitte neu anmelden.':'Nicht gespeichert: '+e.message);
+    if(e.status===401){S.admin=false;S.view='login';render()}
+  }
+  saving=false;if(saveAgain)flushSave();
+}
+let saveState='ok',saveMsg='';
+function setSaveState(s,msg){saveState=s;saveMsg=msg||'';const el=document.getElementById('savestate');if(el)el.outerHTML=saveBadge()}
+function saveBadge(){
+  if(!S.admin)return'<span id="savestate"></span>';
+  const t={pending:'Änderung …',saving:'Speichert …',ok:'Gespeichert',err:saveMsg||'Fehler beim Speichern'}[saveState];
+  return`<span id="savestate" class="pill ${saveState==='err'?'bad':saveState==='ok'?'good':'neutral'}" role="status" style="margin-left:8px">${esc(t)}</span>`;
+}
+window.addEventListener('beforeunload',e=>{if(saveState==='pending'||saveState==='saving'){e.preventDefault();e.returnValue=''}});
+const SET=()=>S.db.set;
+
+/* ---------- Hilfsfunktionen ---------- */
+const $=s=>document.querySelector(s);
+const fmt=n=>Number(n||0).toLocaleString('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function dInfo(ds){const [y,m,d]=String(ds).split('-').map(Number);const dt=new Date(y,(m||1)-1,d||1);return{dow:dt.getDay(),month:m,dt}}
+const dLong=ds=>ds?dInfo(ds).dt.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'}):'–';
+const dShort=ds=>ds?dInfo(ds).dt.toLocaleDateString('de-DE',{weekday:'short',day:'numeric',month:'numeric',year:'2-digit'}):'–';
+function iso(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')}
+function addDays(ds,n){const d=dInfo(ds).dt;d.setDate(d.getDate()+n);return iso(d)}
+const today=()=>iso(new Date());
+const nowStr=()=>new Date().toLocaleString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'});
+function dist(a,b){
+  const A=CITIES[a],B=CITIES[b];if(!A||!B)return 999;
+  const R=6371,r=x=>x*Math.PI/180,dl=r(B[0]-A[0]),dn=r(B[1]-A[1]);
+  const q=Math.sin(dl/2)**2+Math.cos(r(A[0]))*Math.cos(r(B[0]))*Math.sin(dn/2)**2;
+  return Math.round(2*R*Math.asin(Math.sqrt(q))*1.25);
+}
+const isB2B=occ=>!!(OCCASIONS.find(o=>o[0]===occ)||[0,0])[1];
+const commOf=p=>p.comm!=null&&p.comm!==''?+p.comm:((SET().comm||{})[p.cat]||0);
+function ratingOf(p){const r=(p.reviews||[]);return r.length?r.reduce((a,x)=>a+x,0)/r.length:null}
+const stars=r=>r==null?'neu':'★ '+r.toFixed(1).replace('.',',');
+function mailto(to,subj,body){return 'mailto:'+(to||'')+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body)}
+
+/* ---------- Matching-Engine ---------- */
+function getP(id){
+  if(String(id).includes('#gastro')){const loc=S.db.providers.find(x=>x.id===id.split('#')[0]);return loc?inhouseOf(loc):null}
+  return S.db.providers.find(x=>x.id===id);
+}
+function inhouseOf(loc){
+  return{id:loc.id+'#gastro',cat:'catering',name:loc.name+' – Hausgastronomie',city:loc.city,addr:loc.addr,tel:loc.tel,mail:loc.mail,web:loc.web,
+    desc:'Essen direkt von der Location',tags:loc.tags,diets:loc.diets||['vegetarisch'],mobile:true,km:0,virtual:true,parent:loc.id,
+    status:loc.status,comm:loc.comm!=null&&loc.comm!==''?loc.comm:(SET().comm||{}).catering,reviews:loc.reviews,price:{pp:loc.inhouse,min:0,src:loc.price&&loc.price.src}};
+}
+function priceOf(p,b){
+  const h=+b.hours,g=+b.guests,dow=dInfo(b.date).dow,pr=p.price||{};let amt=0,calc='';
+  switch(p.cat){
+    case 'location':amt=pr.base||0;calc='Miete inkl. 6 Stunden';if(h>6){amt+=100*(h-6);calc+=` + ${h-6} h × 100 €`}
+      if(dow>=1&&dow<=4){amt*=0.9;calc+=' · Wochentag −10 %'}break;
+    case 'catering':amt=Math.max(pr.min||0,(pr.pp||0)*g);calc=`${pr.pp} € × ${g} Gäste`+((pr.pp||0)*g<(pr.min||0)?` (Mindestumsatz ${fmt(pr.min)})`:'');break;
+    case 'getraenke':amt=(pr.base||0)+(pr.pp||0)*g;calc=`${fmt(pr.base||0)} Grundpreis + ${pr.pp||0} € × ${g} Gäste`;break;
+    case 'dj':{const dh=Math.max(1,h-1);amt=(pr.base||0)+90*Math.max(0,dh-5);calc='5 Stunden inklusive'+(dh>5?` + ${dh-5} h × 90 €`:'');break}
+    case 'foto':{if(pr.hourly){const fh=Math.min(h,8);amt=(pr.base||0)+pr.hourly*Math.max(0,fh-4);calc='4 Stunden inklusive'+(fh>4?` + ${fh-4} h × ${pr.hourly} €`:'')}else{amt=pr.base||0;calc='Pauschale für die Feier'}break}
+    case 'deko':amt=(pr.base||0)+(pr.pp||0)*g;calc=`${fmt(pr.base||0)} + ${pr.pp||0} € × ${g} Gäste`;break;
+    case 'personal':{const n=Math.max(1,Math.ceil(g/25)),hh=h+2;amt=n*hh*(pr.hourly||0);calc=`${n} ${n>1?'Kräfte':'Kraft'} × ${hh} h × ${pr.hourly||0} €`;break}
+  }
+  return{amt:Math.round(amt/5)*5,calc};
+}
+function bookedElsewhere(pid,date,exclude){
+  if(!S.admin)return S.busy.some(x=>x.pid===pid&&x.date===date&&x.k!==exclude);
+  return S.db.bookings.some(k=>k.id!==exclude&&k.stage!=='storniert'&&k.stage!=='neu'&&k.brief.date===date&&k.items.some(i=>i.pid===pid&&i.status!=='abgelehnt'));
+}
+function reasonFor(p,b,ctx){
+  ctx=ctx||{};
+  if(p.status==='Pausiert')return'pausiert';
+  if(SET().onlyPartners&&p.status!=='Partner')return'noch kein Vertragspartner';
+  if(p.cat==='location'){const d=dist(b.city,p.city);if(d>b.radius)return`${d} km entfernt (Umkreis ${b.radius} km)`}
+  else if(!p.virtual){const d=dist(b.city,p.city);const km=+p.km||40;if(d>km)return`fährt nur ${km} km (${d} km)`}
+  if((p.blocked||[]).includes(b.date))return'an diesem Tag gesperrt';
+  if(bookedElsewhere(p.virtual?p.parent:p.id,b.date,ctx.exclude))return'an diesem Tag bereits gebucht';
+  if(p.cat==='location'&&p.cap&&(b.guests<p.cap[0]||b.guests>p.cap[1]))return`nur für ${p.cap[0]}–${p.cap[1]} Gäste`;
+  if(p.cat==='catering'){
+    if(p.maxG&&b.guests>p.maxG)return`max. ${p.maxG} Gäste`;
+    const miss=(b.diets||[]).filter(x=>!(p.diets||[]).includes(x));if(miss.length)return`bietet nicht: ${miss.join(', ')}`;
+    if(ctx.loc){
+      if(p.virtual&&p.parent!==ctx.loc.id)return'nur mit eigener Location';
+      if(!p.virtual&&ctx.loc.ext===false)return'Location erlaubt kein Fremd-Catering';
+      if(!p.virtual&&!ctx.loc.kitchen&&!p.mobile)return'Location ohne Küche';
+    }else if(p.virtual)return'nur mit eigener Location';
+  }
+  return null;
+}
+function cands(cat,b,ctx){
+  let list=S.db.providers.filter(p=>p.cat===cat);
+  if(cat==='catering'&&ctx&&ctx.loc&&ctx.loc.inhouse)list=[inhouseOf(ctx.loc)].concat(list);
+  return list.map(p=>{const pr=priceOf(p,b);return{p,price:pr.amt,calc:pr.calc,reason:reasonFor(p,b,ctx)}}).sort((x,y)=>x.price-y.price);
+}
+function pick(all,tier,b,avoid){
+  const pr=all.map(x=>x.price),mn=Math.min(...pr),mx=Math.max(...pr);
+  const sc=x=>{
+    const r=ratingOf(x.p),q=(r==null?4.3:r)-4,s=(x.p.tags||[]).includes(b.style)?1:0,n=mx>mn?(x.price-mn)/(mx-mn):0;
+    const bonus=x.p.status==='Partner'?1:x.p.status==='Angefragt'?.4:0,pen=avoid&&avoid.includes(x.p.id)?.3:0;
+    if(tier==='spar')return -x.price+q*10+bonus*20;
+    if(tier==='beliebt')return .35*q+.35*s+.2*(1-n)+.1*bonus-pen;
+    return .35*q+.35*s+.2*n+.1*bonus-pen;
+  };
+  return all.reduce((a,x)=>sc(x)>sc(a)?x:a);
+}
+function totals(items){
+  const st=SET(),sum=items.reduce((a,i)=>a+i.price,0);
+  const disc=items.length>=st.bundleMin?Math.round(sum*st.bundle/100):0;
+  const net=sum-disc,fee=Math.min(Math.round(net*st.fee/100),st.feeCap),total=net+fee;
+  let comm=0;items.forEach(i=>{comm+=Math.round(i.price*(i.comm!=null?i.comm:commOf(i.p||getP(i.pid)||{cat:i.cat}))/100)});
+  return{sum,disc,net,fee,total,deposit:Math.round(total*st.deposit/100),comm,revenue:comm+fee-disc,perGuest:0};
+}
+const selItems=sel=>ORDER.filter(c=>sel[c]).map(c=>({cat:c,p:sel[c].p,pid:sel[c].p.id,price:sel[c].price}));
+function fit(sel,b){
+  let guard=40;
+  while(totals(selItems(sel)).total>b.budget&&guard--){
+    let best=null;
+    for(const c of Object.keys(sel)){
+      const ctx={loc:c==='location'?null:sel.location&&sel.location.p};
+      const lower=cands(c,b,ctx).filter(x=>!x.reason&&x.price<sel[c].price);
+      if(!lower.length)continue;
+      const a=lower[lower.length-1];
+      if(c==='location'&&sel.catering&&reasonFor(sel.catering.p,b,{loc:a.p}))continue;
+      const save=sel[c].price-a.price,loss=Math.max(.05,((ratingOf(sel[c].p)||4.3)-(ratingOf(a.p)||4.3))+.3);
+      if(!best||save/loss>best.v)best={c,a,v:save/loss};
+    }
+    if(!best)break;
+    sel[best.c]=best.a;
+  }
+}
+function buildPackage(tier,b,avoid){
+  const sel={},missing=[],ctx={};
+  for(const c of ORDER.filter(c=>b.cats[c])){
+    const all=cands(c,b,ctx).filter(x=>!x.reason);
+    if(!all.length){missing.push(c);continue}
+    sel[c]=pick(all,tier,b,avoid);
+    if(c==='location')ctx.loc=sel[c].p;
+  }
+  if(tier!=='premium')fit(sel,b);
+  return{tier,sel,missing,tot:totals(selItems(sel))};
+}
+function whyText(pk,b){
+  const items=selItems(pk.sel),n=items.length;if(!n)return'Für diese Angaben gibt es kein passendes Paket.';
+  const hits=items.filter(i=>(i.p.tags||[]).includes(b.style)).length,diff=b.budget-pk.tot.total;
+  const bud=diff>=0?`${fmt(diff)} unter deinem Budget.`:`${fmt(-diff)} über deinem Budget.`;
+  const miss=pk.missing.length?` Nicht verfügbar: ${pk.missing.map(c=>CATS[c].label).join(', ')}.`:'';
+  if(pk.tier==='spar')return`Die günstigste passende Kombination im Umkreis von ${b.radius} km. ${bud}${miss}`;
+  if(pk.tier==='beliebt')return`Beste Mischung aus Stil „${b.style}“, Qualität und Preis – ${hits} von ${n} Bausteinen passen genau zum Stil. ${bud}${miss}`;
+  return`Die hochwertigste Auswahl, ${hits} von ${n} Bausteinen im Stil „${b.style}“. ${bud}${miss}`;
+}
+function tmin(s){const [h,m]=String(s).split(':').map(Number);return h*60+(m||0)}
+function tfmt(m){m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function timeline(names,b){
+  const s=tmin(b.start),e=s+b.hours*60,r=[],nm=c=>names[c]||'';
+  if(names.location)r.push([s-180,'Zugang zur Location',nm('location')]);
+  if(names.deko)r.push([s-150,'Aufbau Deko & Mobiliar',nm('deko')]);
+  if(names.dj)r.push([s-90,'Technik- und Soundcheck',nm('dj')]);
+  if(names.getraenke)r.push([s-75,'Getränke & Bar bauen auf',nm('getraenke')]);
+  if(names.catering)r.push([s-60,'Catering baut auf',nm('catering')]);
+  if(names.personal)r.push([s-45,'Servicekräfte treffen ein, Einweisung',nm('personal')]);
+  if(names.foto)r.push([s,'Foto startet',nm('foto')]);
+  r.push([s,'Gäste kommen an',b.guests+' Gäste']);
+  if(names.catering)r.push([s+60,'Essen wird serviert',nm('catering')]);
+  if(names.dj)r.push([s+150,'Tanzfläche öffnet',nm('dj')]);
+  r.push([e,'Ende der Feier','']);
+  r.push([e+30,'Abbau und Übergabe','alle Dienstleister']);
+  return r.sort((a,c)=>a[0]-c[0]).map(x=>({t:tfmt(x[0]),what:x[1],who:x[2]}));
+}
+function parseBriefing(txt){
+  const t=txt.toLowerCase(),b=S.brief,found=[];let m;
+  if((m=t.match(/(\d{1,3})\s*(gäste|gast|personen|leute|mitarbeiter|pers)/))){b.guests=Math.min(400,Math.max(10,+m[1]));found.push(b.guests+' Gäste')}
+  if((m=t.match(/(\d[\d.]*)\s*(€|euro)/))){const v=parseInt(m[1].replace(/\./g,''),10);if(v>=300){b.budget=v;found.push('Budget '+fmt(v))}}
+  for(const c of EVENT_CITIES){if(t.includes(c.toLowerCase())){b.city=c;found.push(c);break}}
+  for(const s of STYLES){if(t.includes(s)||(s==='gemütlich'&&t.includes('gemuetlich'))){b.style=s;found.push('Stil '+s);break}}
+  if(/bbq|grill|barbecue/.test(t)&&!found.some(f=>f.startsWith('Stil'))){b.style='gartenparty';found.push('Stil gartenparty')}
+  const occ=[['geburtstag','Geburtstag'],['hochzeit','Hochzeit'],['jubiläum','Jubiläum'],['taufe','Taufe / Kommunion'],['kommunion','Taufe / Kommunion'],['weihnachtsfeier','Weihnachtsfeier (Firma)'],['sommerfest','Sommerfest (Firma)'],['teamevent','Teamevent (Firma)'],['firmenjubiläum','Firmenjubiläum'],['gartenparty','Gartenparty / BBQ'],['bbq','Gartenparty / BBQ'],['grill','Gartenparty / BBQ']];
+  for(const [k,v] of occ){if(t.includes(k)){b.occasion=v;found.push(v);break}}
+  const d=DIETS.filter(x=>t.includes(x));if(d.length){b.diets=d;found.push(d.join(', '))}
+  if(/dj|musik/.test(t))b.cats.dj=true;
+  if(/foto|fotobox/.test(t))b.cats.foto=true;
+  if(/deko/.test(t))b.cats.deko=true;
+  if(/personal|kellner|service/.test(t))b.cats.personal=true;
+  if((m=t.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})?/))){
+    const now=new Date();let y=m[3]?+m[3]:now.getFullYear();let dt=new Date(y,+m[2]-1,+m[1]);
+    if(!m[3]&&dt<now)dt=new Date(y+1,+m[2]-1,+m[1]);
+    if(!isNaN(dt)){b.date=iso(dt);found.push(dShort(b.date))}
+  }
+  return found;
+}
+
+/* ---------- Buchungen / Event-Akten ---------- */
+function newId(){let id;do{id='PP-'+(1000+Math.floor(Math.random()*9000))}while(S.db.bookings.some(k=>k.id===id));return id}
+function createBooking(brief,sel,co,opts){
+  const items=selItems(sel).map(i=>({cat:i.cat,pid:i.pid,name:i.p.name,price:i.price,calc:sel[i.cat].calc,comm:commOf(i.p),status:'offen',paid:false,rating:null}));
+  const k={id:opts&&opts.id||newId(),created:nowStr(),example:!!(opts&&opts.example),stage:'neu',brief:clone(brief),customer:clone(co),
+    items,checks:{},log:[{t:nowStr(),txt:'Anfrage über die Website eingegangen.'}],feePaid:false};
+  S.db.bookings.unshift(k);return k;
+}
+function bTot(k){return totals(k.items.filter(i=>i.status!=='abgelehnt'))}
+function checklist(k){
+  const out=[],ev=k.brief.date;
+  const add=(arr,cat)=>arr.forEach((x,i)=>{const due=x[3]==='booked'?addDays(k.bookedAt||today(),3):addDays(ev,x[0]);out.push({key:(cat||'all')+':'+i,cat,days:x[3]==='booked'?-999:x[0],label:x[1],who:x[2],due})});
+  add(CHECK_TPL._all,null);
+  k.items.filter(i=>i.status!=='abgelehnt').forEach(i=>{if(CHECK_TPL[i.cat])add(CHECK_TPL[i.cat],i.cat)});
+  return out.sort((a,b)=>a.days-b.days);
+}
+function openTasks(k){
+  if(STAGE_IDX[k.stage]<STAGE_IDX.gebucht||k.stage==='storniert')return[];
+  return checklist(k).filter(c=>!k.checks[c.key]);
+}
+function lateTasks(k){const t=today();return openTasks(k).filter(c=>c.due<t)}
+function logB(k,txt){k.log.unshift({t:nowStr(),txt})}
+function makeDemo(){
+  const b={occasion:'Geburtstag',date:addDays(today(),75),start:'17:00',hours:6,city:'Heidelberg',radius:25,guests:60,budget:5000,style:'gemütlich',diets:['vegetarisch'],cats:{location:true,catering:true,getraenke:false,dj:true,foto:true,deko:false,personal:false}};
+  const pk=buildPackage('beliebt',b);
+  if(!Object.keys(pk.sel).length)return;
+  const k=createBooking(b,pk.sel,{type:'Privat',name:'Beispiel: Familie Muster',email:'kunde@example.com',phone:'0170 0000000',company:'',address:'',vat:'',po:'',msg:'60. Geburtstag, bitte rustikal-gemütlich.',privacy:true},{id:'PP-DEMO',example:true});
+  k.stage='abstimmung';k.bookedAt=addDays(today(),-6);k.items.forEach(i=>i.status='angenommen');
+  checklist(k).filter(c=>c.days<=-40||c.key==='all:0').forEach(c=>k.checks[c.key]=true);
+  k.log=[{t:nowStr(),txt:'Beispiel-Akte: so sieht eine Buchung in der Abstimmungsphase aus.'}];
+}
+
+/* ---------- Mail-Vorlagen ---------- */
+function mailProvider(k,i){
+  const p=getP(i.pid)||{},b=k.brief,st=SET();
+  const subj=`Anfrage ${k.id}: ${b.occasion} am ${dShort(b.date)} – ${CATS[i.cat].label}`;
+  const body=`Hallo ${p.name||''},
+
+über PartyPilot habe ich eine konkrete Anfrage für Sie:
+
+Anlass: ${b.occasion}
+Datum: ${dLong(b.date)}, ${b.start} Uhr, ca. ${b.hours} Stunden
+Ort: ${b.city}${k.items.find(x=>x.cat==='location'&&x.cat!==i.cat)?' – Location: '+k.items.find(x=>x.cat==='location').name:''}
+Gäste: ${b.guests}
+Stil: ${b.style}${b.diets.length?'\nErnährung: '+b.diets.join(', '):''}
+
+Gewünschte Leistung: ${CATS[i.cat].label}
+Kalkulierter Preis: ${fmt(i.price)} (${i.calc||''})
+
+Bitte bestätigen Sie mir bis ${dShort(addDays(today(),2))} Verfügbarkeit und Preis.
+Vermittlungsprovision laut Partnervereinbarung: ${i.comm} % auf den Auftragswert.
+
+Viele Grüße
+${st.company.name}${st.company.tel?'\n'+st.company.tel:''}`;
+  return mailto(p.mail||'',subj,body);
+}
+function mailCustomer(k,kind){
+  const b=k.brief,t=bTot(k),c=k.customer,st=SET();
+  const lines=k.items.filter(i=>i.status!=='abgelehnt').map(i=>`- ${CATS[i.cat].label}: ${i.name} – ${fmt(i.price)}`).join('\n');
+  let subj,body;
+  if(kind==='angebot'){
+    subj=`Dein Angebot ${k.id}: ${b.occasion} am ${dShort(b.date)}`;
+    body=`Hallo ${c.name},
+
+alle Dienstleister haben deinen Termin bestätigt. Hier ist dein Paket:
+
+${lines}
+${t.disc?'Bundle-Rabatt: −'+fmt(t.disc)+'\n':''}Servicegebühr: ${fmt(t.fee)}
+Gesamt: ${fmt(t.total)} (${fmt(Math.round(t.total/b.guests))} pro Gast)
+
+Zum Buchen: Antworte einfach mit „Ich buche“. Danach erhältst du die Verträge der Dienstleister und die Zahlungsdaten für die Anzahlung von ${fmt(t.deposit)}.
+
+Viele Grüße
+${st.company.name}`;
+  }else{
+    subj=`Deine Anfrage ${k.id} ist eingegangen`;
+    body=`Hallo ${c.name},
+
+danke für deine Anfrage für ${b.occasion} am ${dLong(b.date)} (${b.guests} Gäste, ${b.city}).
+Wir prüfen jetzt die Verfügbarkeit aller Dienstleister und melden uns innerhalb von ${st.replyHours} Stunden mit deinem verbindlichen Angebot.
+
+Deine Anfragenummer: ${k.id}
+
+Viele Grüße
+${st.company.name}`;
+  }
+  return mailto(c.email,subj,body);
+}
+
+/* ---------- Ansichten: Rahmen ---------- */
+function header(){
+  if(S.admin){
+    const t=(k,l)=>`<button class="tab" data-act="aview" data-v="${k}" ${S.view==='admin'&&S.aview===k?'aria-current="page"':''}>${l}</button>`;
+    const late=S.db.bookings.reduce((a,k)=>a+lateTasks(k).length,0);
+    return`<header class="top"><button class="brand" data-act="home"><i></i>PartyPilot <span class="adm">ADMIN</span></button>${saveBadge()}
+      <nav class="tabs" aria-label="Admin">${t('cockpit','Cockpit'+(late?` (${late}!)`:''))}${t('anfragen','Anfragen')}${t('db','Datenbank')}${t('gewinn','Gewinn')}${t('settings','Einstellungen')}
+      <button class="tab" data-act="home" ${S.view!=='admin'?'aria-current="page"':''}>Kundenansicht</button></nav></header>`;
+  }
+  const t=(k,l)=>`<button class="tab" data-act="view" data-v="${k}" ${S.view===k?'aria-current="page"':''}>${l}</button>`;
+  return`<header class="top"><button class="brand" data-act="home"><i></i>PartyPilot</button><nav class="tabs" aria-label="Navigation">${t('host','Feier planen')}${t('track','Anfrage verfolgen')}</nav></header>`;
+}
+function footer(){
+  return`<footer class="foot"><span>PartyPilot · Feiern in Heidelberg, Mannheim & Rhein-Neckar</span><span class="sp"></span>
+    ${S.admin?`<button class="linkbtn" data-act="logout">Admin abmelden</button>`:`<button class="linkbtn" data-act="view" data-v="login">Admin</button>`}</footer>`;
+}
+function render(){
+  let main='';
+  if(S.loading){$('#app').innerHTML='<main><div class="panel center">Lädt …</div></main>';return}
+  if(S.loadErr){$('#app').innerHTML='<main><div class="err" role="alert">'+esc(S.loadErr)+'</div></main>';return}
+  if(S.view==='admin'&&S.admin)main=adminView();
+  else if(S.view==='login')main=loginView();
+  else if(S.view==='track')main=trackView();
+  else main=hostView();
+  $('#app').innerHTML=header()+'<main>'+main+'</main>'+footer();
+}
+
+/* ---------- Kundenansicht ---------- */
+function stepper(){
+  const L=['Deine Feier','Pakete','Anpassen & anfragen','Fertig'];
+  return`<ol class="steps">${L.map((l,i)=>{const n=i+1,cl=n===S.step?'on':n<S.step?'done':'',dis=n>S.step||S.step===4||n===4;
+    return`<li class="${cl}"><button data-act="goto" data-step="${n}" ${dis?'disabled':''}><b>${n}</b>${l}</button></li>`}).join('')}</ol>`;
+}
+function hostView(){return stepper()+(S.step===1?stepBrief():S.step===2?stepPackages():S.step===3?stepTune():stepDone())}
+function stepBrief(){
+  const b=S.brief,o=(arr,v)=>arr.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
+  if(!b.date)b.date=addDays(today(),60);
+  const chips=S.nlFound.length?`<div class="chips" aria-live="polite">${S.nlFound.map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>`:'';
+  return`<section class="hero"><div><h1>Deine Feier.<br><em>Vollendet geplant.</em></h1>
+    <p>Sag uns, was du feiern willst. PartyPilot wählt aus geprüften Dienstleistern der Region die passende Location, Catering, Musik und mehr – und stellt dir drei abgestimmte Pakete zusammen.</p></div>
+    <div class="nl"><label for="nl">Beschreibe deine Feier in einem Satz</label>
+      <textarea id="nl" data-f="nl">${esc(S.nlText)}</textarea>
+      <div class="row"><button class="btn sm" data-act="parse">Angaben übernehmen</button><small>erkennt Anlass, Gäste, Budget, Ort, Stil, Datum</small></div>${chips}</div></section>
+  ${S.err?`<div class="err" role="alert">${esc(S.err)}</div>`:''}
+  <section class="panel stack">
+    <div class="grid-f">
+      <label class="fld"><span>Anlass</span><select data-f="b:occasion">${o(OCCASIONS.map(x=>x[0]),b.occasion)}</select></label>
+      <label class="fld"><span>Datum</span><input type="date" data-f="b:date" value="${b.date}" min="${today()}"></label>
+      <label class="fld"><span>Beginn</span><select data-f="b:start">${o(['11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'],b.start)}</select></label>
+      <label class="fld"><span>Dauer (Stunden)</span><select data-f="b:hours">${[3,4,5,6,7,8,10].map(h=>`<option ${h==b.hours?'selected':''}>${h}</option>`).join('')}</select></label>
+      <label class="fld"><span>Ort</span><select data-f="b:city">${o(EVENT_CITIES,b.city)}</select></label>
+      <label class="fld"><span>Umkreis Location</span><select data-f="b:radius">${[10,25,50].map(r=>`<option value="${r}" ${r==b.radius?'selected':''}>${r} km</option>`).join('')}</select></label>
+      <label class="fld"><span>Gäste</span><input type="number" min="10" max="400" data-f="b:guests" value="${b.guests}"></label>
+      <label class="fld"><span>Budget gesamt (€)</span><input type="number" min="300" step="100" data-f="b:budget" value="${b.budget}"></label>
+      <label class="fld"><span>Stil</span><select data-f="b:style">${o(STYLES,b.style)}</select></label>
+    </div>
+    <div class="fld"><span>Ernährung der Gäste</span><div class="checks">${DIETS.map(d=>`<label class="chk"><input type="checkbox" data-f="diet:${d}" ${b.diets.includes(d)?'checked':''}>${d}</label>`).join('')}</div></div>
+    <div class="fld"><span>Was brauchst du?</span><div class="checks">${ORDER.map(c=>`<label class="chk"><input type="checkbox" data-f="cat:${c}" ${b.cats[c]?'checked':''}>${CATS[c].label}</label>`).join('')}</div></div>
+    <div class="row"><button class="btn accent" data-act="gen">Pakete zusammenstellen</button><small>Kostenlos und unverbindlich.</small></div>
+  </section>`;
+}
+function passCard(pk){
+  const b=S.brief,t=pk.tot,over=t.total-b.budget,label={spar:'Spar',beliebt:'Beliebt',premium:'Premium'}[pk.tier],n=selItems(pk.sel).length;
+  const rows=ORDER.filter(c=>b.cats[c]).map(c=>pk.sel[c]
+    ?`<li><span class="k">${CATS[c].label}</span><span class="v"><b>${esc(pk.sel[c].p.name)}</b><small>${esc(pk.sel[c].p.city)}</small></span><span class="pr">${fmt(pk.sel[c].price)}</span></li>`
+    :`<li><span class="k">${CATS[c].label}</span><span class="v"><small>Kein passender Anbieter frei</small></span><span class="pr">–</span></li>`).join('');
+  const pill=over>0?`<span class="pill bad">${fmt(over)} über Budget</span>`:`<span class="pill good">${fmt(-over)} unter Budget</span>`;
+  return`<article class="pass ${pk.tier==='beliebt'?'rec':''}">
+    <div class="pass-h"><div class="kicker"><span>${dShort(b.date)} · ${esc(b.city)}</span>${pk.tier==='beliebt'?'<span class="tag">Empfehlung</span>':''}</div>
+      <h3>${label}</h3><div class="price">${fmt(t.total)}</div>
+      <div class="row">${pill}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span>${t.disc?`<span class="pill info">Bundle −${fmt(t.disc)}</span>`:''}</div></div>
+    <div class="perf"></div><ul class="items">${rows}</ul>
+    <p class="why">${esc(whyText(pk,b))}</p>
+    <div class="pass-f"><button class="btn ${pk.tier==='beliebt'?'accent':''}" data-act="choose" data-tier="${pk.tier}" ${n?'':'disabled'}>Dieses Paket wählen</button></div></article>`;
+}
+function stepPackages(){
+  const b=S.brief,ok=S.packages.some(p=>selItems(p.sel).length);
+  return`<div class="sec-h"><h2>Drei Pakete für ${esc(b.occasion)} am ${dLong(b.date)}</h2><span class="muted">${b.guests} Gäste · ${esc(b.city)} · Budget ${fmt(b.budget)}</span></div>
+  ${ok?`<div class="passes">${S.packages.map(passCard).join('')}</div>`:`<div class="panel"><b>Für diese Angaben ist nichts frei.</b><p class="muted">Vergrößere den Umkreis, ändere das Datum oder die Gästezahl.</p></div>`}
+  <p class="info" style="margin-top:18px">Alle Preise sind Paketpreise der Dienstleister. Nach deiner Anfrage prüfen wir jeden Termin persönlich und bestätigen dir den Festpreis innerhalb von ${SET().replyHours} Stunden.</p>
+  <div class="row" style="margin-top:14px"><button class="btn ghost" data-act="goto" data-step="1">Angaben ändern</button></div>`;
+}
+function blockHTML(c){
+  const it=S.sel[c],b=S.brief;
+  if(!it)return`<section class="blk empty"><div class="blk-h"><h3>${CATS[c].label}</h3><span class="muted">nicht im Paket</span></div><div><button class="btn ghost sm" data-act="add" data-cat="${c}">${CATS[c].label} hinzufügen</button></div></section>`;
+  const ctx={loc:c==='location'?null:S.sel.location&&S.sel.location.p};
+  const alts=cands(c,b,ctx).filter(x=>x.p.id!==it.p.id&&!x.reason);
+  return`<section class="blk"><div class="blk-h"><h3>${CATS[c].label}</h3><button class="btn ghost sm" data-act="remove" data-cat="${c}">Entfernen</button></div>
+    <div class="cur"><div><b>${esc(it.p.name)}</b><div class="muted">${esc(it.p.desc)}</div>
+      <div class="meta"><span class="pill good">frei am ${dShort(b.date)}</span><span class="pill neutral">${esc(it.p.city)}</span>${(it.p.tags||[]).includes(b.style)?`<span class="pill info">Stil ${esc(b.style)}</span>`:''}</div></div>
+      <div style="text-align:right"><div class="price" style="font-size:1.6rem">${fmt(it.price)}</div><small>${esc(it.calc)}</small></div></div>
+    ${alts.length?`<details><summary>Andere Auswahl (${alts.length})</summary><ul>
+      ${alts.map(x=>{const dl=x.price-it.price;return`<li class="alt"><div><b>${esc(x.p.name)}</b><small>${esc(x.p.city)} · ${esc(x.calc)}</small></div><span class="delta">${(dl>=0?'+':'−')+fmt(Math.abs(dl))}</span><button class="btn sm ghost" data-act="swap" data-cat="${c}" data-id="${x.p.id}">Wählen</button></li>`}).join('')}
+    </ul></details>`:''}</section>`;
+}
+function coReady(){const b=S.brief,co=S.co,b2b=isB2B(b.occasion)||co.type==='Firma';return !!(selItems(S.sel).length&&co.name.trim()&&/\S+@\S+\.\S+/.test(co.email)&&co.phone.trim()&&co.privacy&&(!b2b||co.company.trim()))}
+function updateReady(){const btn=document.querySelector('[data-act="request"]');if(btn)btn.disabled=!coReady()}
+function stepTune(){
+  const b=S.brief,items=selItems(S.sel),t=totals(items),b2b=isB2B(b.occasion)||S.co.type==='Firma',over=t.total-b.budget,co=S.co;
+  const tl=timeline(Object.fromEntries(items.map(i=>[i.cat,i.p.name])),b);
+  const ready=coReady();
+  return`<div class="sec-h"><h2>Paket anpassen</h2><span class="muted">Preise und Ablauf werden bei jeder Änderung neu berechnet.</span></div>
+  ${S.notice?`<div class="note" role="status">${esc(S.notice)}</div>`:''}
+  <div class="cols"><div class="stack">${ORDER.map(blockHTML).join('')}
+    <section class="blk"><div class="blk-h"><h3>Ablauf deiner Feier</h3><span class="muted">${b.start} Uhr, ${b.hours} Stunden</span></div>
+      <ol class="tl">${tl.map(x=>`<li><time>${x.t}</time><div><span class="evt">${esc(x.what)}</span>${x.who?`<div class="muted">${esc(x.who)}</div>`:''}</div></li>`).join('')}</ol></section></div>
+  <aside class="sum"><div class="panel"><h3>Preisübersicht</h3>
+    <ul class="lines">${items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.p.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')||'<li><span class="n muted">Noch keine Bausteine</span></li>'}
+      ${t.disc?`<li class="dis"><span class="n">Bundle-Rabatt (ab ${SET().bundleMin} Bausteinen)</span><span class="m">−${fmt(t.disc)}</span></li>`:''}
+      ${t.fee?`<li><span class="n">Servicegebühr</span><span class="m">${fmt(t.fee)}</span></li>`:''}
+      <li class="tot"><span class="n">Gesamt</span><span class="m">${fmt(t.total)}</span></li></ul>
+    <div class="row">${over>0?`<span class="pill bad">${fmt(over)} über Budget</span>`:`<span class="pill good">${fmt(-over)} unter Budget</span>`}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span></div>
+    <small>Bei Buchung ${SET().deposit} % Anzahlung (${fmt(t.deposit)}), Rest 14 Tage vor der Feier.</small></div>
+  <div class="panel stack"><h3>Unverbindlich anfragen</h3>
+    <div class="checks">${['Privat','Firma'].map(x=>`<label class="chk"><input type="radio" name="ct" data-f="co:type" data-r value="${x}" ${co.type===x?'checked':''}>${x}</label>`).join('')}</div>
+    <label class="fld"><span>Name</span><input type="text" data-f="co:name" value="${esc(co.name)}" autocomplete="name"></label>
+    <label class="fld"><span>E-Mail</span><input type="email" data-f="co:email" value="${esc(co.email)}" autocomplete="email"></label>
+    <label class="fld"><span>Telefon</span><input type="tel" data-f="co:phone" value="${esc(co.phone)}" autocomplete="tel"></label>
+    ${b2b?`<label class="fld"><span>Firma</span><input type="text" data-f="co:company" value="${esc(co.company)}" autocomplete="organization"></label>
+      <label class="fld"><span>Rechnungsadresse</span><textarea data-f="co:address" style="min-height:60px">${esc(co.address)}</textarea></label>
+      <div class="grid-f"><label class="fld"><span>USt-ID (optional)</span><input type="text" data-f="co:vat" value="${esc(co.vat)}"></label>
+      <label class="fld"><span>Bestellnr. / Kostenstelle</span><input type="text" data-f="co:po" value="${esc(co.po)}"></label></div>`:''}
+    <label class="fld"><span>Wünsche & Hinweise</span><textarea data-f="co:msg" style="min-height:60px">${esc(co.msg)}</textarea></label>
+    <label class="chk" style="border-radius:10px;align-items:flex-start"><input type="checkbox" data-f="co:privacy" ${co.privacy?'checked':''}>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert und an die ausgewählten Dienstleister weitergegeben werden.</label>
+    <button class="btn accent" data-act="request" ${ready?'':'disabled'}>Kostenlos anfragen</button>
+    <small>Wir prüfen alle Termine und bestätigen deinen Festpreis innerhalb von ${SET().replyHours} Stunden. Erst dann entscheidest du.</small></div></aside></div>`;
+}
+function stepDone(){
+  const k=S.lastBooking;if(!k)return`<div class="panel">Keine Anfrage gefunden.</div>`;
+  const t=bTot(k);
+  return`<div class="panel stack" style="max-width:680px">
+    <div class="ok" style="margin:0">Danke, ${esc(k.customer.name)}! Deine Anfrage ist eingegangen.</div>
+    <h2>Anfrage <span class="mono">${k.id}</span></h2>
+    <p>${esc(k.brief.occasion)} am ${dLong(k.brief.date)} · ${k.brief.guests} Gäste · ${esc(k.brief.city)}</p>
+    <ul class="lines">${k.items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
+      <li class="tot"><span class="n">Voraussichtlich</span><span class="m">${fmt(t.total)}</span></li></ul>
+    <h3>So geht es weiter</h3>
+    <ol style="margin:0;padding-left:20px;display:grid;gap:6px">
+      <li>Wir fragen jetzt alle Dienstleister für deinen Termin an.</li>
+      <li>Innerhalb von ${SET().replyHours} Stunden bekommst du dein verbindliches Angebot per E-Mail.</li>
+      <li>Du sagst zu, leistest die Anzahlung – und wir stimmen alle Details mit dir und den Dienstleistern ab.</li></ol>
+    <p class="muted">Mit deiner Anfragenummer und E-Mail kannst du den Stand jederzeit unter „Anfrage verfolgen“ sehen.</p>
+    <div class="row"><button class="btn" data-act="newEvent">Neue Feier planen</button><button class="btn ghost" data-act="view" data-v="track">Anfrage verfolgen</button></div></div>`;
+}
+function trackView(){
+  const tr=S.track,k=tr.res&&tr.res!=='none'?tr.k:null;
+  let res='';
+  if(tr.res==='none')res=`<div class="err">Keine Anfrage mit dieser Nummer und E-Mail gefunden.</div>`;
+  else if(k){
+    const idx=k.stage==='storniert'?-1:STAGE_IDX[k.stage];
+    const cust=checklist(k).filter(c=>c.who==='Kunde'&&STAGE_IDX[k.stage]>=STAGE_IDX.gebucht);
+    res=`<div class="panel stack"><div class="row"><h3>${esc(k.brief.occasion)} am ${dLong(k.brief.date)}</h3><span class="sp"></span>${k.stage==='storniert'?'<span class="pill bad">storniert</span>':`<span class="pill info">${esc(STAGES[idx][2])}</span>`}</div>
+      <div class="stagebar">${STAGES.map(s=>{const i=STAGE_IDX[s[0]];return`<span class="${i<idx?'done':i===idx?'now':''}">${esc(s[2])}</span>`}).join('')}</div>
+      <ul class="lines">${k.items.filter(i=>i.status!=='abgelehnt').map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.name)}</span><span class="m">${i.status==='angenommen'?'bestätigt':'in Prüfung'}</span></li>`).join('')}</ul>
+      ${cust.length?`<h3>Deine To-dos</h3><div>${cust.map(c=>`<div class="todo ${k.checks[c.key]?'done':''}"><span>${k.checks[c.key]?'✓':'○'}</span><span class="t">${esc(c.label)}</span><span class="d">bis ${dShort(c.due)}</span></div>`).join('')}</div>`:''}</div>`;
+  }
+  return`<div class="sec-h"><h2>Anfrage verfolgen</h2></div>
+  <div class="panel stack" style="max-width:520px;margin-bottom:18px">
+    <label class="fld"><span>Anfragenummer</span><input type="text" data-f="track:id" value="${esc(tr.id)}" placeholder="PP-1234"></label>
+    <label class="fld"><span>E-Mail</span><input type="email" data-f="track:mail" value="${esc(tr.mail)}"></label>
+    <button class="btn accent" data-act="track">Stand anzeigen</button></div>${res}`;
+}
+function loginView(){
+  return`<div class="center panel stack"><h2>Admin-Login</h2>
+    ${S.err?`<div class="err">${esc(S.err)}</div>`:''}
+    <label class="fld"><span>Passwort</span><input type="password" id="pin" data-f="pin" autocomplete="current-password"></label>
+    <button class="btn accent" data-act="login">Anmelden</button>
+    <small class="muted">Nur für den Betreiber. Die Sitzung bleibt 30 Tage auf diesem Gerät angemeldet.</small></div>`;
+}
+
+/* ---------- Admin ---------- */
+function adminView(){
+  if(S.akte)return akteView();
+  if(S.aview==='anfragen')return anfragenView();
+  if(S.aview==='db')return S.pe?providerForm():dbView();
+  if(S.aview==='gewinn')return gewinnView();
+  if(S.aview==='settings')return settingsView();
+  return cockpitView();
+}
+function stagePill(k){
+  if(k.stage==='storniert')return`<span class="pill bad">storniert</span>`;
+  const i=STAGE_IDX[k.stage],cl=i<=1?'warn':i<=3?'info':i<=6?'good':'neutral';
+  return`<span class="pill ${cl}">${esc(STAGES[i][1])}</span>`;
+}
+function cockpitView(){
+  const bs=S.db.bookings,act=bs.filter(k=>k.stage!=='storniert');
+  const booked=act.filter(k=>STAGE_IDX[k.stage]>=STAGE_IDX.gebucht);
+  const gmv=booked.reduce((a,k)=>a+bTot(k).total,0),exp=booked.reduce((a,k)=>a+bTot(k).revenue,0);
+  const real=act.filter(k=>k.stage==='abgeschlossen').reduce((a,k)=>a+bTot(k).revenue,0);
+  const open=act.filter(k=>STAGE_IDX[k.stage]<=STAGE_IDX.angebot);
+  const late=[];bs.forEach(k=>lateTasks(k).forEach(c=>late.push({k,c})));
+  const next=booked.filter(k=>k.brief.date>=today()&&k.stage!=='abgeschlossen').sort((a,b)=>a.brief.date<b.brief.date?-1:1).slice(0,6);
+  const leads=S.db.providers.filter(p=>p.status==='Lead').length,partners=S.db.providers.filter(p=>p.status==='Partner').length;
+  return`<div class="sec-h"><h2>Cockpit</h2><span class="muted">${today().split('-').reverse().join('.')}</span></div>
+  <div class="kpis">
+    <div class="kpi ${open.length?'hi':''}"><span class="l">Offene Anfragen</span><span class="n">${open.length}</span><small>bis zur Kundenzusage</small></div>
+    <div class="kpi"><span class="l">Gebuchte Events</span><span class="n">${booked.length}</span><small>Volumen ${fmt(gmv)}</small></div>
+    <div class="kpi"><span class="l">Erwarteter Umsatz</span><span class="n">${fmt(exp)}</span><small>Provision + Gebühr, gebuchte Events</small></div>
+    <div class="kpi"><span class="l">Realisiert</span><span class="n">${fmt(real)}</span><small>abgerechnete Events</small></div>
+    <div class="kpi ${late.length?'hi':''}"><span class="l">Überfällige Aufgaben</span><span class="n">${late.length}</span><small>in der Abstimmung</small></div>
+    <div class="kpi"><span class="l">Dienstleister</span><span class="n">${S.db.providers.length}</span><small>${partners} Partner · ${leads} noch nicht angefragt</small></div></div>
+  <div class="pipe">${STAGES.map(s=>`<div><b>${act.filter(k=>k.stage===s[0]).length}</b><small>${esc(s[1])}</small></div>`).join('')}</div>
+  <div class="two">
+    <section class="panel stack"><h3>Überfällig</h3>${late.length?late.slice(0,10).map(x=>`<div class="todo"><span class="pill bad">${dShort(x.c.due)}</span><span class="t"><b>${esc(x.k.id)}</b> · ${esc(x.c.label)}</span><button class="btn sm ghost" data-act="akte" data-k="${x.k.id}">Öffnen</button></div>`).join(''):'<p class="muted">Nichts überfällig.</p>'}</section>
+    <section class="panel stack"><h3>Nächste Events</h3>${next.length?next.map(k=>`<div class="todo"><span class="d">${dShort(k.brief.date)}</span><span class="t"><b>${esc(k.brief.occasion)}</b> · ${k.brief.guests} Gäste · ${esc(k.customer.name)}</span><button class="btn sm ghost" data-act="akte" data-k="${k.id}">Öffnen</button></div>`).join(''):'<p class="muted">Noch keine gebuchten Events.</p>'}</section></div>
+  ${leads?`<div class="info">${leads} Dienstleister sind noch „Lead“ mit geschätzten Preisen. Rufe sie an, trage echte Preise ein und setze den Status auf „Partner“ – dann rechnet das Matching mit echten Zahlen.</div>`:''}`;
+}
+function anfragenView(){
+  const bs=S.db.bookings;
+  return`<div class="sec-h"><h2>Anfragen & Event-Akten</h2><span class="muted">${bs.length} gesamt</span></div>
+  <section class="panel tbl"><table><thead><tr><th>Nr.</th><th>Kunde</th><th>Anlass</th><th>Datum</th><th class="r">Gäste</th><th class="r">Volumen</th><th class="r">Dein Umsatz</th><th>Status</th><th>Aufgaben</th></tr></thead><tbody>
+  ${bs.map(k=>{const t=bTot(k),late=lateTasks(k).length,op=openTasks(k).length;return`<tr class="click" data-act="akte" data-k="${k.id}"><td class="mono">${esc(k.id)}${k.example?' <span class="pill neutral">Beispiel</span>':''}</td><td>${esc(k.customer.name)}${k.customer.type==='Firma'?`<br><small>${esc(k.customer.company)}</small>`:''}</td><td>${esc(k.brief.occasion)}</td><td>${dShort(k.brief.date)}</td><td class="r">${k.brief.guests}</td><td class="r">${fmt(t.total)}</td><td class="r">${fmt(t.revenue)}</td><td>${stagePill(k)}</td><td>${late?`<span class="pill bad">${late} überfällig</span>`:op?`<span class="pill neutral">${op} offen</span>`:''}</td></tr>`}).join('')||'<tr><td colspan="9" class="muted">Noch keine Anfragen. Teste es in der Kundenansicht.</td></tr>'}
+  </tbody></table></section>`;
+}
+function akteView(){
+  const k=S.db.bookings.find(x=>x.id===S.akte);if(!k){S.akte=null;return anfragenView()}
+  const b=k.brief,c=k.customer,t=bTot(k),idx=k.stage==='storniert'?-1:STAGE_IDX[k.stage];
+  const checks=checklist(k),td=today(),showChecks=idx>=STAGE_IDX.gebucht;
+  const next=idx>=0&&idx<STAGES.length-1?STAGES[idx+1]:null;
+  const tl=timeline(Object.fromEntries(k.items.filter(i=>i.status!=='abgelehnt').map(i=>[i.cat,i.name])),b);
+  const itemHTML=(i,n)=>{
+    const p=getP(i.pid)||{},alts=cands(i.cat,b,{exclude:k.id,loc:i.cat==='location'?null:getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt')||{}).pid)}).filter(x=>!x.reason&&x.p.id!==i.pid);
+    const cl={offen:'neutral',angefragt:'warn',angenommen:'good',abgelehnt:'bad'}[i.status];
+    return`<div class="item"><div class="hd"><span><b>${CATS[i.cat].label}:</b> ${esc(i.name)} <span class="pill ${cl}">${i.status}</span></span><span class="mono">${fmt(i.price)} · ${i.comm} % = ${fmt(Math.round(i.price*i.comm/100))}</span></div>
+      <small class="muted">${esc(p.addr||p.city||'')}${p.tel?` · <a href="tel:${esc(p.tel.replace(/\s/g,''))}">${esc(p.tel)}</a>`:''}${p.mail?` · <a href="mailto:${esc(p.mail)}">${esc(p.mail)}</a>`:''}${p.web?` · <a href="${esc(p.web)}" target="_blank" rel="noopener">Website</a>`:''}${p.status?` · ${esc(p.status)}`:''}${p.price&&p.price.src==='geschätzt'?' · <b>Preis geschätzt</b>':''}</small>
+      <div class="row">
+        <a class="btn sm ghost" href="${esc(mailProvider(k,i))}" data-act="mailP" data-k="${k.id}" data-i="${n}">Anfrage-Mail</a>
+        ${['angefragt','angenommen','abgelehnt'].map(s=>`<button class="btn sm ${i.status===s?'':'ghost'}" data-act="istatus" data-k="${k.id}" data-i="${n}" data-s="${s}">${s}</button>`).join('')}
+        ${alts.length?`<select data-act-change="replace" data-k="${k.id}" data-i="${n}" style="max-width:240px"><option value="">Ersetzen durch …</option>${alts.map(x=>`<option value="${esc(x.p.id)}">${esc(x.p.name)} (${fmt(x.price)})</option>`).join('')}</select>`:''}
+      </div>
+      ${idx>=STAGE_IDX.durchgefuehrt&&i.status!=='abgelehnt'?`<div class="row"><small>Bewertung:</small><span class="stars">${[1,2,3,4,5].map(s=>`<button class="${(i.rating||0)>=s?'on':''}" data-act="rate" data-k="${k.id}" data-i="${n}" data-s="${s}" aria-label="${s} Sterne">★</button>`).join('')}</span>
+        <label class="chk"><input type="checkbox" data-act-change="paid" data-k="${k.id}" data-i="${n}" ${i.paid?'checked':''}>Provision bezahlt</label></div>`:''}</div>`;
+  };
+  return`<div class="row" style="margin-bottom:10px"><button class="btn sm ghost" data-act="closeAkte">← Alle Anfragen</button><span class="sp"></span>
+    ${k.stage!=='storniert'?`<button class="btn sm danger" data-act="cancel" data-k="${k.id}">Stornieren</button>`:''}<button class="btn sm danger" data-act="delB" data-k="${k.id}">Löschen</button></div>
+  ${S.flash?`<div class="note">${esc(S.flash)}</div>`:''}
+  <div class="sec-h"><h2><span class="mono">${esc(k.id)}</span> · ${esc(b.occasion)}</h2>${stagePill(k)}</div>
+  <div class="stagebar">${STAGES.map((s,i)=>`<span class="${i<idx?'done':i===idx?'now':''}">${i+1}. ${esc(s[1])}</span>`).join('')}</div>
+  ${next?`<div class="row" style="margin:10px 0 20px"><button class="btn accent" data-act="stage" data-k="${k.id}" data-s="${next[0]}">Weiter: ${esc(next[1])}</button>${idx>0?`<button class="btn ghost sm" data-act="stage" data-k="${k.id}" data-s="${STAGES[idx-1][0]}">Zurück</button>`:''}<small class="muted">${esc(stageHint(k))}</small></div>`:'<div style="height:16px"></div>'}
+  <div class="two">
+    <section class="panel stack"><h3>Eckdaten</h3>
+      <ul class="lines kv"><li><span class="n">Datum</span><span class="m">${dLong(b.date)}, ${b.start} Uhr</span></li><li><span class="n">Dauer / Gäste</span><span class="m">${b.hours} h · ${b.guests} Gäste</span></li>
+      <li><span class="n">Ort / Stil</span><span class="m">${esc(b.city)} · ${esc(b.style)}</span></li><li><span class="n">Ernährung</span><span class="m">${esc(b.diets.join(', ')||'–')}</span></li><li><span class="n">Budget</span><span class="m">${fmt(b.budget)}</span></li></ul>
+      <h3>Kunde</h3><p><b>${esc(c.name)}</b> (${esc(c.type)})${c.company?'<br>'+esc(c.company):''}${c.address?'<br><small>'+esc(c.address).replace(/\n/g,'<br>')+'</small>':''}${c.vat?'<br><small>USt-ID '+esc(c.vat)+'</small>':''}${c.po?'<br><small>Bestellnr. '+esc(c.po)+'</small>':''}</p>
+      <div class="row">${c.email?`<a class="btn sm ghost" href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}${c.phone?`<a class="btn sm ghost" href="tel:${esc(c.phone.replace(/\s/g,''))}">${esc(c.phone)}</a>`:''}</div>
+      ${c.msg?`<p class="info">${esc(c.msg)}</p>`:''}
+      <div class="row"><a class="btn sm ghost" href="${esc(mailCustomer(k,'eingang'))}">Mail: Eingang bestätigen</a><a class="btn sm ghost" href="${esc(mailCustomer(k,'angebot'))}">Mail: Angebot senden</a></div></section>
+    <section class="panel stack"><h3>Abrechnung</h3>
+      <ul class="lines">${k.items.filter(i=>i.status!=='abgelehnt').map(i=>`<li><span class="n">${esc(i.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
+        ${t.disc?`<li class="dis"><span class="n">Bundle-Rabatt (trägst du)</span><span class="m">−${fmt(t.disc)}</span></li>`:''}
+        <li><span class="n">Servicegebühr Kunde</span><span class="m">${fmt(t.fee)}</span></li>
+        <li class="tot"><span class="n">Kunde zahlt</span><span class="m">${fmt(t.total)}</span></li></ul>
+      <ul class="lines"><li><span class="n">Provisionen Dienstleister</span><span class="m">${fmt(t.comm)}</span></li><li><span class="n">+ Servicegebühr − Rabatt</span><span class="m">${fmt(t.fee-t.disc)}</span></li>
+        <li class="tot"><span class="n">Dein Umsatz</span><span class="m">${fmt(t.revenue)}</span></li></ul>
+      <small class="muted">Anzahlung ${SET().deposit} % = ${fmt(t.deposit)}. Zahlungen laufen direkt an die Dienstleister bzw. über einen lizenzierten Zahlungsanbieter.</small></section></div>
+  <section class="panel stack" style="margin-bottom:22px"><h3>Dienstleister</h3>${k.items.map(itemHTML).join('')}
+    <details><summary>Baustein hinzufügen</summary><div class="row" style="margin-top:10px">${ORDER.filter(cat=>!k.items.some(i=>i.cat===cat&&i.status!=='abgelehnt')).map(cat=>`<button class="btn sm ghost" data-act="addItem" data-k="${k.id}" data-cat="${cat}">${CATS[cat].label}</button>`).join('')}</div></details></section>
+  <div class="two">
+    <section class="panel stack"><h3>Abstimmung & Fristen</h3>
+      ${showChecks?checks.map(ch=>{const done=!!k.checks[ch.key],late=!done&&ch.due<td;return`<label class="todo ${done?'done':''}"><input type="checkbox" data-act-change="check" data-k="${k.id}" data-c="${ch.key}" ${done?'checked':''}><span class="t">${esc(ch.label)} <small class="muted">· ${esc(ch.who)}</small></span><span class="d ${late?'late':''}">${dShort(ch.due)}</span></label>`}).join('')
+      :'<p class="muted">Die Checkliste startet, sobald der Kunde gebucht hat. Bis dahin: Dienstleister anfragen → alle bestätigt → Angebot an Kunden.</p>'}</section>
+    <section class="panel stack"><h3>Ablaufplan</h3><ol class="tl">${tl.map(x=>`<li><time>${x.t}</time><div><span class="evt">${esc(x.what)}</span>${x.who?`<div class="muted">${esc(x.who)}</div>`:''}</div></li>`).join('')}</ol>
+      <button class="btn sm ghost" data-act="print">Drucken / als PDF</button></section></div>
+  <section class="panel stack"><h3>Notizen & Verlauf</h3>
+    <div class="row"><input type="text" data-f="note" value="${esc(S.note)}" placeholder="z. B. Catering will 15 % Anzahlung, DJ braucht 2 Steckdosen" style="flex:1;min-width:200px"><button class="btn sm" data-act="addNote" data-k="${k.id}">Speichern</button></div>
+    <ul class="log">${k.log.map(l=>`<li><time>${esc(l.t)}</time>${esc(l.txt)}</li>`).join('')}</ul></section>`;
+}
+function stageHint(k){
+  const s=k.stage,its=k.items.filter(i=>i.status!=='abgelehnt');
+  if(s==='neu')return'Schick jedem Dienstleister die Anfrage-Mail und setze ihn auf „angefragt“.';
+  if(s==='angefragt'){const o=its.filter(i=>i.status!=='angenommen').length;return o?`${o} Dienstleister haben noch nicht zugesagt.`:'Alle haben zugesagt.'}
+  if(s==='bestaetigt')return'Jetzt dem Kunden das Angebot schicken.';
+  if(s==='angebot')return'Warten auf Zusage und Anzahlung des Kunden.';
+  if(s==='gebucht'||s==='abstimmung'){const o=openTasks(k).filter(c=>c.days<0).length;return o?`${o} Aufgaben vor dem Event offen.`:'Alles vor dem Event erledigt.'}
+  if(s==='final')return'Nach dem Event: auf „Durchgeführt“ setzen und bewerten.';
+  if(s==='durchgefuehrt')return'Bewertungen eintragen, Provisionen einziehen.';
+  return'';
+}
+function dbView(){
+  const f=S.flt,q=f.q.trim().toLowerCase();
+  const list=S.db.providers.filter(p=>(!f.cat||p.cat===f.cat)&&(!f.city||p.city===f.city)&&(!f.status||p.status===f.status)&&(!q||(p.name+' '+p.desc+' '+(p.addr||'')).toLowerCase().includes(q)));
+  const usedCities=[...new Set(S.db.providers.map(p=>p.city))].sort();
+  const priceTxt=p=>{const r=p.price||{};return[r.base?fmt(r.base):'',r.pp?r.pp+' €/Gast':'',r.hourly?r.hourly+' €/h':'',p.inhouse?'Gastro '+p.inhouse+' €/Gast':''].filter(Boolean).join(' + ')};
+  return`<div class="sec-h"><h2>Dienstleister-Datenbank</h2><div class="row"><span class="muted">${list.length} von ${S.db.providers.length}</span><button class="btn sm accent" data-act="newP">+ Neuer Dienstleister</button></div></div>
+  <p class="info" style="margin-bottom:14px">Nur für dich sichtbar. Kunden sehen nur Name, Ort, Beschreibung und Preis der passenden Anbieter in ihren Paketen – keine Kontaktdaten, Provisionen oder Notizen.</p>
+  <div class="panel grid-f" style="margin-bottom:16px">
+    <label class="fld"><span>Kategorie</span><select data-f="flt:cat" data-r><option value="">Alle</option>${ORDER.map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${CATS[c].label}</option>`).join('')}</select></label>
+    <label class="fld"><span>Ort</span><select data-f="flt:city" data-r><option value="">Alle</option>${usedCities.map(c=>`<option ${f.city===c?'selected':''}>${esc(c)}</option>`).join('')}</select></label>
+    <label class="fld"><span>Status</span><select data-f="flt:status" data-r><option value="">Alle</option>${PSTATUS.map(s=>`<option ${f.status===s?'selected':''}>${s}</option>`).join('')}</select></label>
+    <label class="fld"><span>Suche</span><input type="text" data-f="flt:q" data-r value="${esc(f.q)}" placeholder="Name, Adresse …"></label></div>
+  <section class="panel tbl"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Ort</th><th>Status</th><th>Preis (Richtwert)</th><th class="r">Prov.</th><th>Bewertung</th><th>Zu prüfen</th></tr></thead><tbody>
+  ${list.map(p=>{const cl={Lead:'neutral',Angefragt:'warn',Partner:'good',Pausiert:'bad'}[p.status||'Lead'];const jobs=S.db.bookings.filter(k=>k.items.some(i=>i.pid===p.id||i.pid===p.id+'#gastro')).length;
+    return`<tr class="click" data-act="editP" data-id="${esc(p.id)}"><td><b>${esc(p.name)}</b><br><small class="muted">${esc(p.addr||'')}${p.tel?' · '+esc(p.tel):''}</small></td><td>${CATS[p.cat].label}</td><td>${esc(p.city)}</td><td><span class="pill ${cl}">${esc(p.status||'Lead')}</span></td>
+    <td><span class="mono" style="font-size:.85rem">${esc(priceTxt(p))}</span><br><small class="muted">${esc((p.price||{}).src||'')}</small></td><td class="r">${commOf(p)} %</td><td>${stars(ratingOf(p))}${jobs?`<br><small class="muted">${jobs} Aufträge</small>`:''}</td><td><small>${esc((p.check||[]).join(', '))}</small></td></tr>`}).join('')||'<tr><td colspan="8" class="muted">Keine Treffer.</td></tr>'}
+  </tbody></table></section>`;
+}
+function providerForm(){
+  const p=S.pe,isNew=!S.db.providers.some(x=>x.id===p.id),c=p.cat,pr=p.price||(p.price={});
+  const inp=(f,l,v,type='text',extra='')=>`<label class="fld"><span>${l}</span><input type="${type}" data-f="pe:${f}" value="${esc(v==null?'':v)}" ${extra}></label>`;
+  const num=(f,l,v)=>inp(f,l,v,'number','step="any" min="0"');
+  return`<div class="row" style="margin-bottom:10px"><button class="btn sm ghost" data-act="cancelP">← Zurück zur Datenbank</button></div>
+  <div class="sec-h"><h2>${isNew?'Neuer Dienstleister':esc(p.name)}</h2><span class="mono muted">${esc(p.id)}</span></div>
+  ${S.err?`<div class="err">${esc(S.err)}</div>`:''}
+  <section class="panel stack">
+    <div class="grid-f">${inp('name','Name *',p.name)}
+      <label class="fld"><span>Kategorie</span><select data-f="pe:cat" data-r>${ORDER.map(x=>`<option value="${x}" ${c===x?'selected':''}>${CATS[x].label}</option>`).join('')}</select></label>
+      <label class="fld"><span>Ort (für Entfernung)</span><select data-f="pe:city">${Object.keys(CITIES).map(x=>`<option ${p.city===x?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
+      <label class="fld"><span>Status</span><select data-f="pe:status">${PSTATUS.map(s=>`<option ${(p.status||'Lead')===s?'selected':''}>${s}</option>`).join('')}</select></label></div>
+    <div class="grid-f">${inp('addr','Adresse',p.addr)}${inp('tel','Telefon',p.tel,'tel')}${inp('mail','E-Mail',p.mail,'email')}${inp('web','Website',p.web,'url')}</div>
+    <label class="fld"><span>Beschreibung (sieht der Kunde)</span><textarea data-f="pe:desc" style="min-height:60px">${esc(p.desc)}</textarea></label>
+    <div class="fld"><span>Stil</span><div class="checks">${STYLES.map(s=>`<label class="chk"><input type="checkbox" data-f="petag:${s}" ${(p.tags||[]).includes(s)?'checked':''}>${s}</label>`).join('')}</div></div>
+    <h3>Preise & Konditionen</h3>
+    <div class="grid-f">
+      ${c==='location'?num('price.base','Miete bis 6 h (€)',pr.base)+num('cap.0','Min. Gäste',(p.cap||[])[0])+num('cap.1','Max. Gäste',(p.cap||[])[1])+num('inhouse','Hausgastronomie €/Gast (leer = keine)',p.inhouse):''}
+      ${c==='catering'?num('price.pp','€ pro Gast',pr.pp)+num('price.min','Mindestumsatz (€)',pr.min)+num('maxG','Max. Gäste',p.maxG):''}
+      ${c==='getraenke'||c==='deko'?num('price.base','Grundpreis (€)',pr.base)+num('price.pp','€ pro Gast',pr.pp):''}
+      ${c==='dj'?num('price.base','Pauschale 5 h (€)',pr.base):''}
+      ${c==='foto'?num('price.base','Pauschale (€)',pr.base)+num('price.hourly','€/h ab 5. Stunde (leer = Fotobox)',pr.hourly):''}
+      ${c==='personal'?num('price.hourly','€ pro Kraft und Stunde',pr.hourly):''}
+      ${c!=='location'?num('km','Fährt bis (km)',p.km):''}
+      ${num('comm',`Provision % (leer = ${SET().comm[c]} %)`,p.comm)}
+      <label class="fld"><span>Preisquelle</span><select data-f="pe:price.src">${['geschätzt','öffentlicher Ab-Preis','vom Anbieter bestätigt','Partnervertrag'].map(s=>`<option ${pr.src===s?'selected':''}>${s}</option>`).join('')}</select></label></div>
+    ${c==='location'?`<div class="checks"><label class="chk"><input type="checkbox" data-f="pebool:kitchen" ${p.kitchen?'checked':''}>Küche vorhanden</label><label class="chk"><input type="checkbox" data-f="pebool:ext" ${p.ext!==false?'checked':''}>Fremd-Catering erlaubt</label></div>`:''}
+    ${c==='catering'?`<div class="fld"><span>Ernährung</span><div class="checks">${DIETS.map(d=>`<label class="chk"><input type="checkbox" data-f="pediet:${d}" ${(p.diets||[]).includes(d)?'checked':''}>${d}</label>`).join('')}<label class="chk"><input type="checkbox" data-f="pebool:mobile" ${p.mobile!==false?'checked':''}>Mobile Küche</label></div></div>`:''}
+    <h3>Intern</h3>
+    <div class="grid-f">${inp('blocked','Gesperrte Tage (JJJJ-MM-TT, Komma)',(p.blocked||[]).join(', '))}${inp('check','Noch zu prüfen (Komma)',(p.check||[]).join(', '))}${inp('src','Quelle / Fundstelle',p.src,'url')}</div>
+    <label class="fld"><span>Notizen (nur Admin)</span><textarea data-f="pe:notes">${esc(p.notes||'')}</textarea></label>
+    ${p.src?`<p><a href="${esc(p.src)}" target="_blank" rel="noopener">Fundstelle öffnen</a></p>`:''}
+    <div class="row"><button class="btn accent" data-act="saveP">Speichern</button><button class="btn ghost" data-act="cancelP">Abbrechen</button><span class="sp"></span>${!isNew?`<button class="btn danger" data-act="delP">Löschen</button>`:''}</div>
+  </section>`;
+}
+function gewinnView(){
+  const st=SET(),cv=st.calc,bs=S.db.bookings.filter(k=>k.stage!=='storniert'&&!k.example);
+  const items=S.db.bookings.filter(k=>k.stage!=='storniert').flatMap(k=>k.items.filter(i=>i.status!=='abgelehnt'));
+  const avgComm=items.length?items.reduce((a,i)=>a+i.price*i.comm,0)/Math.max(1,items.reduce((a,i)=>a+i.price,0)):10;
+  const fee=Math.min(Math.round(cv.value*st.fee/100),st.feeCap),disc=Math.round(cv.value*st.bundle/100*.6);
+  const perEvent=Math.round(cv.value*avgComm/100)+fee-disc;
+  const costs=Object.values(st.costs).reduce((a,x)=>a+(+x||0),0);
+  const rev=perEvent*cv.events,profit=rev-costs,be=perEvent>0?Math.ceil(costs/perEvent):'–';
+  const sc=[2,4,8,12,20,30];
+  return`<div class="sec-h"><h2>Gewinnrechnung</h2><span class="muted">Vermittlungsmodell: du verdienst Provision + Servicegebühr</span></div>
+  <div class="two">
+    <section class="panel stack"><h3>Annahmen</h3>
+      <label class="fld"><span>Events pro Monat: <b class="mono">${cv.events}</b></span><input type="range" min="1" max="40" data-f="calc:events" data-r value="${cv.events}"></label>
+      <label class="fld"><span>Ø Paketwert (€): <b class="mono">${fmt(cv.value)}</b></span><input type="range" min="1000" max="15000" step="250" data-f="calc:value" data-r value="${cv.value}"></label>
+      <ul class="lines"><li><span class="n">Ø Provision (aus deinen Daten)</span><span class="m">${avgComm.toFixed(1).replace('.',',')} %</span></li>
+        <li><span class="n">Servicegebühr pro Event</span><span class="m">${fmt(fee)}</span></li><li><span class="n">Ø Bundle-Rabatt (geschätzt)</span><span class="m">−${fmt(disc)}</span></li>
+        <li class="tot"><span class="n">Dein Umsatz pro Event</span><span class="m">${fmt(perEvent)}</span></li></ul>
+      <h3>Fixkosten pro Monat</h3>
+      ${Object.entries(st.costs).map(([n,v])=>`<label class="fld"><span>${esc(n)}</span><input type="number" min="0" step="10" data-f="cost:${esc(n)}" data-r value="${v}"></label>`).join('')}</section>
+    <section class="stack">
+      <div class="kpis" style="margin:0"><div class="kpi"><span class="l">Umsatz / Monat</span><span class="n">${fmt(rev)}</span></div><div class="kpi"><span class="l">Kosten / Monat</span><span class="n">${fmt(costs)}</span></div>
+        <div class="kpi hi"><span class="l">Gewinn / Monat</span><span class="n" style="color:${profit>=0?'var(--good)':'var(--bad)'}">${fmt(profit)}</span></div><div class="kpi hi"><span class="l">Gewinn / Jahr</span><span class="n" style="color:${profit>=0?'var(--good)':'var(--bad)'}">${fmt(profit*12)}</span></div>
+        <div class="kpi"><span class="l">Break-even</span><span class="n">${be}</span><small>Events pro Monat</small></div></div>
+      <div class="panel tbl"><table style="min-width:420px"><thead><tr><th class="r">Events/Monat</th><th class="r">Umsatz/Monat</th><th class="r">Gewinn/Monat</th><th class="r">Gewinn/Jahr</th></tr></thead><tbody>
+        ${sc.map(e=>{const p=perEvent*e-costs;return`<tr><td class="r">${e}</td><td class="r">${fmt(perEvent*e)}</td><td class="r" style="color:${p>=0?'var(--good)':'var(--bad)'}">${fmt(p)}</td><td class="r">${fmt(p*12)}</td></tr>`}).join('')}</tbody></table></div>
+      <p class="info">Werte netto vor Steuern. Auf Provision und Servicegebühr fällt Umsatzsteuer an, auf den Gewinn Einkommen-/Gewerbesteuer – mit dem Steuerberater klären.</p></section></div>
+  <section class="panel tbl"><h3 style="margin-bottom:10px">Echte Buchungen</h3><table><thead><tr><th>Nr.</th><th>Anlass</th><th>Status</th><th class="r">Volumen</th><th class="r">Provision</th><th class="r">Gebühr − Rabatt</th><th class="r">Dein Umsatz</th></tr></thead><tbody>
+    ${bs.map(k=>{const t=bTot(k);return`<tr class="click" data-act="akte" data-k="${k.id}"><td class="mono">${esc(k.id)}</td><td>${esc(k.brief.occasion)}</td><td>${stagePill(k)}</td><td class="r">${fmt(t.total)}</td><td class="r">${fmt(t.comm)}</td><td class="r">${fmt(t.fee-t.disc)}</td><td class="r"><b>${fmt(t.revenue)}</b></td></tr>`}).join('')||'<tr><td colspan="7" class="muted">Noch keine echten Buchungen.</td></tr>'}
+  </tbody></table></section>`;
+}
+function settingsView(){
+  const st=SET(),n=(f,l,v,ex='')=>`<label class="fld"><span>${l}</span><input type="number" step="any" min="0" data-f="set:${f}" value="${v}" ${ex}></label>`;
+  return`<div class="sec-h"><h2>Einstellungen</h2></div>
+  ${S.flash?`<div class="ok">${esc(S.flash)}</div>`:''}
+  <div class="two">
+    <section class="panel stack"><h3>Preise & Gebühren</h3>
+      <div class="grid-f">${n('fee','Servicegebühr Kunde (%)',st.fee)}${n('feeCap','Gebühr max. (€)',st.feeCap)}${n('bundle','Bundle-Rabatt (%)',st.bundle)}${n('bundleMin','Rabatt ab Bausteinen',st.bundleMin)}${n('deposit','Anzahlung (%)',st.deposit)}${n('replyHours','Antwortzeit (h)',st.replyHours)}</div>
+      <h3>Standard-Provision je Kategorie (%)</h3>
+      <div class="grid-f">${ORDER.map(c=>`<label class="fld"><span>${CATS[c].label}</span><input type="number" step="0.5" min="0" data-f="setcomm:${c}" value="${st.comm[c]}"></label>`).join('')}</div>
+      <label class="chk"><input type="checkbox" data-f="setbool:onlyPartners" ${st.onlyPartners?'checked':''}>Im Matching nur Dienstleister mit Status „Partner“ verwenden</label>
+      <small class="muted">Solange du noch keine Partner hast, aus lassen – sonst bekommen Kunden keine Pakete.</small></section>
+    <section class="panel stack"><h3>Firma & Zugang</h3>
+      <div class="grid-f"><label class="fld"><span>Firmenname (in Mails)</span><input type="text" data-f="setco:name" value="${esc(st.company.name)}"></label>
+      <label class="fld"><span>Telefon (in Mails)</span><input type="tel" data-f="setco:tel" value="${esc(st.company.tel)}"></label>
+      </div>
+      <button class="btn accent" data-act="saveSet">Einstellungen speichern</button>
+      <h3>Admin-Passwort ändern</h3>
+      ${S.pwMsg?`<div class="${S.pwMsg.ok?'ok':'err'}">${esc(S.pwMsg.t)}</div>`:''}
+      <div class="grid-f"><label class="fld"><span>Aktuelles Passwort</span><input type="password" data-f="pw:old" autocomplete="current-password"></label>
+      <label class="fld"><span>Neues Passwort</span><input type="password" data-f="pw:new1" autocomplete="new-password" placeholder="mind. 10 Zeichen"></label>
+      <label class="fld"><span>Neues Passwort wiederholen</span><input type="password" data-f="pw:new2" autocomplete="new-password"></label></div>
+      <button class="btn sm" data-act="changePw">Passwort ändern</button>
+      <p class="info">Die Daten liegen auf dem Server (Railway, eigenes Volume) und sind nur nach Login sichtbar. Kunden bekommen nur Name, Ort, Beschreibung und Preis der Dienstleister – keine Kontakte, Provisionen oder Notizen.</p>
+      <h3>Daten</h3>
+      <div class="row"><button class="btn sm" data-act="export">Export (JSON)</button><label class="btn sm ghost">Import<input type="file" accept="application/json" data-act-change="import" hidden></label>
+        <button class="btn sm ghost" data-act="exportCsv">Dienstleister als CSV</button></div>
+      <div class="row"><button class="btn sm danger" data-act="delDemo">Beispiel-Akte löschen</button><button class="btn sm danger" data-act="resetP">Datenbank auf Startstand</button></div>
+      <small class="muted">Daten werden automatisch auf dem Server gespeichert, dazu täglich ein Backup. Ein gelegentlicher Export schadet trotzdem nicht.</small></section></div>`;
+}
+
+/* ---------- Eingaben ---------- */
+function setPath(o,path,v){const ps=path.split('.');let x=o;for(let i=0;i<ps.length-1;i++){const k=ps[i];if(x[k]==null)x[k]=/^\d+$/.test(ps[i+1])?[]:{};x=x[k]}x[ps[ps.length-1]]=v}
+function setField(el){
+  const f=el.dataset.f,b=S.brief,v=el.type==='checkbox'?el.checked:el.value;
+  if(f==='nl'){S.nlText=v;return}
+  if(f==='pin'){S.pinInput=v;return}
+  if(f.startsWith('pw:')){S.pw[f.slice(3)]=v;return}
+  if(f==='note'){S.note=v;return}
+  if(f.startsWith('b:')){const k=f.slice(2);b[k]=['hours','radius','guests','budget'].includes(k)?+v:v;return}
+  if(f.startsWith('cat:')){b.cats[f.slice(4)]=el.checked;return}
+  if(f.startsWith('diet:')){const d=f.slice(5);b.diets=b.diets.filter(x=>x!==d);if(el.checked)b.diets.push(d);return}
+  if(f.startsWith('co:')){S.co[f.slice(3)]=v;updateReady();return}
+  if(f.startsWith('track:')){S.track[f.slice(6)]=v;return}
+  if(f.startsWith('flt:')){S.flt[f.slice(4)]=v;return}
+  if(f.startsWith('calc:')){SET().calc[f.slice(5)]=+v;save();return}
+  if(f.startsWith('cost:')){SET().costs[f.slice(5)]=+v||0;save();return}
+  if(f.startsWith('setcomm:')){S.setDraft=S.setDraft||{};S.setDraft['comm.'+f.slice(8)]=+v;return}
+  if(f.startsWith('setco:')){S.setDraft=S.setDraft||{};S.setDraft['company.'+f.slice(6)]=v;return}
+  if(f.startsWith('setbool:')){S.setDraft=S.setDraft||{};S.setDraft[f.slice(8)]=el.checked;return}
+  if(f.startsWith('set:')){S.setDraft=S.setDraft||{};S.setDraft[f.slice(4)]=+v;return}
+  if(f.startsWith('petag:')){const t=f.slice(6),p=S.pe;p.tags=(p.tags||[]).filter(x=>x!==t);if(el.checked)p.tags.push(t);return}
+  if(f.startsWith('pediet:')){const t=f.slice(7),p=S.pe;p.diets=(p.diets||[]).filter(x=>x!==t);if(el.checked)p.diets.push(t);return}
+  if(f.startsWith('pebool:')){S.pe[f.slice(7)]=el.checked;return}
+  if(f.startsWith('pe:')){
+    const k=f.slice(3);
+    if(k==='blocked'||k==='check'){S.pe[k]=v.split(',').map(x=>x.trim()).filter(Boolean);return}
+    const isNum=el.type==='number';
+    setPath(S.pe,k,isNum?(v===''?(k==='comm'||k==='inhouse'?'':null):+v):v);
+    return;
+  }
+}
+function scrollTop(){try{window.scrollTo(0,0)}catch(e){}}
+function chooseTier(t){const pk=S.packages.find(p=>p.tier===t);if(!pk)return;S.sel={};ORDER.forEach(c=>{if(pk.sel[c])S.sel[c]={...pk.sel[c]}});S.tier=t;S.step=3;S.notice=null;scrollTop()}
+function revalidateCatering(){
+  const b=S.brief;if(!S.sel.catering)return;
+  const loc=S.sel.location&&S.sel.location.p,cc=cands('catering',b,{loc});
+  const cur=cc.find(y=>y.p.id===S.sel.catering.p.id);
+  if(!cur||cur.reason){const ok=cc.filter(y=>!y.reason);
+    if(ok.length){S.sel.catering=pick(ok,'beliebt',b);S.notice=`Catering angepasst: ${S.sel.catering.p.name} passt zur gewählten Location.`}
+    else{delete S.sel.catering;S.notice='Catering entfernt: Mit dieser Location ist kein Catering verfügbar.'}}
+  else S.sel.catering=cur;
+}
+function swap(c,id){
+  const b=S.brief,ctx={loc:c==='location'?null:S.sel.location&&S.sel.location.p};
+  const x=cands(c,b,ctx).find(y=>y.p.id===id);if(!x||x.reason)return;
+  S.sel[c]=x;if(c==='location')revalidateCatering();
+}
+function addCat(c){
+  const b=S.brief,ok=cands(c,b,{loc:S.sel.location&&S.sel.location.p}).filter(x=>!x.reason);
+  if(!ok.length){S.notice=`Für ${CATS[c].label} ist an diesem Datum niemand frei.`;return}
+  S.sel[c]=pick(ok,'beliebt',b);if(c==='location')revalidateCatering();
+}
+function validateBrief(){
+  const b=S.brief;
+  if(!b.date||b.date<today())return'Bitte wähle ein Datum in der Zukunft.';
+  if(!(b.guests>=10&&b.guests<=400))return'Die Gästezahl muss zwischen 10 und 400 liegen.';
+  if(!(b.budget>=300))return'Bitte gib ein Budget von mindestens 300 € an.';
+  if(!ORDER.some(c=>b.cats[c]))return'Wähle mindestens einen Baustein.';
+  return null;
+}
+function download(name,text,type){
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function csv(){
+  const cols=['id','cat','name','city','addr','tel','mail','web','status','desc','price.base','price.pp','price.hourly','price.min','price.src','comm','km','src','check','notes'];
+  const g=(p,c)=>{const v=c.split('.').reduce((a,k)=>a==null?a:a[k],p);return Array.isArray(v)?v.join('; '):v==null?'':v};
+  const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+  return'﻿'+cols.join(';')+'\n'+S.db.providers.map(p=>cols.map(c=>q(g(p,c))).join(';')).join('\n');
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]');if(!t||t.disabled)return;
+  const a=t.dataset.act;
+  if(t.tagName==='A'&&a==='mailP'){const k=S.db.bookings.find(x=>x.id===t.dataset.k),i=k&&k.items[+t.dataset.i];if(i&&i.status==='offen'){i.status='angefragt';logB(k,`Anfrage-Mail an ${i.name} geöffnet.`);if(k.stage==='neu')k.stage='angefragt';save();setTimeout(render,50)}return}
+  if(t.tagName==='A')return;
+  if(t.tagName==='SELECT'||t.tagName==='INPUT')return;
+  S.notice=a==='swap'||a==='add'?null:S.notice;S.flash=null;
+  const K=()=>S.db.bookings.find(x=>x.id===t.dataset.k);
+  switch(a){
+    case 'home':S.view='host';S.akte=null;break;
+    case 'view':S.view=t.dataset.v;S.err=null;if(t.dataset.v==='login'&&S.admin)S.view='admin';break;
+    case 'aview':S.view='admin';S.aview=t.dataset.v;S.akte=null;S.pe=null;S.err=null;break;
+    case 'login':{const v=($('#pin')||{}).value||S.pinInput;S.pinInput='';t.disabled=true;
+      api('/api/login',{method:'POST',body:{password:v}}).then(loadAdmin).then(()=>{S.view='admin';S.aview='cockpit';S.err=null;location.hash='admin'})
+        .catch(e=>{S.err=e.message;S.admin=false}).then(render);return}
+    case 'logout':clearTimeout(saveTimer);(saveState==='pending'?flushSave():Promise.resolve()).then(()=>api('/api/logout',{method:'POST'})).catch(()=>{})
+      .then(()=>{S.admin=false;S.view='host';S.akte=null;S.pe=null;if(location.hash)history.replaceState(null,'',location.pathname);return loadPublic()}).catch(()=>{}).then(render);return;
+    case 'changePw':{const p=S.pw;S.pwMsg=null;if(p.new1!==p.new2){S.pwMsg={ok:false,t:'Die neuen Passwörter stimmen nicht überein.'};break}
+      api('/api/admin/password',{method:'POST',body:{old:p.old,new:p.new1}}).then(()=>{S.pw={old:'',new1:'',new2:''};S.pwMsg={ok:true,t:'Passwort geändert. Andere Geräte wurden abgemeldet.'}})
+        .catch(e=>{S.pwMsg={ok:false,t:e.message}}).then(render);return}
+    case 'goto':S.step=+t.dataset.step;S.err=null;scrollTop();break;
+    case 'parse':S.nlFound=parseBriefing(S.nlText);break;
+    case 'gen':S.err=validateBrief();if(!S.err){const ids=pk=>Object.values(pk.sel).map(x=>x.p.id),sp=buildPackage('spar',S.brief),be=buildPackage('beliebt',S.brief,ids(sp)),pr=buildPackage('premium',S.brief,ids(sp).concat(ids(be)));S.packages=[sp,be,pr];S.step=2;scrollTop()}break;
+    case 'choose':chooseTier(t.dataset.tier);break;
+    case 'swap':swap(t.dataset.cat,t.dataset.id);break;
+    case 'remove':delete S.sel[t.dataset.cat];if(t.dataset.cat==='location')revalidateCatering();break;
+    case 'add':addCat(t.dataset.cat);break;
+    case 'request':{if(S.sending)return;S.sending=true;t.disabled=true;t.textContent='Wird gesendet …';S.err=null;
+      const items=selItems(S.sel).map(i=>({cat:i.cat,pid:i.pid,price:i.price,calc:S.sel[i.cat].calc}));
+      api('/api/request',{method:'POST',body:{brief:S.brief,co:S.co,items}}).then(d=>{S.lastBooking=d.booking;S.bookingId=d.booking.id;S.step=4;scrollTop();
+        if(S.admin)return loadAdmin();return loadPublic()}).catch(e=>{S.notice='Anfrage konnte nicht gesendet werden: '+e.message}).then(()=>{S.sending=false;render()});return}
+    case 'newEvent':S.step=1;S.sel={};S.packages=[];S.bookingId=null;S.co.privacy=false;scrollTop();break;
+    case 'track':{const id=S.track.id.trim().toUpperCase(),m=S.track.mail.trim().toLowerCase();
+      api('/api/track',{method:'POST',body:{id,mail:m}}).then(d=>{S.track.k=d.booking;S.track.res=d.booking?d.booking.id:'none'}).catch(e=>{S.track.k=null;S.track.res='none'}).then(render);return}
+    case 'akte':S.view='admin';S.akte=t.dataset.k;S.note='';scrollTop();break;
+    case 'closeAkte':S.akte=null;S.aview='anfragen';break;
+    case 'stage':{const k=K();if(!k)break;const to=t.dataset.s,its=k.items.filter(i=>i.status!=='abgelehnt');
+      if(to==='bestaetigt'&&its.some(i=>i.status!=='angenommen'))S.flash='Achtung: Noch nicht alle Dienstleister haben angenommen.';
+      if(to==='final'&&openTasks(k).some(c=>c.days<0))S.flash='Achtung: Es sind noch Aufgaben vor dem Event offen.';
+      if(to==='abgeschlossen'&&its.some(i=>!i.paid))S.flash='Hinweis: Nicht alle Provisionen sind als bezahlt markiert.';
+      if(to==='gebucht'&&!k.bookedAt)k.bookedAt=today();
+      const was=k.stage;k.stage=to;logB(k,`Status: ${STAGES[STAGE_IDX[was]]?STAGES[STAGE_IDX[was]][1]:was} → ${STAGES[STAGE_IDX[to]][1]}`);
+      save();break}
+    case 'istatus':{const k=K(),i=k&&k.items[+t.dataset.i];if(i){i.status=t.dataset.s;logB(k,`${i.name}: ${t.dataset.s}`);
+      if(t.dataset.s==='angefragt'&&k.stage==='neu')k.stage='angefragt';
+      const its=k.items.filter(x=>x.status!=='abgelehnt');if((k.stage==='angefragt'||k.stage==='neu')&&its.length&&its.every(x=>x.status==='angenommen')){k.stage='bestaetigt';logB(k,'Alle Dienstleister bestätigt.')}
+      if(t.dataset.s==='abgelehnt')S.flash=`${i.name} hat abgelehnt – wähle unten über „Ersetzen durch …“ einen Ersatz.`;save()}break}
+    case 'rate':{const k=K(),i=k&&k.items[+t.dataset.i];if(i){const p=S.db.providers.find(x=>x.id===String(i.pid).split('#')[0]);
+      if(p){p.reviews=p.reviews||[];if(i.rating!=null){const ix=p.reviews.indexOf(i.rating);if(ix>=0)p.reviews.splice(ix,1)}p.reviews.push(+t.dataset.s)}
+      i.rating=+t.dataset.s;logB(k,`Bewertung ${i.name}: ${i.rating} Sterne`);save()}break}
+    case 'addItem':{const k=K();if(!k)break;const c=t.dataset.cat,loc=getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt')||{}).pid);
+      const ok=cands(c,k.brief,{exclude:k.id,loc:c==='location'?null:loc}).filter(x=>!x.reason);
+      if(!ok.length){S.flash=`Kein freier Anbieter für ${CATS[c].label}.`;break}
+      const x=pick(ok,'beliebt',k.brief);k.items.push({cat:c,pid:x.p.id,name:x.p.name,price:x.price,calc:x.calc,comm:commOf(x.p),status:'offen',paid:false,rating:null});
+      k.brief.cats[c]=true;logB(k,`Baustein ergänzt: ${x.p.name}`);save();break}
+    case 'addNote':{const k=K();if(k&&S.note.trim()){logB(k,S.note.trim());S.note='';save()}break}
+    case 'cancel':{const k=K();if(k){k.stage='storniert';logB(k,'Storniert.');save()}break}
+    case 'delB':{const k=K();if(!k)break;if(t.dataset.confirm!=='1'){t.dataset.confirm='1';t.textContent='Wirklich löschen?';return}
+      S.db.bookings=S.db.bookings.filter(x=>x!==k);if(k.example)S.db.demoRemoved=true;S.akte=null;S.aview='anfragen';save();break}
+    case 'print':try{window.print()}catch(e){}return;
+    case 'newP':S.pe={id:'X'+Date.now().toString(36).toUpperCase(),cat:S.flt.cat||'location',name:'',city:'Heidelberg',status:'Lead',tags:[],price:{src:'vom Anbieter bestätigt'},cap:[10,100],kitchen:true,ext:true,mobile:true,diets:['vegetarisch'],km:40,check:[],blocked:[]};S.err=null;break;
+    case 'editP':{const p=S.db.providers.find(x=>x.id===t.dataset.id);if(p){S.pe=clone(p);S.err=null;scrollTop()}break}
+    case 'cancelP':S.pe=null;S.err=null;break;
+    case 'saveP':{const p=S.pe;if(!p.name||!p.name.trim()){S.err='Bitte einen Namen eingeben.';break}
+      ['comm','inhouse','maxG','km'].forEach(k=>{if(p[k]===''||p[k]==null)delete p[k]});
+      if(p.cat!=='location'){delete p.cap;delete p.inhouse}
+      const ix=S.db.providers.findIndex(x=>x.id===p.id);if(ix>=0)S.db.providers[ix]=p;else S.db.providers.push(p);S.pe=null;S.err=null;save();break}
+    case 'delP':{if(t.dataset.confirm!=='1'){t.dataset.confirm='1';t.textContent='Wirklich löschen?';return}S.db.providers=S.db.providers.filter(x=>x.id!==S.pe.id);S.pe=null;save();break}
+    case 'saveSet':{const d=S.setDraft||{},st=SET();
+      for(const [k,v] of Object.entries(d))setPath(st,k,v);
+      S.setDraft=null;save();S.flash='Gespeichert.';break}
+    case 'export':download('partypilot-daten-'+today()+'.json',JSON.stringify(S.db,null,1),'application/json');return;
+    case 'exportCsv':download('partypilot-dienstleister-'+today()+'.csv',csv(),'text/csv;charset=utf-8');return;
+    case 'delDemo':S.db.bookings=S.db.bookings.filter(k=>!k.example);S.db.demoRemoved=true;save();S.flash='Beispiel-Akte gelöscht.';break;
+    case 'resetP':{if(t.dataset.confirm!=='1'){t.dataset.confirm='1';t.textContent='Sicher? Eigene Änderungen gehen verloren';return}api('/api/admin/default-providers').then(d=>{S.db.providers=d.providers;save();S.flash='Datenbank zurückgesetzt.'}).catch(e=>{S.flash='Fehler: '+e.message}).then(render);return}
+  }
+  render();
+});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset&&el.dataset.f){setField(el);if(el.type==='range'){const lb=el.closest('label');const b=lb&&lb.querySelector('b');if(b)b.textContent=el.dataset.f==='calc:value'?fmt(el.value):el.value}}});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.dataset&&el.dataset.f){setField(el);if(el.dataset.r!==undefined)render();return}
+  const a=el.dataset&&el.dataset.actChange;if(!a)return;
+  const k=S.db.bookings.find(x=>x.id===el.dataset.k);
+  if(a==='check'&&k){k.checks[el.dataset.c]=el.checked;save();render()}
+  else if(a==='paid'&&k){const i=k.items[+el.dataset.i];i.paid=el.checked;logB(k,`Provision ${i.name}: ${el.checked?'bezahlt':'offen'}`);save();render()}
+  else if(a==='replace'&&k&&el.value){
+    const i=k.items[+el.dataset.i],loc=getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt'&&x!==i)||{}).pid);
+    const x=cands(i.cat,k.brief,{exclude:k.id,loc:i.cat==='location'?null:loc}).find(y=>y.p.id===el.value);
+    if(x){logB(k,`${i.name} ersetzt durch ${x.p.name}`);Object.assign(i,{pid:x.p.id,name:x.p.name,price:x.price,calc:x.calc,comm:commOf(x.p),status:'offen',rating:null,paid:false});save();render()}
+  }
+  else if(a==='import'&&el.files&&el.files[0]){
+    const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.providers||!d.bookings)throw 0;S.db.providers=d.providers;S.db.bookings=d.bookings;S.db.set=Object.assign(clone(DEFAULT_SET),d.set||{});S.db.demoRemoved=!!d.demoRemoved;save();S.flash='Import erfolgreich.'}catch(err){S.flash='Datei konnte nicht gelesen werden.'}render()};r.readAsText(el.files[0]);
+  }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='pin'){e.preventDefault();const b=document.querySelector('[data-act="login"]');if(b)b.click()}});
+function fromHash(){const h=location.hash.slice(1);if(h==='admin'){S.view=S.admin?'admin':'login'}else if(h==='verfolgen')S.view='track'}
+async function init(){render();await load();fromHash();render();window.addEventListener('hashchange',()=>{fromHash();render()})}
+if(typeof document!=='undefined')init();
+</script>
+</body>
+</html>
