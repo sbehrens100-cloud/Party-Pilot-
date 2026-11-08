@@ -11,12 +11,14 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { DEFAULT_PROVIDERS } = require('./seed');
+const { DEFAULT_PROVIDERS, DEFAULT_OPTS, DEFAULT_OPTPRICE } = require('./seed');
 
 const PORT = +process.env.PORT || 8080;
 const DATA_DIR = process.env.DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(__dirname, '..', 'data');
 const DB_FILE = path.join(DATA_DIR, 'partypilot-db.json');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const MEDIA_DIR = path.join(DATA_DIR, 'media');
+const MAX_IMG = 4 * 1024 * 1024;
 const SESSION_DAYS = 30;
 const MAX_BODY = 8 * 1024 * 1024;
 const COOKIE = 'pp_session';
@@ -27,7 +29,8 @@ const DEFAULT_SET = {
   comm: { location: 8, catering: 10, getraenke: 10, dj: 12, foto: 12, deko: 15, personal: 8 },
   costs: { 'Hosting & Software': 30, 'Versicherung': 40, 'Marketing / Werbung': 300, 'Telefon & Sonstiges': 40 },
   calc: { events: 4, value: 4000 },
-  company: { name: 'PartyPilot', mail: '', tel: '' }
+  company: { name: 'PartyPilot', mail: '', tel: '' },
+  optImg: {}
 };
 const CATS = ['location', 'catering', 'getraenke', 'dj', 'foto', 'deko', 'personal'];
 
@@ -65,6 +68,21 @@ function loadDB() {
   DB.bookings = DB.bookings || [];
   DB.set = Object.assign(clone(DEFAULT_SET), DB.set || {});
   delete DB.set.pin;
+  DB.set.optImg = DB.set.optImg || {};
+  // Neue Felder (Angebot/Optionen, Bilder, Räume) für bestehende Dienstleister ergänzen
+  let migrated = 0;
+  DB.providers.forEach(p => {
+    if (!Array.isArray(p.opts)) {
+      p.opts = (DEFAULT_OPTS[p.id] || []).slice();
+      p.check = Array.isArray(p.check) ? p.check : [];
+      if (!p.check.includes('Angebot/Optionen')) p.check.push('Angebot/Optionen');
+      migrated++;
+    }
+    if (!p.optPrice || typeof p.optPrice !== 'object') p.optPrice = clone(DEFAULT_OPTPRICE[p.id] || {});
+    if (!Array.isArray(p.imgs)) p.imgs = [];
+    if (p.cat === 'location' && !Array.isArray(p.rooms)) p.rooms = [];
+  });
+  if (migrated) console.log('Optionen für', migrated, 'Dienstleister ergänzt.');
   DB.auth = DB.auth || {};
   DB.auth.sessions = DB.auth.sessions || {};
   // Passwort: aus ADMIN_PASSWORD (Railway-Variable), falls noch keins gesetzt oder ADMIN_PASSWORD_RESET=1
@@ -98,10 +116,15 @@ function dailyBackup() {
 const adminDB = () => ({ rev: DB.rev, providers: DB.providers, bookings: DB.bookings, set: DB.set, demoRemoved: !!DB.demoRemoved });
 
 /* ---------- Öffentliche Sicht (für Kunden) ---------- */
-const PUBLIC_P_FIELDS = ['id', 'cat', 'name', 'city', 'desc', 'tags', 'cap', 'kitchen', 'ext', 'inhouse', 'diets', 'mobile', 'km', 'maxG', 'status', 'blocked', 'reviews'];
+const PUBLIC_P_FIELDS = ['id', 'cat', 'name', 'city', 'desc', 'tags', 'cap', 'kitchen', 'ext', 'inhouse', 'diets', 'mobile', 'km', 'maxG', 'status', 'blocked', 'reviews', 'opts'];
+const okImg = u => typeof u === 'string' && (/^\/media\/[a-z0-9]{16,48}\.(jpg|png|webp)$/.test(u) || /^https:\/\/[^\s"'<>]+$/.test(u));
 function publicProvider(p) {
   const o = {};
   PUBLIC_P_FIELDS.forEach(k => { if (p[k] !== undefined) o[k] = p[k]; });
+  o.imgs = (p.imgs || []).filter(okImg).slice(0, 12);
+  o.optPrice = {};
+  Object.entries(p.optPrice || {}).forEach(([k, v]) => { if (v && (v.base != null || v.pp != null)) o.optPrice[k] = { base: v.base != null ? +v.base : undefined, pp: v.pp != null ? +v.pp : undefined }; });
+  if (p.cat === 'location') o.rooms = (p.rooms || []).map(r => ({ name: str(r.name, 80), min: +r.min || 0, max: +r.max || 0, desc: str(r.desc, 300), img: okImg(r.img) ? r.img : '' }));
   const pr = p.price || {};
   o.price = {};
   ['base', 'pp', 'min', 'hourly'].forEach(k => { if (pr[k] != null) o.price[k] = pr[k]; });
@@ -110,7 +133,9 @@ function publicProvider(p) {
 }
 function publicSet() {
   const s = DB.set;
-  return { fee: s.fee, feeCap: s.feeCap, bundle: s.bundle, bundleMin: s.bundleMin, deposit: s.deposit, onlyPartners: s.onlyPartners, replyHours: s.replyHours, company: { name: s.company.name } };
+  const optImg = {};
+  Object.entries(s.optImg || {}).forEach(([k, v]) => { if (okImg(v)) optImg[k] = v; });
+  return { fee: s.fee, feeCap: s.feeCap, bundle: s.bundle, bundleMin: s.bundleMin, deposit: s.deposit, onlyPartners: s.onlyPartners, replyHours: s.replyHours, company: { name: s.company.name }, optImg };
 }
 function busyList() {
   const out = [];
@@ -124,7 +149,7 @@ function publicBooking(k) {
   return {
     id: k.id, stage: k.stage, bookedAt: k.bookedAt || null, created: k.created,
     brief: k.brief, customer: { name: k.customer && k.customer.name },
-    items: (k.items || []).map(i => ({ cat: i.cat, name: i.name, price: i.price, status: i.status })),
+    items: (k.items || []).map(i => ({ cat: i.cat, name: i.name, price: i.price, status: i.status, detail: i.detail || '' })),
     checks: k.checks || {}
   };
 }
@@ -208,7 +233,12 @@ function createRequest(body) {
     const virtual = pid.includes('#gastro');
     const name = virtual ? p.name + ' – Hausgastronomie' : p.name;
     const comm = virtual ? ((p.comm != null && p.comm !== '') ? +p.comm : DB.set.comm.catering) : commOf(p);
-    outItems.push({ cat: it.cat, pid, name, price: Math.max(0, Math.round(+it.price || 0)), calc: str(it.calc, 200), comm, status: 'offen', paid: false, rating: null });
+    const c = it.cfg || {}, cfg = {};
+    if (c.style) cfg.style = str(c.style, 30);
+    if (Array.isArray(c.extras)) cfg.extras = c.extras.slice(0, 12).map(x => str(x, 30));
+    if (c.staff && typeof c.staff === 'object') { cfg.staff = {}; ['service', 'bar', 'kueche', 'aufbau', 'einlass'].forEach(r => { const n = Math.round(+c.staff[r] || 0); if (n > 0) cfg.staff[r] = Math.min(n, 60); }); }
+    const room = str(it.room, 80);
+    outItems.push({ cat: it.cat, pid, name, price: Math.max(0, Math.round(+it.price || 0)), calc: str(it.calc, 300), detail: str(it.detail, 400), cfg, room, comm, status: 'offen', paid: false, rating: null });
   }
   const customer = {
     type: co.type === 'Firma' ? 'Firma' : 'Privat', name: str(co.name, 120), email: str(co.email, 160), phone: str(co.phone, 60), company: str(co.company, 160),
@@ -240,7 +270,7 @@ function saveAdminDB(body) {
 }
 
 /* ---------- Statische Dateien ---------- */
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.json': 'application/json', '.txt': 'text/plain; charset=utf-8' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json', '.txt': 'text/plain; charset=utf-8' };
 function serveStatic(req, res, pathname) {
   let file = pathname === '/' ? '/index.html' : pathname;
   file = path.normalize(file).replace(/^(\.\.[/\\])+/, '');
@@ -261,6 +291,11 @@ async function handle(req, res) {
   const p = url.pathname, m = req.method;
 
   if (p === '/healthz') return send(res, 200, { ok: true });
+  if (p.startsWith('/media/') && (m === 'GET' || m === 'HEAD')) {
+    if (!/^\/media\/[a-z0-9]{16,48}\.(jpg|png|webp)$/.test(p)) return send(res, 404, 'Nicht gefunden');
+    return fs.readFile(path.join(MEDIA_DIR, path.basename(p)), (err, data) => err ? send(res, 404, 'Nicht gefunden')
+      : send(res, 200, data, { 'Content-Type': MIME[path.extname(p)] || 'image/jpeg', 'Cache-Control': 'public, max-age=31536000, immutable' }));
+  }
   if (!p.startsWith('/api/')) {
     if (m !== 'GET' && m !== 'HEAD') return send(res, 405, 'Nicht erlaubt');
     return serveStatic(req, res, p);
@@ -321,6 +356,17 @@ async function handle(req, res) {
         DB.auth.sessions = keep ? { [tokenHash(t)]: keep } : {};
         saveDB();
         return send(res, 200, { ok: true });
+      }
+      if (p === '/api/admin/media' && m === 'POST') {
+        const body = await readBody(req);
+        const mt = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(body.data || ''));
+        if (!mt) return send(res, 400, { error: 'Nur JPG, PNG oder WebP.' });
+        const buf = Buffer.from(mt[2], 'base64');
+        if (!buf.length || buf.length > MAX_IMG) return send(res, 400, { error: 'Bild zu groß (max. 4 MB).' });
+        fs.mkdirSync(MEDIA_DIR, { recursive: true });
+        const name = crypto.randomBytes(12).toString('hex') + '.' + (mt[1] === 'jpeg' ? 'jpg' : mt[1]);
+        fs.writeFileSync(path.join(MEDIA_DIR, name), buf);
+        return send(res, 200, { url: '/media/' + name });
       }
       if (p === '/api/admin/default-providers' && m === 'GET') return send(res, 200, { providers: clone(DEFAULT_PROVIDERS) });
     }

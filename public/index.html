@@ -231,7 +231,123 @@ tr.click:hover td{background:var(--surface2)}
 }
 @media (prefers-reduced-motion:no-preference){.pass{transition:transform .25s ease,box-shadow .25s ease}.pass:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}}
 @media print{.top,.foot,.btn,.steps{display:none!important}body{background:#fff}.panel,.blk,.kpi{box-shadow:none}}
-
+/* Symbole */
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* Einstieg & große Auswahl */
+.intro{margin:4px 0 30px;display:grid;gap:14px;max-width:780px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.intro h1{font-size:clamp(2.3rem,6.2vw,4.2rem);font-weight:300;line-height:1.04;letter-spacing:-.03em}
+.intro h1 em{font-style:italic;color:var(--accent)}
+.intro p{color:var(--muted);font-size:1.1rem;max-width:58ch}
+.needs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.need{position:relative;text-align:left;display:grid;gap:10px;align-content:start;background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:24px 24px 22px;min-height:196px;box-shadow:var(--shadow);transition:border-color .2s,background .2s,transform .15s}
+.need:hover{border-color:var(--gold2);transform:translateY(-2px)}
+.need.on{border-color:var(--accent);background:var(--accent-soft)}
+.need-ic{width:58px;height:58px;border-radius:50%;border:1px solid var(--accent);display:grid;place-items:center;color:var(--accent);background:var(--surface);flex:none}
+.need-ic .ic{width:28px;height:28px}
+.need-t{font-family:var(--f-display);font-size:1.6rem;line-height:1.1;letter-spacing:-.01em}
+.need-d{color:var(--muted);font-size:1rem;line-height:1.45}
+.need-ck{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line2);display:grid;place-items:center;color:var(--accent-ink);background:var(--surface)}
+.need.on .need-ck,.opt.on .need-ck{background:var(--accent);border-color:var(--accent)}
+.need-ck .ic{width:18px;height:18px;stroke-width:2.4}
+.nextbar{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin-top:30px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:10px 10px 10px 24px;box-shadow:var(--shadow-lg);z-index:5}
+.nextbar .btn{padding:14px 28px;font-size:1rem}
+.nextbar .btn.ghost{padding:12px 20px}
+.big .fld>span{font-size:.78rem}
+.big input,.big select{font-size:1.06rem;padding:14px 16px}
+.choice{display:flex;flex-wrap:wrap;gap:10px}
+.choice button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:11px 20px;font-size:1rem;font-weight:500;transition:border-color .2s,background .2s}
+.choice button:hover{border-color:var(--gold2)}
+.choice button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--sun-ink);font-weight:700}
+/* Flussdiagramm */
+.flow{display:grid}
+.fstart{display:flex;gap:18px;align-items:center}
+.fcirc{width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;flex:none}
+.fcirc .ic{width:32px;height:32px}
+.fstart b{font-family:var(--f-display);font-weight:400;font-size:1.65rem;display:block;line-height:1.15}
+.fbr{list-style:none;margin:0 0 0 37px;padding:0}
+.fbr li{position:relative;padding:12px 0 12px 44px}
+.fbr li::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold2)}
+.fbr li:last-child::before{bottom:50%}
+.fbr li::after{content:"";position:absolute;left:0;top:50%;width:44px;height:2px;background:var(--gold2)}
+.fbox{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;text-align:left;background:var(--surface);border:1.5px dashed var(--line2);border-radius:20px;padding:16px 20px;box-shadow:var(--shadow);transition:border-color .2s,transform .15s}
+button.fbox:hover{border-color:var(--accent);transform:translateX(3px)}
+.fbox.done{border-style:solid;border-color:var(--accent)}
+.fbox.next{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft),var(--shadow)}
+.fic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);overflow:hidden;flex:none}
+.fic img{width:100%;height:100%;object-fit:cover}
+.fk{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block}
+.fn{font-family:var(--f-display);font-size:1.35rem;line-height:1.2;display:block;overflow-wrap:anywhere}
+.fs{color:var(--muted);font-size:.88rem;display:block;line-height:1.4}
+.fp{text-align:right;font-weight:600;white-space:nowrap}
+.fbox.fend{border-style:solid;background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fbox.fend .fic{background:transparent;color:var(--gold2);border:1px solid var(--gold2)}
+.fbox.fend .fs{color:inherit;opacity:.7}
+.fbox.add{box-shadow:none;background:transparent;padding:12px 20px}
+.sugg{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:1.5px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px 16px;font-weight:600;text-align:left}
+.sugg:hover{border-color:var(--accent)}
+.sugg small{display:block;font-weight:500;color:var(--muted)}
+/* Auswahl je Kategorie */
+.cat-h{display:flex;gap:18px;align-items:center;margin:16px 0 8px}
+.q{font-family:var(--f-display);font-size:1.55rem;font-weight:400;margin:34px 0 14px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.q small{font-family:var(--f-body);font-size:.9rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.opts.sm{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.opt{position:relative;text-align:left;display:flex;flex-direction:column;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;padding:0;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.opt:hover{border-color:var(--gold2)}
+.opt.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.opt-img{aspect-ratio:16/10;background:var(--surface2);overflow:hidden}
+.opts.sm .opt-img{aspect-ratio:16/8}
+.opt-img img,.gal-main img,.fi img{width:100%;height:100%;object-fit:cover;display:block}
+.opt-b{padding:14px 16px 16px;display:grid;gap:4px}
+.opt-b b{font-size:1.06rem}
+.opt-b small{color:var(--muted);font-size:.9rem;line-height:1.4}
+.opt-p{font-size:.85rem;font-weight:700;color:var(--sun-ink);margin-top:4px}
+.opt .need-ck{top:10px;right:10px}
+.ph{width:100%;height:100%;display:grid;place-items:center;align-content:center;gap:6px;background:linear-gradient(135deg,var(--accent-soft),var(--surface2));color:var(--accent)}
+.ph .ic{width:40px;height:40px;stroke-width:1.2}
+.ph span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.provs{display:grid;gap:20px}
+.prov{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr) auto;background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.prov.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.gal{display:flex;flex-direction:column;background:var(--surface2);min-width:0}
+.gal-main{aspect-ratio:4/3;overflow:hidden}
+.thumbs{display:flex;gap:6px;padding:8px;overflow-x:auto}
+.thumbs button{width:54px;height:40px;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;flex:none;background:none}
+.thumbs button.on{border-color:var(--accent)}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.prov-b{padding:22px 24px;display:grid;gap:8px;align-content:start;min-width:0}
+.prov-b h3{font-size:1.65rem}
+.cap{font-weight:700;color:var(--sun-ink);display:flex;gap:8px;align-items:center;font-size:1rem}
+.cap .ic{width:20px;height:20px}
+.rooms{display:grid;gap:8px;margin-top:4px}
+.room{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;text-align:left;border:1.5px solid var(--line);background:var(--surface2);border-radius:14px;padding:8px 12px}
+.room.on{border-color:var(--accent);background:var(--accent-soft)}
+.rimg{width:60px;height:44px;border-radius:8px;overflow:hidden;display:block}
+.rimg img{width:100%;height:100%;object-fit:cover;display:block}
+.rimg .ic{width:22px;height:22px}
+.room small{display:block;color:var(--muted)}
+.prov-f{padding:22px 24px;display:grid;gap:12px;align-content:space-between;justify-items:end;text-align:right;border-left:1px solid var(--line);min-width:210px;max-width:280px}
+.prov-f .price{font-size:2.1rem}
+.roles{display:grid;gap:12px}
+.role{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:14px 18px}
+.role.on{border-color:var(--accent)}
+.role .need-ic{width:48px;height:48px}
+.cnt{display:flex;align-items:center;gap:6px}
+.cnt button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line2);background:var(--surface);font-size:1.3rem;line-height:1}
+.cnt button:disabled{opacity:.35}
+.cnt b{min-width:34px;text-align:center;font-family:var(--f-display);font-size:1.7rem;font-weight:400}
+/* Admin: Bilder & Optionen */
+.aimgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.aimgs figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface2);display:flex;flex-direction:column}
+.fi{aspect-ratio:4/3;overflow:hidden}
+.aimgs figcaption{padding:8px 10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;align-items:center}
+.aopts{display:grid;gap:8px}
+.aopt{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.aopt input[type=number]{width:170px;padding:7px 10px}
+.aroom{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:10px;background:var(--surface2)}
+@media (max-width:900px){.prov{grid-template-columns:minmax(0,1fr)}.prov-f{border-left:0;border-top:1px solid var(--line);max-width:none;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;text-align:left}}
+@media (max-width:560px){.nextbar{border-radius:20px;padding:14px}.nextbar .btn{flex:1}.fbr{margin-left:24px}.fbr li{padding-left:22px}.fbr li::after{width:22px}.fcirc{width:50px;height:50px}.fbox{grid-template-columns:auto minmax(0,1fr);padding:14px}.opts,.opts.sm{grid-template-columns:1fr 1fr;gap:10px}.opt-b{padding:10px 12px 12px}.opt-b b{font-size:.95rem}.opt-b small{font-size:.8rem}.opt .need-ck{width:26px;height:26px}.q{font-size:1.3rem}.fp{grid-column:2;text-align:left}.fic{width:44px;height:44px}.need{min-height:0}.role{grid-template-columns:minmax(0,1fr) auto}.role .need-ic{display:none}}
 </style>
 </head>
 <body>
@@ -246,14 +362,137 @@ tr.click:hover td{background:var(--surface2)}
 
 /* ---------- Stammdaten ---------- */
 const CATS={
-  location:{label:'Location'},
-  catering:{label:'Catering'},
-  getraenke:{label:'Getränke & Bar'},
-  dj:{label:'DJ / Musik'},
-  foto:{label:'Foto / Fotobox'},
-  deko:{label:'Deko & Verleih'},
-  personal:{label:'Service-Personal'}
+  location:{label:'Location',icon:'location',desc:'Der Ort für deine Feier: Saal, Restaurant, Garten oder Bar.'},
+  catering:{label:'Catering',icon:'catering',desc:'Essen für alle Gäste: Buffet, Menü, Fingerfood, BBQ oder Food-Truck.'},
+  getraenke:{label:'Getränke & Bar',icon:'getraenke',desc:'Getränke geliefert, mobile Bar, Cocktails, Fassbier oder Sektempfang.'},
+  dj:{label:'DJ / Musik',icon:'dj',desc:'DJ, Moderation, Sänger:in oder Live-Band.'},
+  foto:{label:'Foto / Fotobox',icon:'foto',desc:'Fotograf:in, Fotobox oder Video für die Erinnerung.'},
+  deko:{label:'Deko & Verleih',icon:'deko',desc:'Deko, Blumen, Tische, Stühle und Zelte.'},
+  personal:{label:'Service-Personal',icon:'personal',desc:'Servicekräfte, Barkeeper und Helfer für den Abend.'}
 };
+/* Auswahl-Optionen je Kategorie.
+   styles: [Schlüssel, Name, Beschreibung, Symbol, Preisfaktor] – der Kunde wählt eine Art.
+   extras: [Schlüssel, Name, Beschreibung, Symbol, Richtpreis] – mehrere möglich.
+           Richtpreis: {base} pauschal, {pp} pro Gast, {unit,per} = je angefangene "per" Gäste "unit" €.
+   roles:  [Schlüssel, Name, Beschreibung, Symbol] – Anzahl Kräfte (nur Personal).
+   Welche Optionen ein Anbieter hat, steht in der Datenbank (Feld "opts"), eigene Preise in "optPrice". */
+const OPTS={
+  location:{q:'Welche Art von Location?',hint:'optional, filtert die Liste',styles:[
+    ['saal','Saal & Halle','Viel Platz, Tanzfläche, frei bestuhlbar','hall',1],
+    ['restaurant','Restaurant & Gasthaus','Essen direkt vom Haus, gemütliche Räume','plate',1],
+    ['bar','Bar & Lounge','Locker, im Stehen, Drinks im Mittelpunkt','cocktail',1],
+    ['garten','Garten & Outdoor','Biergarten, Terrasse oder Park für den Sommer','tree',1],
+    ['historisch','Historisch & besonders','Schloss, Palais oder Altbau mit Charakter','castle',1]],extras:[]},
+  catering:{q:'Wie soll gegessen werden?',styles:[
+    ['buffet','Buffet','Kalte und warme Speisen zum Selbstnehmen. Der Klassiker ab ca. 30 Gästen.','buffet',1],
+    ['menue','Gesetztes Menü','3 bis 4 Gänge, am Tisch serviert. Festlich und elegant.','plate',1.4],
+    ['fingerfood','Fingerfood & Flying Buffet','Kleine Häppchen, im Stehen, ideal für Empfänge.','skewer',.85],
+    ['bbq','BBQ & Grill','Grillstation, gern mit Grillmeister vor Ort.','grill',.95],
+    ['foodtruck','Food-Truck & Streetfood','Burger, Pasta oder Tacos frisch aus dem Wagen.','truck',.8],
+    ['kaffee','Kaffee & Kuchen / Brunch','Für den Nachmittag oder Vormittag.','cup',.5]],
+   extras:[
+    ['chafing','Warmhaltung mit Chafing Dishes','Hält warme Speisen am Buffet stundenlang heiß.','chafing',{unit:15,per:15}],
+    ['geschirr','Geschirr, Besteck & Gläser','Komplett geliefert und wieder abgeholt.','plate',{pp:3}],
+    ['dessert','Dessert-Buffet','Süßes zum Abschluss.','cake',{pp:6}],
+    ['mitternacht','Mitternachtssnack','Kleine warme Stärkung spät am Abend.','moon',{pp:5}]]},
+  getraenke:{q:'Wie sollen die Getränke kommen?',styles:[
+    ['lieferung','Getränkelieferung','Getränke auf Kommission, ihr schenkt selbst aus. Am günstigsten.','crate',1],
+    ['mobilebar','Mobile Bar mit Barkeeper','Theke und Personal: Bier, Wein, Longdrinks.','bar',1],
+    ['cocktail','Cocktailbar','Frisch gemixte Cocktails, auch alkoholfrei.','cocktail',1.25]],
+   extras:[
+    ['fass','Fassbier mit Zapfanlage','Frisch gezapft, lohnt sich ab ca. 50 Gästen.','beer',{base:120}],
+    ['sekt','Sektempfang','Ein Glas Sekt oder Spritz zur Begrüßung.','flute',{pp:4}],
+    ['kuehlung','Kühlung','Kühlschrank oder Kühlanhänger, damit alles kalt bleibt.','snow',{base:90}],
+    ['glaeser','Gläser-Verleih','Inklusive Spülen.','glass',{pp:1.5}],
+    ['kaffeebar','Kaffeebar / Barista','Espresso, Cappuccino und Co.','cup',{base:250}],
+    ['alkoholfrei','Alkoholfrei-Flatrate','Softdrinks, Wasser und Saft für alle.','bottle',{pp:5}]]},
+  dj:{q:'Welche Musik soll es sein?',styles:[
+    ['dj','DJ','Musik nach euren Wünschen, Anlage inklusive.','dj',1],
+    ['djmc','DJ mit Moderation','Führt durch den Abend, mit Spielen und Ansagen.','mic',1.2],
+    ['saenger','Sänger:in + DJ','Live-Gesang kombiniert mit DJ-Set.','note',1.5],
+    ['band','Live-Band','Handgemachte Musik, 3 bis 5 Musiker.','guitar',2.6]],
+   extras:[
+    ['licht','Lichtshow & Tanzflächenlicht','Moving Heads und Farbeffekte.','light',{base:150}],
+    ['mikro','Funkmikrofon für Reden','Für Reden, Ansagen und Spiele.','mic',{base:40}],
+    ['ambiente','Ambiente-Beleuchtung','Farbiges Licht für den ganzen Raum.','bulb',{base:120}],
+    ['empfang','Musik zum Empfang & Essen','Ruhige Hintergrundmusik vor der Party.','note',{base:100}]]},
+  foto:{q:'Wie sollen die Erinnerungen entstehen?',styles:[
+    ['fotograf','Fotograf:in','Reportage eurer Feier mit bearbeiteten Bildern.','foto',1],
+    ['fotobox','Fotobox','Gäste machen selbst Fotos, sofort gedruckt.','photobox',.45],
+    ['video','Videograf:in','Ein Film von eurer Feier.','video',1.6]],
+   extras:[
+    ['druck','Druck-Flatrate','Unbegrenzt Fotos drucken.','print',{base:90}],
+    ['requisiten','Requisiten & Fotowand','Hüte, Brillen, Schilder und Hintergrund.','sparkle',{base:40}],
+    ['galerie','Online-Galerie','Alle Bilder zum Teilen.','image',{base:0}],
+    ['album','Fotoalbum','Gedrucktes Album nach der Feier.','book',{base:180}]]},
+  deko:{q:'Welche Art von Deko?',styles:[
+    ['komplett','Komplett-Deko mit Aufbau','Konzept, Lieferung, Auf- und Abbau.','sparkle',1.3],
+    ['verleih','Deko-Verleih','Ihr holt ab und baut selbst auf. Günstiger.','box',.7],
+    ['blumen','Blumen & Floristik','Tischgestecke, Sträuße und Blumenschmuck.','deko',1.1]],
+   extras:[
+    ['moebel','Tische & Stühle','Bestuhlung für alle Gäste.','chair',{pp:6}],
+    ['stehtisch','Stehtische mit Husse','Für Empfang und Bar.','table',{unit:15,per:10}],
+    ['zelt','Partyzelt','Für draußen, wetterfest.','tent',{base:350}],
+    ['licht','Lichterketten & Ambiente','Warmes Licht für die Stimmung.','bulb',{base:80}],
+    ['tischwaesche','Tischwäsche','Tischdecken und Servietten.','napkin',{pp:2}]]},
+  personal:{roles:[
+    ['service','Servicekraft','Servieren, abräumen, Getränke nachfüllen.','personal'],
+    ['bar','Barkeeper:in','Schenkt aus und mixt an der Bar.','cocktail'],
+    ['kueche','Küchenhilfe / Spüle','Unterstützt das Catering und spült.','plate'],
+    ['aufbau','Auf- & Abbauhelfer','Tische stellen, aufräumen, abbauen.','box'],
+    ['einlass','Garderobe & Einlass','Empfängt Gäste und nimmt Jacken.','door']]}
+};
+const IC={
+  location:'<path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/>',
+  hall:'<path d="M3 21h18M4 21V10h16v11M2 10l10-6 10 6M8 21v-6M12 21v-6M16 21v-6"/>',
+  castle:'<path d="M4 21V9h3V6h2v3h2V4h2v5h2V6h2v3h3v12zM10 21v-4a2 2 0 0 1 4 0v4"/>',
+  tree:'<path d="M12 21v-6M12 15l-3-3M12 3a6 6 0 0 0-6 6c0 3.3 2.7 6 6 6s6-2.7 6-6a6 6 0 0 0-6-6zM8 21h8"/>',
+  catering:'<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4M2 20h20"/>',
+  buffet:'<path d="M2 18h20M4 18v-3h4v3M10 18v-4h4v4M16 18v-3h4v3M4 15a2 2 0 0 1 4 0M10 14a2 2 0 0 1 4 0M16 15a2 2 0 0 1 4 0"/>',
+  plate:'<circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="3"/><path d="M3 4v16M21 4c-1.5 1-2 3-2 5h2v11"/>',
+  skewer:'<path d="M4 20 20 4M7 13l4 4M10 10l4 4M13 7l4 4"/>',
+  grill:'<path d="M4 10h16a8 8 0 0 1-16 0zM8 18l-2 4M16 18l2 4M8 3c1 1-1 2 0 3M12 3c1 1-1 2 0 3M16 3c1 1-1 2 0 3"/>',
+  truck:'<path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+  cup:'<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1a3 3 0 0 1 0 6h-1M8 3v3M12 3v3"/>',
+  chafing:'<path d="M3 12h18M4 12a8 5 0 0 1 16 0M12 7V5M6 12v4h12v-4M8 21c0-1 1-1.5 1-3M12 21c0-1 1-1.5 1-3M16 21c0-1 1-1.5 1-3"/>',
+  cake:'<path d="M4 21h16v-8H4zM4 16c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 4 0M12 13V9M12 6a1 1 0 0 0 0-3c-1 1-1 2 0 3"/>',
+  moon:'<path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/>',
+  getraenke:'<path d="M8 3h8l-1 9a3 3 0 0 1-6 0zM12 15v6M8 21h8"/>',
+  crate:'<path d="M3 10h18v10H3zM3 10l2-4h14l2 4M8 6v4M12 6v4M16 6v4"/>',
+  bar:'<path d="M3 13h18M5 13v8M19 13v8M7 4h3v5H7zM14 3h3v6h-3"/>',
+  cocktail:'<path d="M4 4h16l-8 9zM12 13v7M8 20h8M15 4l3-2"/>',
+  beer:'<path d="M5 8h10v12H5zM15 11h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2M5 8a3 3 0 0 1 3-4 3 3 0 0 1 4 0 3 3 0 0 1 3 4M8 12v5M12 12v5"/>',
+  flute:'<path d="M9 2h6l-1 10a2 2 0 0 1-4 0zM12 14v7M9 21h6M10 6h4"/>',
+  snow:'<path d="M12 2v20M3.5 7l17 10M3.5 17l17-10"/>',
+  glass:'<path d="M6 3h12l-2 18H8zM7 8h10"/>',
+  bottle:'<path d="M10 2h4v4l2 3v13H8V9l2-3zM8 13h8"/>',
+  dj:'<path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15h3v6H4zM17 15h3v6h-3z"/>',
+  mic:'<path d="M9 3h6v9a3 3 0 0 1-6 0zM5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>',
+  note:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  guitar:'<path d="M14 10l6-6M18 2l4 4M11 9a4 4 0 0 0-4 0c-1 1-1 2-2 3-2 1-3 3-1 6s5 1 6-1c1-1 2-1 3-2a4 4 0 0 0 0-4z"/>',
+  light:'<path d="M12 2v4M5 5l2.5 2.5M19 5l-2.5 2.5M8 22l4-12 4 12"/>',
+  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c1 1 1 2 1 3h6c0-1 0-2 1-3A6 6 0 0 0 12 3z"/>',
+  foto:'<path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="4"/>',
+  photobox:'<path d="M5 3h14v18H5zM5 14h14M9 18h6"/><circle cx="12" cy="8" r="3"/>',
+  video:'<path d="M3 6h12v12H3zM15 10l6-3v10l-6-3"/>',
+  print:'<path d="M6 9V3h12v6M6 18H3v-9h18v9h-3M6 14h12v7H6z"/>',
+  sparkle:'<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 3v4M17 5h4"/>',
+  image:'<path d="M3 4h18v16H3zM3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="8" r="1.5"/>',
+  book:'<path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-5a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h5z"/>',
+  deko:'<path d="M12 22V12M12 12c-3 0-5-2-5-5 3 0 5 2 5 5zm0 0c3 0 5-2 5-5-3 0-5 2-5 5zM8 22h8"/><circle cx="12" cy="5" r="2"/>',
+  box:'<path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/>',
+  chair:'<path d="M7 3h10v8H7zM6 11h12v3H6zM7 14v7M17 14v7"/>',
+  table:'<path d="M5 6h14M12 6v14M8 21h8M5 6l1-2h12l1 2"/>',
+  tent:'<path d="M2 20 12 4l10 16zM12 4v16M8 20l4-6 4 6"/>',
+  napkin:'<path d="M4 4h16v16H4zM4 4l16 16"/>',
+  personal:'<circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  door:'<path d="M5 21V3h11v18M3 21h18M13 12h.01M16 5h3v16"/>',
+  party:'<path d="M3 21l5-13 8 8zM14 3c0 2 2 2 2 4M18 9h3M17 4l2-1M7 13l4 4"/>',
+  check:'<path d="M5 12l4 4 10-10"/>',
+  send:'<path d="M3 11l18-8-8 18-2-8z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>'
+};
+const ico=(n,cls)=>`<svg class="ic ${cls||''}" viewBox="0 0 24 24" aria-hidden="true">${IC[n]||IC.sparkle}</svg>`;
 const ORDER=['location','catering','getraenke','dj','foto','deko','personal'];
 const CITIES={
   'Heidelberg':[49.398,8.672],'Mannheim':[49.487,8.466],'Schwetzingen':[49.383,8.570],'Weinheim':[49.549,8.667],
@@ -297,7 +536,8 @@ const DEFAULT_SET={
   comm:{location:8,catering:10,getraenke:10,dj:12,foto:12,deko:15,personal:8},
   costs:{'Hosting & Software':30,'Versicherung':40,'Marketing / Werbung':300,'Telefon & Sonstiges':40},
   calc:{events:4,value:4000},
-  company:{name:'PartyPilot',mail:'',tel:''}
+  company:{name:'PartyPilot',mail:'',tel:''},
+  optImg:{}
 };
 
 /* ---------- Zustand ---------- */
@@ -305,9 +545,9 @@ const KEY='partypilot-v2';
 const S={
   view:'host',step:1,err:null,notice:null,flash:null,
   admin:false,aview:'cockpit',akte:null,pinInput:'',loading:true,busy:[],lastBooking:null,pw:{old:'',new1:'',new2:''},
-  nlText:'60. Geburtstag meines Vaters, 60 Gäste, Raum Heidelberg, gemütlich, BBQ, max. 5.000 €',nlFound:[],
-  brief:{occasion:'Geburtstag',date:'',start:'17:00',hours:6,city:'Heidelberg',radius:25,guests:60,budget:5000,style:'gemütlich',diets:[],cats:{location:true,catering:true,getraenke:true,dj:true,foto:true,deko:false,personal:false}},
-  packages:[],tier:null,sel:{},
+  nlText:'',nlFound:[],
+  brief:freshBrief(),cfg:{},open:null,roomPick:{},gal:{},imgUrl:'',
+  sel:{},
   co:{type:'Privat',name:'',email:'',phone:'',company:'',address:'',vat:'',po:'',msg:'',privacy:false},
   bookingId:null,track:{id:'',mail:'',res:null},
   db:{providers:[],bookings:[],set:null,demoRemoved:false},
@@ -400,23 +640,52 @@ function getP(id){
 }
 function inhouseOf(loc){
   return{id:loc.id+'#gastro',cat:'catering',name:loc.name+' – Hausgastronomie',city:loc.city,addr:loc.addr,tel:loc.tel,mail:loc.mail,web:loc.web,
-    desc:'Essen direkt von der Location',tags:loc.tags,diets:loc.diets||['vegetarisch'],mobile:true,km:0,virtual:true,parent:loc.id,
+    desc:'Essen direkt von der Location',tags:loc.tags,diets:loc.diets||['vegetarisch'],mobile:true,km:0,virtual:true,parent:loc.id,imgs:loc.imgs||[],opts:[],optPrice:{},
     status:loc.status,comm:loc.comm!=null&&loc.comm!==''?loc.comm:(SET().comm||{}).catering,reviews:loc.reviews,price:{pp:loc.inhouse,min:0,src:loc.price&&loc.price.src}};
 }
-function priceOf(p,b){
-  const h=+b.hours,g=+b.guests,dow=dInfo(b.date).dow,pr=p.price||{};let amt=0,calc='';
+const styleOf=(cat,k)=>((OPTS[cat]||{}).styles||[]).find(s=>s[0]===k);
+const extraOf=(cat,k)=>((OPTS[cat]||{}).extras||[]).find(s=>s[0]===k);
+function extraPrice(p,ex,g){
+  const ov=p&&p.optPrice&&p.optPrice[ex[0]];
+  if(ov&&(ov.base!=null||ov.pp!=null))return Math.round((+ov.base||0)+(+ov.pp||0)*g);
+  const d=ex[4]||{};if(d.unit)return Math.ceil(g/d.per)*d.unit;
+  return Math.round((d.base||0)+(d.pp||0)*g);
+}
+function recStaff(b,cfgAll){
+  cfgAll=cfgAll||{};const g=+b.guests||0,cs=(cfgAll.catering||{}).style,gs=(cfgAll.getraenke||{}).style,cats=b.cats||{};
+  const st={service:Math.max(1,Math.ceil(g/(cs==='menue'?12:25)))};
+  if(cats.getraenke&&gs==='lieferung')st.bar=Math.max(1,Math.ceil(g/80));
+  if(cats.catering&&(cs==='buffet'||cs==='menue')&&g>=50)st.kueche=1;
+  return st;
+}
+const staffOf=(cfg,b)=>cfg&&cfg.staff?cfg.staff:recStaff(b,S.view==='host'?S.cfg:{});
+function roleTxt(st){return OPTS.personal.roles.filter(o=>+st[o[0]]).map(o=>`${st[o[0]]}× ${o[1]}`).join(', ')||'niemand'}
+function priceOf(p,b,cfg){
+  cfg=cfg||{};
+  const h=+b.hours,g=+b.guests,dow=dInfo(b.date).dow,pr=Object.assign({},p.price||{});let amt=0,calc='',f=1;
+  const st=cfg.style&&p.cat!=='location'?styleOf(p.cat,cfg.style):null,ov=st&&p.optPrice&&p.optPrice[st[0]];
+  if(ov&&(ov.base!=null||ov.pp!=null)){if(ov.base!=null)pr.base=+ov.base;if(ov.pp!=null)pr.pp=+ov.pp}else if(st&&st[4])f=st[4];
   switch(p.cat){
     case 'location':amt=pr.base||0;calc='Miete inkl. 6 Stunden';if(h>6){amt+=100*(h-6);calc+=` + ${h-6} h × 100 €`}
       if(dow>=1&&dow<=4){amt*=0.9;calc+=' · Wochentag −10 %'}break;
-    case 'catering':amt=Math.max(pr.min||0,(pr.pp||0)*g);calc=`${pr.pp} € × ${g} Gäste`+((pr.pp||0)*g<(pr.min||0)?` (Mindestumsatz ${fmt(pr.min)})`:'');break;
+    case 'catering':amt=Math.max(pr.min||0,(pr.pp||0)*g);calc=`${pr.pp||0} € × ${g} Gäste`+((pr.pp||0)*g<(pr.min||0)?` (Mindestumsatz ${fmt(pr.min)})`:'');break;
     case 'getraenke':amt=(pr.base||0)+(pr.pp||0)*g;calc=`${fmt(pr.base||0)} Grundpreis + ${pr.pp||0} € × ${g} Gäste`;break;
     case 'dj':{const dh=Math.max(1,h-1);amt=(pr.base||0)+90*Math.max(0,dh-5);calc='5 Stunden inklusive'+(dh>5?` + ${dh-5} h × 90 €`:'');break}
-    case 'foto':{if(pr.hourly){const fh=Math.min(h,8);amt=(pr.base||0)+pr.hourly*Math.max(0,fh-4);calc='4 Stunden inklusive'+(fh>4?` + ${fh-4} h × ${pr.hourly} €`:'')}else{amt=pr.base||0;calc='Pauschale für die Feier'}break}
+    case 'foto':{if(pr.hourly&&cfg.style!=='fotobox'){const fh=Math.min(h,8);amt=(pr.base||0)+pr.hourly*Math.max(0,fh-4);calc='4 Stunden inklusive'+(fh>4?` + ${fh-4} h × ${pr.hourly} €`:'')}else{amt=pr.base||0;calc='Pauschale für die Feier'}break}
     case 'deko':amt=(pr.base||0)+(pr.pp||0)*g;calc=`${fmt(pr.base||0)} + ${pr.pp||0} € × ${g} Gäste`;break;
-    case 'personal':{const n=Math.max(1,Math.ceil(g/25)),hh=h+2;amt=n*hh*(pr.hourly||0);calc=`${n} ${n>1?'Kräfte':'Kraft'} × ${hh} h × ${pr.hourly||0} €`;break}
+    case 'personal':{const sf=staffOf(cfg,b),n=Object.values(sf).reduce((a,x)=>a+(+x||0),0),hh=h+2;amt=n*hh*(pr.hourly||0);calc=`${n} ${n===1?'Kraft':'Kräfte'} × ${hh} h × ${pr.hourly||0} €`;break}
   }
+  if(st){amt*=f;calc=st[1]+': '+calc+(f!==1?' (Richtwert)':'')}
+  (cfg.extras||[]).forEach(k=>{const ex=extraOf(p.cat,k);if(!ex)return;const v=extraPrice(p,ex,g);amt+=v;calc+=` + ${ex[1]} ${fmt(v)}`});
   return{amt:Math.round(amt/5)*5,calc};
 }
+function locRange(p){
+  const rs=(p.rooms||[]).filter(r=>+r.max);
+  if(rs.length)return[Math.min(...rs.map(r=>+r.min||0)),Math.max(...rs.map(r=>+r.max))];
+  return p.cap&&p.cap[1]?[p.cap[0]||0,p.cap[1]]:null;
+}
+const roomsFit=(p,g)=>(p.rooms||[]).filter(r=>+r.max&&g>=(+r.min||0)&&g<=+r.max);
+function locFits(p,g){if((p.rooms||[]).some(r=>+r.max))return roomsFit(p,g).length>0;return!(p.cap&&(g<p.cap[0]||g>p.cap[1]))}
 function bookedElsewhere(pid,date,exclude){
   if(!S.admin)return S.busy.some(x=>x.pid===pid&&x.date===date&&x.k!==exclude);
   return S.db.bookings.some(k=>k.id!==exclude&&k.stage!=='storniert'&&k.stage!=='neu'&&k.brief.date===date&&k.items.some(i=>i.pid===pid&&i.status!=='abgelehnt'));
@@ -429,7 +698,9 @@ function reasonFor(p,b,ctx){
   else if(!p.virtual){const d=dist(b.city,p.city);const km=+p.km||40;if(d>km)return`fährt nur ${km} km (${d} km)`}
   if((p.blocked||[]).includes(b.date))return'an diesem Tag gesperrt';
   if(bookedElsewhere(p.virtual?p.parent:p.id,b.date,ctx.exclude))return'an diesem Tag bereits gebucht';
-  if(p.cat==='location'&&p.cap&&(b.guests<p.cap[0]||b.guests>p.cap[1]))return`nur für ${p.cap[0]}–${p.cap[1]} Gäste`;
+  if(p.cat==='location'&&!locFits(p,+b.guests)){const rg=locRange(p);return rg?`nur für ${rg[0]} bis ${rg[1]} Gäste`:'passt nicht zur Gästezahl'}
+  const cs=ctx.cfg&&ctx.cfg.style;
+  if(cs&&Array.isArray(p.opts)&&p.opts.length&&!p.opts.includes(cs)){const s=styleOf(p.cat,cs);return'bietet nicht: '+(s?s[1]:cs)}
   if(p.cat==='catering'){
     if(p.maxG&&b.guests>p.maxG)return`max. ${p.maxG} Gäste`;
     const miss=(b.diets||[]).filter(x=>!(p.diets||[]).includes(x));if(miss.length)return`bietet nicht: ${miss.join(', ')}`;
@@ -442,9 +713,10 @@ function reasonFor(p,b,ctx){
   return null;
 }
 function cands(cat,b,ctx){
+  ctx=ctx||{};
   let list=S.db.providers.filter(p=>p.cat===cat);
-  if(cat==='catering'&&ctx&&ctx.loc&&ctx.loc.inhouse)list=[inhouseOf(ctx.loc)].concat(list);
-  return list.map(p=>{const pr=priceOf(p,b);return{p,price:pr.amt,calc:pr.calc,reason:reasonFor(p,b,ctx)}}).sort((x,y)=>x.price-y.price);
+  if(cat==='catering'&&ctx.loc&&ctx.loc.inhouse)list=[inhouseOf(ctx.loc)].concat(list);
+  return list.map(p=>{const pr=priceOf(p,b,ctx.cfg);return{p,price:pr.amt,calc:pr.calc,reason:reasonFor(p,b,ctx)}}).sort((x,y)=>x.price-y.price);
 }
 function pick(all,tier,b,avoid){
   const pr=all.map(x=>x.price),mn=Math.min(...pr),mx=Math.max(...pr);
@@ -464,17 +736,17 @@ function totals(items){
   let comm=0;items.forEach(i=>{comm+=Math.round(i.price*(i.comm!=null?i.comm:commOf(i.p||getP(i.pid)||{cat:i.cat}))/100)});
   return{sum,disc,net,fee,total,deposit:Math.round(total*st.deposit/100),comm,revenue:comm+fee-disc,perGuest:0};
 }
-const selItems=sel=>ORDER.filter(c=>sel[c]).map(c=>({cat:c,p:sel[c].p,pid:sel[c].p.id,price:sel[c].price}));
-function fit(sel,b){
-  let guard=40;
-  while(totals(selItems(sel)).total>b.budget&&guard--){
+const selItems=sel=>ORDER.filter(c=>sel[c]).map(c=>({cat:c,p:sel[c].p,pid:sel[c].p.id,price:sel[c].price,room:sel[c].room||''}));
+function fit(sel,b,cfgAll){
+  cfgAll=cfgAll||{};let guard=40;
+  while(b.budget&&totals(selItems(sel)).total>b.budget&&guard--){
     let best=null;
     for(const c of Object.keys(sel)){
-      const ctx={loc:c==='location'?null:sel.location&&sel.location.p};
+      const ctx={loc:c==='location'?null:sel.location&&sel.location.p,cfg:cfgAll[c]};
       const lower=cands(c,b,ctx).filter(x=>!x.reason&&x.price<sel[c].price);
       if(!lower.length)continue;
       const a=lower[lower.length-1];
-      if(c==='location'&&sel.catering&&reasonFor(sel.catering.p,b,{loc:a.p}))continue;
+      if(c==='location'&&sel.catering&&reasonFor(sel.catering.p,b,{loc:a.p,cfg:cfgAll.catering}))continue;
       const save=sel[c].price-a.price,loss=Math.max(.05,((ratingOf(sel[c].p)||4.3)-(ratingOf(a.p)||4.3))+.3);
       if(!best||save/loss>best.v)best={c,a,v:save/loss};
     }
@@ -482,15 +754,16 @@ function fit(sel,b){
     sel[best.c]=best.a;
   }
 }
-function buildPackage(tier,b,avoid){
-  const sel={},missing=[],ctx={};
+function buildPackage(tier,b,avoid,cfgAll){
+  cfgAll=cfgAll||{};const sel={},missing=[];let loc=null;
   for(const c of ORDER.filter(c=>b.cats[c])){
-    const all=cands(c,b,ctx).filter(x=>!x.reason);
+    const all=cands(c,b,{loc:c==='location'?null:loc,cfg:cfgAll[c]}).filter(x=>!x.reason);
     if(!all.length){missing.push(c);continue}
     sel[c]=pick(all,tier,b,avoid);
-    if(c==='location')ctx.loc=sel[c].p;
+    if(c==='location')loc=sel[c].p;
   }
-  if(tier!=='premium')fit(sel,b);
+  if(tier!=='premium')fit(sel,b,cfgAll);
+  if(sel.location)sel.location.room=(roomsFit(sel.location.p,+b.guests)[0]||{}).name||'';
   return{tier,sel,missing,tot:totals(selItems(sel))};
 }
 function whyText(pk,b){
@@ -588,7 +861,7 @@ Ort: ${b.city}${k.items.find(x=>x.cat==='location'&&x.cat!==i.cat)?' – Locatio
 Gäste: ${b.guests}
 Stil: ${b.style}${b.diets.length?'\nErnährung: '+b.diets.join(', '):''}
 
-Gewünschte Leistung: ${CATS[i.cat].label}
+Gewünschte Leistung: ${CATS[i.cat].label}${i.detail?'\nDetails: '+i.detail:''}
 Kalkulierter Preis: ${fmt(i.price)} (${i.calc||''})
 
 Bitte bestätigen Sie mir bis ${dShort(addDays(today(),2))} Verfügbarkeit und Preis.
@@ -659,92 +932,181 @@ function render(){
 }
 
 /* ---------- Kundenansicht ---------- */
+const STEPS=['Was brauchst du?','Eckdaten','Zusammenstellen','Anfragen','Fertig'];
 function stepper(){
-  const L=['Deine Feier','Pakete','Anpassen & anfragen','Fertig'];
-  return`<ol class="steps">${L.map((l,i)=>{const n=i+1,cl=n===S.step?'on':n<S.step?'done':'',dis=n>S.step||S.step===4||n===4;
+  return`<ol class="steps">${STEPS.map((l,i)=>{const n=i+1,cl=n===S.step?'on':n<S.step?'done':'',dis=n>S.step||S.step===5||n===5;
     return`<li class="${cl}"><button data-act="goto" data-step="${n}" ${dis?'disabled':''}><b>${n}</b>${l}</button></li>`}).join('')}</ol>`;
 }
-function hostView(){return stepper()+(S.step===1?stepBrief():S.step===2?stepPackages():S.step===3?stepTune():stepDone())}
+function hostView(){return stepper()+[stepNeeds,stepBrief,stepPlan,stepRequest,stepDone][S.step-1]()}
+const chosenCats=()=>ORDER.filter(c=>S.brief.cats[c]);
+const imgTag=(u,alt)=>`<img src="${esc(u)}" alt="${esc(alt||'')}" loading="lazy">`;
+const ph=(icon,txt)=>`<div class="ph">${ico(icon)}${txt?`<span>${esc(txt)}</span>`:''}</div>`;
+function optPic(c,o){const u=(SET().optImg||{})[c+':'+o[0]];return u?imgTag(u,o[1]):ph(o[3])}
+function ctxFor(c){return{loc:c==='location'?null:S.sel.location&&S.sel.location.p,cfg:S.cfg[c]||{}}}
+function detailOf(c,cfg,room){
+  cfg=cfg||{};const parts=[],st=cfg.style&&styleOf(c,cfg.style);
+  if(st)parts.push(st[1]);
+  (cfg.extras||[]).forEach(k=>{const e=extraOf(c,k);if(e)parts.push(e[1])});
+  if(c==='personal')parts.push(roleTxt(staffOf(cfg,S.brief)));
+  if(room)parts.push('Raum: '+room);
+  return parts.join(' · ');
+}
+function roomSel(p){
+  const rf=roomsFit(p,+S.brief.guests);if(!rf.length)return'';
+  const v=S.roomPick[p.id]||(S.sel.location&&S.sel.location.p.id===p.id?S.sel.location.room:'');
+  return rf.some(r=>r.name===v)?v:rf[0].name;
+}
+function refreshSel(c){
+  const it=S.sel[c];if(!it)return;
+  const x=cands(c,S.brief,ctxFor(c)).find(y=>y.p.id===it.p.id);
+  if(!x||x.reason){delete S.sel[c];S.notice=`${it.p.name} passt nicht mehr${x&&x.reason?' ('+x.reason+')':''}. Bitte bei ${CATS[c].label} neu wählen.`;return}
+  if(c==='location')x.room=roomSel(x.p);
+  S.sel[c]=x;
+}
+function refreshAll(){ORDER.forEach(c=>{if(!S.brief.cats[c])delete S.sel[c];else refreshSel(c)})}
+const nextOpen=()=>chosenCats().find(c=>!S.sel[c]);
+function suggestions(){
+  const ids=pk=>Object.values(pk.sel).map(x=>x.p.id),b=S.brief;
+  const sp=buildPackage('spar',b,null,S.cfg),be=buildPackage('beliebt',b,ids(sp),S.cfg),pr=buildPackage('premium',b,ids(sp).concat(ids(be)),S.cfg);
+  return[sp,be,pr];
+}
+
+function stepNeeds(){
+  const b=S.brief,on=chosenCats();
+  return`<section class="intro"><span class="eyebrow">Feier planen · Heidelberg, Mannheim & Rhein-Neckar</span>
+    <h1>Was brauchst du<br><em>für deine Feier?</em></h1>
+    <p>Tippe alles an, was du brauchst. Danach siehst du zu jedem Punkt die Möglichkeiten mit Bildern und Preisen und stellst dir deine Feier selbst zusammen.</p></section>
+  <div class="needs">${ORDER.map(c=>{const x=!!b.cats[c];return`<button class="need ${x?'on':''}" data-act="need" data-cat="${c}" aria-pressed="${x}">
+    <span class="need-ck">${x?ico('check'):''}</span><span class="need-ic">${ico(CATS[c].icon)}</span><span class="need-t">${CATS[c].label}</span><span class="need-d">${esc(CATS[c].desc)}</span></button>`}).join('')}</div>
+  ${S.err?`<div class="err" role="alert" style="margin-top:18px">${esc(S.err)}</div>`:''}
+  <div class="nextbar"><span>${on.length?`<b>${on.length} ausgewählt:</b> ${on.map(c=>CATS[c].label).join(', ')}`:'<span class="muted">Noch nichts ausgewählt</span>'}</span>
+    <button class="btn accent" data-act="toStep" data-step="2" ${on.length?'':'disabled'}>Weiter</button></div>`;
+}
 function stepBrief(){
   const b=S.brief,o=(arr,v)=>arr.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
-  if(!b.date)b.date=addDays(today(),60);
   const chips=S.nlFound.length?`<div class="chips" aria-live="polite">${S.nlFound.map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>`:'';
-  return`<section class="hero"><div><h1>Deine Feier.<br><em>Vollendet geplant.</em></h1>
-    <p>Sag uns, was du feiern willst. PartyPilot wählt aus geprüften Dienstleistern der Region die passende Location, Catering, Musik und mehr – und stellt dir drei abgestimmte Pakete zusammen.</p></div>
-    <div class="nl"><label for="nl">Beschreibe deine Feier in einem Satz</label>
-      <textarea id="nl" data-f="nl">${esc(S.nlText)}</textarea>
-      <div class="row"><button class="btn sm" data-act="parse">Angaben übernehmen</button><small>erkennt Anlass, Gäste, Budget, Ort, Stil, Datum</small></div>${chips}</div></section>
+  return`<section class="intro"><span class="eyebrow">Eckdaten</span><h1>Erzähl uns kurz<br><em>von deiner Feier.</em></h1>
+    <p>Damit wir dir nur Anbieter zeigen, die an deinem Tag frei sind, zu dir kommen und zu deiner Gästezahl passen.</p></section>
   ${S.err?`<div class="err" role="alert">${esc(S.err)}</div>`:''}
-  <section class="panel stack">
+  <section class="panel stack big">
+    <div class="fld"><span>Anlass</span><div class="choice">${OCCASIONS.map(x=>`<button class="${b.occasion===x[0]?'on':''}" data-act="occ" data-v="${esc(x[0])}">${esc(x[0])}</button>`).join('')}</div></div>
     <div class="grid-f">
-      <label class="fld"><span>Anlass</span><select data-f="b:occasion">${o(OCCASIONS.map(x=>x[0]),b.occasion)}</select></label>
-      <label class="fld"><span>Datum</span><input type="date" data-f="b:date" value="${b.date}" min="${today()}"></label>
+      <label class="fld"><span>Datum</span><input type="date" data-f="b:date" value="${esc(b.date)}" min="${today()}"></label>
+      <label class="fld"><span>Ort der Feier</span><select data-f="b:city"><option value="" ${b.city?'':'selected'} disabled>Bitte wählen …</option>${o(EVENT_CITIES,b.city)}</select></label>
+      <label class="fld"><span>Gäste</span><input type="number" min="10" max="400" inputmode="numeric" data-f="b:guests" value="${b.guests||''}" placeholder="z. B. 60"></label>
       <label class="fld"><span>Beginn</span><select data-f="b:start">${o(['11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'],b.start)}</select></label>
       <label class="fld"><span>Dauer (Stunden)</span><select data-f="b:hours">${[3,4,5,6,7,8,10].map(h=>`<option ${h==b.hours?'selected':''}>${h}</option>`).join('')}</select></label>
-      <label class="fld"><span>Ort</span><select data-f="b:city">${o(EVENT_CITIES,b.city)}</select></label>
-      <label class="fld"><span>Umkreis Location</span><select data-f="b:radius">${[10,25,50].map(r=>`<option value="${r}" ${r==b.radius?'selected':''}>${r} km</option>`).join('')}</select></label>
-      <label class="fld"><span>Gäste</span><input type="number" min="10" max="400" data-f="b:guests" value="${b.guests}"></label>
-      <label class="fld"><span>Budget gesamt (€)</span><input type="number" min="300" step="100" data-f="b:budget" value="${b.budget}"></label>
-      <label class="fld"><span>Stil</span><select data-f="b:style">${o(STYLES,b.style)}</select></label>
+      <label class="fld"><span>Umkreis für die Location</span><select data-f="b:radius">${[10,25,50].map(r=>`<option value="${r}" ${r==b.radius?'selected':''}>${r} km</option>`).join('')}</select></label>
+      <label class="fld"><span>Budget gesamt (optional)</span><input type="number" min="300" step="100" inputmode="numeric" data-f="b:budget" value="${b.budget||''}" placeholder="z. B. 5000"></label>
     </div>
-    <div class="fld"><span>Ernährung der Gäste</span><div class="checks">${DIETS.map(d=>`<label class="chk"><input type="checkbox" data-f="diet:${d}" ${b.diets.includes(d)?'checked':''}>${d}</label>`).join('')}</div></div>
-    <div class="fld"><span>Was brauchst du?</span><div class="checks">${ORDER.map(c=>`<label class="chk"><input type="checkbox" data-f="cat:${c}" ${b.cats[c]?'checked':''}>${CATS[c].label}</label>`).join('')}</div></div>
-    <div class="row"><button class="btn accent" data-act="gen">Pakete zusammenstellen</button><small>Kostenlos und unverbindlich.</small></div>
-  </section>`;
+    <div class="fld"><span>Stil (optional)</span><div class="choice">${STYLES.map(s=>`<button class="${b.style===s?'on':''}" data-act="bstyle" data-v="${s}">${s}</button>`).join('')}</div></div>
+    ${b.cats.catering?`<div class="fld"><span>Ernährung der Gäste (optional)</span><div class="choice">${DIETS.map(d=>`<button class="${b.diets.includes(d)?'on':''}" data-act="diet" data-v="${d}">${d}</button>`).join('')}</div></div>`:''}
+    <details><summary>Oder beschreibe deine Feier in einem Satz</summary>
+      <div class="stack" style="margin-top:12px"><textarea data-f="nl" placeholder="z. B. 60. Geburtstag, 60 Gäste, Mannheim, gemütlich, 14.6.">${esc(S.nlText)}</textarea>
+      <div class="row"><button class="btn sm" data-act="parse">Angaben übernehmen</button><small>erkennt Anlass, Gäste, Budget, Ort, Stil, Datum</small></div>${chips}</div></details>
+  </section>
+  <div class="nextbar"><button class="btn ghost" data-act="goto" data-step="1">← Zurück</button><button class="btn accent" data-act="toStep" data-step="3">Weiter zur Übersicht</button></div>`;
 }
-function passCard(pk){
-  const b=S.brief,t=pk.tot,over=t.total-b.budget,label={spar:'Spar',beliebt:'Beliebt',premium:'Premium'}[pk.tier],n=selItems(pk.sel).length;
-  const rows=ORDER.filter(c=>b.cats[c]).map(c=>pk.sel[c]
-    ?`<li><span class="k">${CATS[c].label}</span><span class="v"><b>${esc(pk.sel[c].p.name)}</b><small>${esc(pk.sel[c].p.city)}</small></span><span class="pr">${fmt(pk.sel[c].price)}</span></li>`
-    :`<li><span class="k">${CATS[c].label}</span><span class="v"><small>Kein passender Anbieter frei</small></span><span class="pr">–</span></li>`).join('');
-  const pill=over>0?`<span class="pill bad">${fmt(over)} über Budget</span>`:`<span class="pill good">${fmt(-over)} unter Budget</span>`;
-  return`<article class="pass ${pk.tier==='beliebt'?'rec':''}">
-    <div class="pass-h"><div class="kicker"><span>${dShort(b.date)} · ${esc(b.city)}</span>${pk.tier==='beliebt'?'<span class="tag">Empfehlung</span>':''}</div>
-      <h3>${label}</h3><div class="price">${fmt(t.total)}</div>
-      <div class="row">${pill}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span>${t.disc?`<span class="pill info">Bundle −${fmt(t.disc)}</span>`:''}</div></div>
-    <div class="perf"></div><ul class="items">${rows}</ul>
-    <p class="why">${esc(whyText(pk,b))}</p>
-    <div class="pass-f"><button class="btn ${pk.tier==='beliebt'?'accent':''}" data-act="choose" data-tier="${pk.tier}" ${n?'':'disabled'}>Dieses Paket wählen</button></div></article>`;
-}
-function stepPackages(){
-  const b=S.brief,ok=S.packages.some(p=>selItems(p.sel).length);
-  return`<div class="sec-h"><h2>Drei Pakete für ${esc(b.occasion)} am ${dLong(b.date)}</h2><span class="muted">${b.guests} Gäste · ${esc(b.city)} · Budget ${fmt(b.budget)}</span></div>
-  ${ok?`<div class="passes">${S.packages.map(passCard).join('')}</div>`:`<div class="panel"><b>Für diese Angaben ist nichts frei.</b><p class="muted">Vergrößere den Umkreis, ändere das Datum oder die Gästezahl.</p></div>`}
-  <p class="info" style="margin-top:18px">Alle Preise sind Paketpreise der Dienstleister. Nach deiner Anfrage prüfen wir jeden Termin persönlich und bestätigen dir den Festpreis innerhalb von ${SET().replyHours} Stunden.</p>
-  <div class="row" style="margin-top:14px"><button class="btn ghost" data-act="goto" data-step="1">Angaben ändern</button></div>`;
-}
-function blockHTML(c){
-  const it=S.sel[c],b=S.brief;
-  if(!it)return`<section class="blk empty"><div class="blk-h"><h3>${CATS[c].label}</h3><span class="muted">nicht im Paket</span></div><div><button class="btn ghost sm" data-act="add" data-cat="${c}">${CATS[c].label} hinzufügen</button></div></section>`;
-  const ctx={loc:c==='location'?null:S.sel.location&&S.sel.location.p};
-  const alts=cands(c,b,ctx).filter(x=>x.p.id!==it.p.id&&!x.reason);
-  return`<section class="blk"><div class="blk-h"><h3>${CATS[c].label}</h3><button class="btn ghost sm" data-act="remove" data-cat="${c}">Entfernen</button></div>
-    <div class="cur"><div><b>${esc(it.p.name)}</b><div class="muted">${esc(it.p.desc)}</div>
-      <div class="meta"><span class="pill good">frei am ${dShort(b.date)}</span><span class="pill neutral">${esc(it.p.city)}</span>${(it.p.tags||[]).includes(b.style)?`<span class="pill info">Stil ${esc(b.style)}</span>`:''}</div></div>
-      <div style="text-align:right"><div class="price" style="font-size:1.6rem">${fmt(it.price)}</div><small>${esc(it.calc)}</small></div></div>
-    ${alts.length?`<details><summary>Andere Auswahl (${alts.length})</summary><ul>
-      ${alts.map(x=>{const dl=x.price-it.price;return`<li class="alt"><div><b>${esc(x.p.name)}</b><small>${esc(x.p.city)} · ${esc(x.calc)}</small></div><span class="delta">${(dl>=0?'+':'−')+fmt(Math.abs(dl))}</span><button class="btn sm ghost" data-act="swap" data-cat="${c}" data-id="${x.p.id}">Wählen</button></li>`}).join('')}
-    </ul></details>`:''}</section>`;
-}
-function coReady(){const b=S.brief,co=S.co,b2b=isB2B(b.occasion)||co.type==='Firma';return !!(selItems(S.sel).length&&co.name.trim()&&/\S+@\S+\.\S+/.test(co.email)&&co.phone.trim()&&co.privacy&&(!b2b||co.company.trim()))}
-function updateReady(){const btn=document.querySelector('[data-act="request"]');if(btn)btn.disabled=!coReady()}
-function stepTune(){
-  const b=S.brief,items=selItems(S.sel),t=totals(items),b2b=isB2B(b.occasion)||S.co.type==='Firma',over=t.total-b.budget,co=S.co;
-  const tl=timeline(Object.fromEntries(items.map(i=>[i.cat,i.p.name])),b);
-  const ready=coReady();
-  return`<div class="sec-h"><h2>Paket anpassen</h2><span class="muted">Preise und Ablauf werden bei jeder Änderung neu berechnet.</span></div>
+function stepPlan(){
+  if(S.open)return catView(S.open);
+  const b=S.brief,cs=chosenCats(),items=selItems(S.sel),t=totals(items),nx=nextOpen(),open=cs.filter(c=>!S.sel[c]);
+  const box=c=>{const it=S.sel[c],img=it&&(it.p.imgs||[])[0],sub=it?detailOf(c,S.cfg[c],it.room)||it.p.city:(detailOf(c,S.cfg[c])||CATS[c].desc);
+    return`<li><button class="fbox ${it?'done':''} ${c===nx?'next':''}" data-act="openCat" data-cat="${c}">
+      <span class="fic">${img?imgTag(img,it.p.name):ico(CATS[c].icon)}</span>
+      <span><span class="fk">${CATS[c].label}${c===nx?' · als Nächstes':''}</span><span class="fn">${it?esc(it.p.name):'Noch auswählen'}</span><span class="fs">${esc(sub)}</span></span>
+      <span class="fp">${it?fmt(it.price):'Auswählen →'}</span></button></li>`};
+  const pks=suggestions(),lab={spar:'Spar',beliebt:'Beliebt',premium:'Premium'},sub={spar:'die günstigste passende Kombination',beliebt:'Mischung aus Stil, Qualität und Preis',premium:'die hochwertigste Auswahl'};
+  return`<div class="sec-h"><h2>Deine Feier im Überblick</h2><span class="muted">Tippe auf ein Kästchen und wähle aus.</span></div>
   ${S.notice?`<div class="note" role="status">${esc(S.notice)}</div>`:''}
-  <div class="cols"><div class="stack">${ORDER.map(blockHTML).join('')}
-    <section class="blk"><div class="blk-h"><h3>Ablauf deiner Feier</h3><span class="muted">${b.start} Uhr, ${b.hours} Stunden</span></div>
-      <ol class="tl">${tl.map(x=>`<li><time>${x.t}</time><div><span class="evt">${esc(x.what)}</span>${x.who?`<div class="muted">${esc(x.who)}</div>`:''}</div></li>`).join('')}</ol></section></div>
-  <aside class="sum"><div class="panel"><h3>Preisübersicht</h3>
-    <ul class="lines">${items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.p.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')||'<li><span class="n muted">Noch keine Bausteine</span></li>'}
+  <div class="cols"><div class="flow">
+    <div class="fstart"><span class="fcirc">${ico('party')}</span><div><b>${esc(b.occasion)}</b><span class="muted">${dLong(b.date)} · ${esc(b.start)} Uhr · ${b.guests} Gäste · ${esc(b.city)}</span><br><button class="linkbtn" data-act="goto" data-step="2">Eckdaten ändern</button></div></div>
+    <ol class="fbr">${cs.map(box).join('')}
+      <li><button class="fbox add" data-act="goto" data-step="1"><span class="fic">${ico('plus')}</span><span><span class="fn" style="font-size:1.1rem">Etwas ergänzen</span><span class="fs">Weitere Punkte hinzufügen oder streichen</span></span><span></span></button></li>
+      <li><div class="fbox fend"><span class="fic">${ico('send')}</span><span><span class="fn">Unverbindlich anfragen</span><span class="fs">Wir prüfen alle Termine und bestätigen dir den Festpreis.</span></span><span></span></div></li></ol>
+  </div>
+  <aside class="sum"><div class="panel"><h3>Deine Auswahl</h3>
+    <ul class="lines">${items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.p.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
+      ${open.map(c=>`<li><span class="n muted">${CATS[c].label}</span><span class="m muted">offen</span></li>`).join('')}
       ${t.disc?`<li class="dis"><span class="n">Bundle-Rabatt (ab ${SET().bundleMin} Bausteinen)</span><span class="m">−${fmt(t.disc)}</span></li>`:''}
       ${t.fee?`<li><span class="n">Servicegebühr</span><span class="m">${fmt(t.fee)}</span></li>`:''}
       <li class="tot"><span class="n">Gesamt</span><span class="m">${fmt(t.total)}</span></li></ul>
-    <div class="row">${over>0?`<span class="pill bad">${fmt(over)} über Budget</span>`:`<span class="pill good">${fmt(-over)} unter Budget</span>`}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span></div>
+    ${items.length?`<div class="row">${b.budget?(t.total>b.budget?`<span class="pill bad">${fmt(t.total-b.budget)} über Budget</span>`:`<span class="pill good">${fmt(b.budget-t.total)} unter Budget</span>`):''}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span></div>`:''}
+    <button class="btn accent" data-act="toStep" data-step="4" ${items.length?'':'disabled'}>Weiter zur Anfrage</button>
+    ${open.length&&items.length?`<small class="muted">Noch offen: ${open.map(c=>CATS[c].label).join(', ')}. Das kannst du auch offen lassen und mit uns klären.</small>`:''}</div>
+  <div class="panel stack"><h3>Lieber einen Vorschlag?</h3><small class="muted">Wir füllen alle Punkte passend aus. Danach kannst du alles ändern.</small>
+    ${pks.map(pk=>{const n=selItems(pk.sel).length;return`<button class="sugg" data-act="suggest" data-tier="${pk.tier}" ${n?'':'disabled'}><span>${lab[pk.tier]}<small>${sub[pk.tier]}</small></span><span>${n?fmt(pk.tot.total):'–'}</span></button>`}).join('')}</div></aside></div>`;
+}
+function catView(c){
+  const b=S.brief,O=OPTS[c]||{},cfg=S.cfg[c]||(S.cfg[c]={}),cs=chosenCats(),pos=cs.indexOf(c),g=+b.guests;
+  const all=cands(c,b,ctxFor(c)),ok=all.filter(x=>!x.reason),no=all.filter(x=>x.reason);
+  const card=(o,kind)=>{const on=kind==='style'?cfg.style===o[0]:(cfg.extras||[]).includes(o[0]),pr=kind==='extra'?extraPrice(null,o,g):0;
+    return`<button class="opt ${on?'on':''}" data-act="${kind}" data-cat="${c}" data-k="${o[0]}" aria-pressed="${on}"><div class="opt-img">${optPic(c,o)}</div><span class="need-ck">${on?ico('check'):''}</span>
+      <div class="opt-b"><b>${esc(o[1])}</b><small>${esc(o[2])}</small>${kind==='extra'?`<span class="opt-p">${pr?'+ ca. '+fmt(pr):'meist inklusive'}</span>`:''}</div></button>`};
+  let h=`<div class="row"><button class="btn ghost sm" data-act="closeCat">← Zur Übersicht</button><span class="sp"></span><span class="muted">Punkt ${pos+1} von ${cs.length}</span></div>
+    <div class="cat-h"><span class="need-ic">${ico(CATS[c].icon)}</span><div><h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:300">${CATS[c].label}</h2><p class="muted">${esc(b.occasion)} · ${dShort(b.date)} · ${g} Gäste · ${esc(b.city)}</p></div></div>
+    ${S.notice?`<div class="note" role="status">${esc(S.notice)}</div>`:''}`;
+  if(O.styles)h+=`<h3 class="q">${esc(O.q||'Wie soll es sein?')} <small>${esc(O.hint||'eine Möglichkeit antippen')}</small></h3><div class="opts">${O.styles.map(o=>card(o,'style')).join('')}</div>`;
+  if(O.extras&&O.extras.length)h+=`<h3 class="q">Extras dazu? <small>optional, mehrere möglich · Richtwerte für ${g} Gäste</small></h3><div class="opts sm">${O.extras.map(o=>card(o,'extra')).join('')}</div>`;
+  if(O.roles){const st=staffOf(cfg,b),rec=recStaff(b,S.cfg);
+    h+=`<h3 class="q">Wie viele Helfer brauchst du? <small>Unsere Empfehlung für ${g} Gäste: ${esc(roleTxt(rec))}</small></h3>
+    <div class="roles">${O.roles.map(o=>{const n=+st[o[0]]||0;return`<div class="role ${n?'on':''}"><span class="need-ic">${ico(o[3])}</span><div><b>${esc(o[1])}</b><small class="muted" style="display:block">${esc(o[2])}</small></div>
+      <div class="cnt"><button data-act="staff" data-k="${o[0]}" data-d="-1" aria-label="${esc(o[1])} weniger" ${n?'':'disabled'}>−</button><b>${n}</b><button data-act="staff" data-k="${o[0]}" data-d="1" aria-label="${esc(o[1])} mehr">+</button></div></div>`}).join('')}</div>
+    <div class="row" style="margin-top:12px"><button class="btn sm ghost" data-act="staffRec">Empfehlung übernehmen</button><small class="muted">Jeweils ${+b.hours+2} Stunden inklusive Auf- und Abbau.</small></div>`}
+  const sty=cfg.style&&styleOf(c,cfg.style);
+  h+=`<h3 class="q">${c==='location'?'Passende Locations':'Passende Anbieter'} <small>${ok.length} frei am ${dShort(b.date)} für ${g} Gäste${sty?' · '+esc(sty[1]):''}</small></h3>`;
+  h+=ok.length?`<div class="provs">${ok.map(x=>provCard(c,x)).join('')}</div>`
+    :`<div class="panel"><b>Hier passt gerade niemand.</b><p class="muted">${sty?'Wähle oben eine andere Art oder ':''}Ändere Datum, Ort, Umkreis oder Gästezahl.</p></div>`;
+  if(no.length)h+=`<details style="margin-top:16px"><summary>Nicht verfügbar (${no.length})</summary><ul>${no.map(x=>`<li class="alt off"><div><b>${esc(x.p.name)}</b><small>${esc(x.p.city)}</small></div><span class="delta">${esc(x.reason)}</span><span></span></li>`).join('')}</ul></details>`;
+  const nxt=cs.slice(pos+1).find(x=>!S.sel[x])||cs[pos+1];
+  h+=`<div class="nextbar"><button class="btn ghost" data-act="skipCat" data-cat="${c}">Brauche ich doch nicht</button>
+    <button class="btn accent" data-act="${nxt?'openCat':'closeCat'}" data-cat="${nxt||''}">${nxt?'Weiter: '+CATS[nxt].label+' →':'Zur Übersicht'}</button></div>`;
+  return h;
+}
+function provCard(c,x){
+  const p=x.p,b=S.brief,on=!!(S.sel[c]&&S.sel[c].p.id===p.id),imgs=p.imgs||[],gi=Math.min(S.gal[p.id]||0,Math.max(0,imgs.length-1));
+  const d=p.virtual?0:dist(b.city,p.city),r=ratingOf(p);
+  const gal=`<div class="gal"><div class="gal-main">${imgs.length?imgTag(imgs[gi],p.name):ph(CATS[c].icon,'Bilder folgen')}</div>
+    ${imgs.length>1?`<div class="thumbs">${imgs.map((u,i)=>`<button class="${i===gi?'on':''}" data-act="gal" data-id="${esc(p.id)}" data-i="${i}" aria-label="Bild ${i+1}">${imgTag(u)}</button>`).join('')}</div>`:''}</div>`;
+  let ex='';
+  if(c==='location'){
+    const rg=locRange(p);if(rg)ex+=`<p class="cap">${ico('personal')} Platz für ${rg[0]} bis ${rg[1]} Personen</p>`;
+    const rf=roomsFit(p,+b.guests);
+    if(rf.length){const sel=roomSel(p);ex+=`<div class="rooms"><small class="muted">Passende Räume für ${b.guests} Gäste:</small>${rf.map(rm=>`<button class="room ${sel===rm.name?'on':''}" data-act="room" data-id="${esc(p.id)}" data-v="${esc(rm.name)}"><span class="rimg">${rm.img?imgTag(rm.img,rm.name):ph('location')}</span><span><b>${esc(rm.name||'Raum')}</b><small>${+rm.min||0} bis ${+rm.max} Personen${rm.desc?' · '+esc(rm.desc):''}</small></span></button>`).join('')}</div>`}
+    const feat=[p.kitchen?'Küche vorhanden':'',p.ext===false?'nur Hausgastronomie':'eigenes Catering möglich',p.inhouse?`Hausgastronomie ab ${p.inhouse} € p. P.`:''].filter(Boolean);
+    ex+=`<div class="meta">${feat.map(f=>`<span class="pill neutral">${esc(f)}</span>`).join('')}</div>`;
+  }else{
+    const O=OPTS[c]||{},offered=[...(O.styles||[]),...(O.extras||[]),...(O.roles||[])].filter(o=>(p.opts||[]).includes(o[0]));
+    if(offered.length)ex+=`<div class="meta">${offered.map(o=>`<span class="pill info">${esc(o[1])}</span>`).join('')}</div>`;
+    const miss=((S.cfg[c]||{}).extras||[]).filter(k=>(p.opts||[]).length&&!p.opts.includes(k)).map(k=>(extraOf(c,k)||[])[1]).filter(Boolean);
+    if(miss.length)ex+=`<small class="muted">Wird zusätzlich angefragt: ${esc(miss.join(', '))}</small>`;
+  }
+  return`<article class="prov ${on?'on':''}">${gal}<div class="prov-b"><div class="kicker"><span>${esc(p.city)}${d&&d<999?` · ca. ${d} km`:''}</span><span>${r==null?'':stars(r)}</span></div>
+    <h3>${esc(p.name)}</h3><p class="muted">${esc(p.desc||'')}</p>${ex}</div>
+    <div class="prov-f"><div><span class="kicker">Für deine Feier</span><div class="price">${fmt(x.price)}</div><small class="muted">${esc(x.calc)}</small></div>
+    <button class="btn ${on?'':'accent'}" data-act="pick" data-cat="${c}" data-id="${esc(p.id)}">${on?'✓ Ausgewählt':'Auswählen'}</button></div></article>`;
+}
+function coReady(){const b=S.brief,co=S.co,b2b=isB2B(b.occasion)||co.type==='Firma';return !!(selItems(S.sel).length&&co.name.trim()&&/\S+@\S+\.\S+/.test(co.email)&&co.phone.trim()&&co.privacy&&(!b2b||co.company.trim()))}
+function updateReady(){const btn=document.querySelector('[data-act="request"]');if(btn)btn.disabled=!coReady()}
+function stepRequest(){
+  const b=S.brief,items=selItems(S.sel),t=totals(items),b2b=isB2B(b.occasion)||S.co.type==='Firma',co=S.co,ready=coReady(),open=chosenCats().filter(c=>!S.sel[c]);
+  const tl=timeline(Object.fromEntries(items.map(i=>[i.cat,i.p.name])),b);
+  return`<div class="sec-h"><h2>Unverbindlich anfragen</h2><span class="muted">Wir prüfen alle Termine und bestätigen dir den Festpreis innerhalb von ${SET().replyHours} Stunden.</span></div>
+  ${S.notice?`<div class="note" role="status">${esc(S.notice)}</div>`:''}
+  <div class="cols"><div class="stack">
+    <section class="blk"><div class="blk-h"><h3>Deine Auswahl</h3><button class="btn ghost sm" data-act="goto" data-step="3">Ändern</button></div>
+      ${items.map(i=>`<div class="cur"><div><span class="fk">${CATS[i.cat].label}</span><b>${esc(i.p.name)}</b><div class="muted">${esc(detailOf(i.cat,S.cfg[i.cat],i.room)||i.p.city)}</div></div>
+        <div style="text-align:right"><div class="price" style="font-size:1.5rem">${fmt(i.price)}</div><small>${esc(S.sel[i.cat].calc)}</small></div></div>`).join('<div class="perf" style="margin:2px 0"></div>')}
+      ${open.length?`<p class="info">Noch offen: ${open.map(c=>CATS[c].label).join(', ')}. Schreib uns gern unten, was du dir vorstellst.</p>`:''}</section>
+    <section class="blk"><div class="blk-h"><h3>Ablauf deiner Feier</h3><span class="muted">${esc(b.start)} Uhr, ${b.hours} Stunden</span></div>
+      <ol class="tl">${tl.map(x=>`<li><time>${x.t}</time><div><span class="evt">${esc(x.what)}</span>${x.who?`<div class="muted">${esc(x.who)}</div>`:''}</div></li>`).join('')}</ol></section></div>
+  <aside class="sum"><div class="panel"><h3>Preisübersicht</h3>
+    <ul class="lines">${items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.p.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
+      ${t.disc?`<li class="dis"><span class="n">Bundle-Rabatt (ab ${SET().bundleMin} Bausteinen)</span><span class="m">−${fmt(t.disc)}</span></li>`:''}
+      ${t.fee?`<li><span class="n">Servicegebühr</span><span class="m">${fmt(t.fee)}</span></li>`:''}
+      <li class="tot"><span class="n">Gesamt</span><span class="m">${fmt(t.total)}</span></li></ul>
+    <div class="row">${b.budget?(t.total>b.budget?`<span class="pill bad">${fmt(t.total-b.budget)} über Budget</span>`:`<span class="pill good">${fmt(b.budget-t.total)} unter Budget</span>`):''}<span class="pill neutral">${fmt(Math.round(t.total/b.guests))} pro Gast</span></div>
     <small>Bei Buchung ${SET().deposit} % Anzahlung (${fmt(t.deposit)}), Rest 14 Tage vor der Feier.</small></div>
-  <div class="panel stack"><h3>Unverbindlich anfragen</h3>
+  <div class="panel stack"><h3>Deine Kontaktdaten</h3>
     <div class="checks">${['Privat','Firma'].map(x=>`<label class="chk"><input type="radio" name="ct" data-f="co:type" data-r value="${x}" ${co.type===x?'checked':''}>${x}</label>`).join('')}</div>
     <label class="fld"><span>Name</span><input type="text" data-f="co:name" value="${esc(co.name)}" autocomplete="name"></label>
     <label class="fld"><span>E-Mail</span><input type="email" data-f="co:email" value="${esc(co.email)}" autocomplete="email"></label>
@@ -756,7 +1118,7 @@ function stepTune(){
     <label class="fld"><span>Wünsche & Hinweise</span><textarea data-f="co:msg" style="min-height:60px">${esc(co.msg)}</textarea></label>
     <label class="chk" style="border-radius:10px;align-items:flex-start"><input type="checkbox" data-f="co:privacy" ${co.privacy?'checked':''}>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert und an die ausgewählten Dienstleister weitergegeben werden.</label>
     <button class="btn accent" data-act="request" ${ready?'':'disabled'}>Kostenlos anfragen</button>
-    <small>Wir prüfen alle Termine und bestätigen deinen Festpreis innerhalb von ${SET().replyHours} Stunden. Erst dann entscheidest du.</small></div></aside></div>`;
+    <small>Erst wenn alle Termine bestätigt sind, entscheidest du.</small></div></aside></div>`;
 }
 function stepDone(){
   const k=S.lastBooking;if(!k)return`<div class="panel">Keine Anfrage gefunden.</div>`;
@@ -765,13 +1127,13 @@ function stepDone(){
     <div class="ok" style="margin:0">Danke, ${esc(k.customer.name)}! Deine Anfrage ist eingegangen.</div>
     <h2>Anfrage <span class="mono">${k.id}</span></h2>
     <p>${esc(k.brief.occasion)} am ${dLong(k.brief.date)} · ${k.brief.guests} Gäste · ${esc(k.brief.city)}</p>
-    <ul class="lines">${k.items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.name)}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
+    <ul class="lines">${k.items.map(i=>`<li><span class="n">${CATS[i.cat].label}: ${esc(i.name)}${i.detail?`<br><small class="muted">${esc(i.detail)}</small>`:''}</span><span class="m">${fmt(i.price)}</span></li>`).join('')}
       <li class="tot"><span class="n">Voraussichtlich</span><span class="m">${fmt(t.total)}</span></li></ul>
     <h3>So geht es weiter</h3>
     <ol style="margin:0;padding-left:20px;display:grid;gap:6px">
       <li>Wir fragen jetzt alle Dienstleister für deinen Termin an.</li>
       <li>Innerhalb von ${SET().replyHours} Stunden bekommst du dein verbindliches Angebot per E-Mail.</li>
-      <li>Du sagst zu, leistest die Anzahlung – und wir stimmen alle Details mit dir und den Dienstleistern ab.</li></ol>
+      <li>Du sagst zu, leistest die Anzahlung, und wir stimmen alle Details mit dir und den Dienstleistern ab.</li></ol>
     <p class="muted">Mit deiner Anfragenummer und E-Mail kannst du den Stand jederzeit unter „Anfrage verfolgen“ sehen.</p>
     <div class="row"><button class="btn" data-act="newEvent">Neue Feier planen</button><button class="btn ghost" data-act="view" data-v="track">Anfrage verfolgen</button></div></div>`;
 }
@@ -852,9 +1214,10 @@ function akteView(){
   const next=idx>=0&&idx<STAGES.length-1?STAGES[idx+1]:null;
   const tl=timeline(Object.fromEntries(k.items.filter(i=>i.status!=='abgelehnt').map(i=>[i.cat,i.name])),b);
   const itemHTML=(i,n)=>{
-    const p=getP(i.pid)||{},alts=cands(i.cat,b,{exclude:k.id,loc:i.cat==='location'?null:getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt')||{}).pid)}).filter(x=>!x.reason&&x.p.id!==i.pid);
+    const p=getP(i.pid)||{},alts=cands(i.cat,b,{exclude:k.id,cfg:i.cfg,loc:i.cat==='location'?null:getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt')||{}).pid)}).filter(x=>!x.reason&&x.p.id!==i.pid);
     const cl={offen:'neutral',angefragt:'warn',angenommen:'good',abgelehnt:'bad'}[i.status];
     return`<div class="item"><div class="hd"><span><b>${CATS[i.cat].label}:</b> ${esc(i.name)} <span class="pill ${cl}">${i.status}</span></span><span class="mono">${fmt(i.price)} · ${i.comm} % = ${fmt(Math.round(i.price*i.comm/100))}</span></div>
+      ${i.detail?`<div><small>${esc(i.detail)}</small></div>`:''}
       <small class="muted">${esc(p.addr||p.city||'')}${p.tel?` · <a href="tel:${esc(p.tel.replace(/\s/g,''))}">${esc(p.tel)}</a>`:''}${p.mail?` · <a href="mailto:${esc(p.mail)}">${esc(p.mail)}</a>`:''}${p.web?` · <a href="${esc(p.web)}" target="_blank" rel="noopener">Website</a>`:''}${p.status?` · ${esc(p.status)}`:''}${p.price&&p.price.src==='geschätzt'?' · <b>Preis geschätzt</b>':''}</small>
       <div class="row">
         <a class="btn sm ghost" href="${esc(mailProvider(k,i))}" data-act="mailP" data-k="${k.id}" data-i="${n}">Anfrage-Mail</a>
@@ -915,7 +1278,7 @@ function dbView(){
   const usedCities=[...new Set(S.db.providers.map(p=>p.city))].sort();
   const priceTxt=p=>{const r=p.price||{};return[r.base?fmt(r.base):'',r.pp?r.pp+' €/Gast':'',r.hourly?r.hourly+' €/h':'',p.inhouse?'Gastro '+p.inhouse+' €/Gast':''].filter(Boolean).join(' + ')};
   return`<div class="sec-h"><h2>Dienstleister-Datenbank</h2><div class="row"><span class="muted">${list.length} von ${S.db.providers.length}</span><button class="btn sm accent" data-act="newP">+ Neuer Dienstleister</button></div></div>
-  <p class="info" style="margin-bottom:14px">Nur für dich sichtbar. Kunden sehen nur Name, Ort, Beschreibung und Preis der passenden Anbieter in ihren Paketen – keine Kontaktdaten, Provisionen oder Notizen.</p>
+  <p class="info" style="margin-bottom:14px">Nur für dich sichtbar. Kunden sehen nur Name, Ort, Beschreibung, Preis, Bilder, Räume und Angebot der passenden Anbieter – keine Kontaktdaten, Provisionen oder Notizen.</p>
   <div class="panel grid-f" style="margin-bottom:16px">
     <label class="fld"><span>Kategorie</span><select data-f="flt:cat" data-r><option value="">Alle</option>${ORDER.map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${CATS[c].label}</option>`).join('')}</select></label>
     <label class="fld"><span>Ort</span><select data-f="flt:city" data-r><option value="">Alle</option>${usedCities.map(c=>`<option ${f.city===c?'selected':''}>${esc(c)}</option>`).join('')}</select></label>
@@ -923,7 +1286,7 @@ function dbView(){
     <label class="fld"><span>Suche</span><input type="text" data-f="flt:q" data-r value="${esc(f.q)}" placeholder="Name, Adresse …"></label></div>
   <section class="panel tbl"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Ort</th><th>Status</th><th>Preis (Richtwert)</th><th class="r">Prov.</th><th>Bewertung</th><th>Zu prüfen</th></tr></thead><tbody>
   ${list.map(p=>{const cl={Lead:'neutral',Angefragt:'warn',Partner:'good',Pausiert:'bad'}[p.status||'Lead'];const jobs=S.db.bookings.filter(k=>k.items.some(i=>i.pid===p.id||i.pid===p.id+'#gastro')).length;
-    return`<tr class="click" data-act="editP" data-id="${esc(p.id)}"><td><b>${esc(p.name)}</b><br><small class="muted">${esc(p.addr||'')}${p.tel?' · '+esc(p.tel):''}</small></td><td>${CATS[p.cat].label}</td><td>${esc(p.city)}</td><td><span class="pill ${cl}">${esc(p.status||'Lead')}</span></td>
+    return`<tr class="click" data-act="editP" data-id="${esc(p.id)}"><td><b>${esc(p.name)}</b><br><small class="muted">${esc(p.addr||'')}${p.tel?' · '+esc(p.tel):''}</small><br><small class="${(p.imgs||[]).length?'muted':''}" style="${(p.imgs||[]).length?'':'color:var(--warn)'}">${(p.imgs||[]).length?(p.imgs.length+' Bilder'):'keine Bilder'} · ${(p.opts||[]).length} Optionen</small></td><td>${CATS[p.cat].label}</td><td>${esc(p.city)}</td><td><span class="pill ${cl}">${esc(p.status||'Lead')}</span></td>
     <td><span class="mono" style="font-size:.85rem">${esc(priceTxt(p))}</span><br><small class="muted">${esc((p.price||{}).src||'')}</small></td><td class="r">${commOf(p)} %</td><td>${stars(ratingOf(p))}${jobs?`<br><small class="muted">${jobs} Aufträge</small>`:''}</td><td><small>${esc((p.check||[]).join(', '))}</small></td></tr>`}).join('')||'<tr><td colspan="8" class="muted">Keine Treffer.</td></tr>'}
   </tbody></table></section>`;
 }
@@ -933,7 +1296,7 @@ function providerForm(){
   const num=(f,l,v)=>inp(f,l,v,'number','step="any" min="0"');
   return`<div class="row" style="margin-bottom:10px"><button class="btn sm ghost" data-act="cancelP">← Zurück zur Datenbank</button></div>
   <div class="sec-h"><h2>${isNew?'Neuer Dienstleister':esc(p.name)}</h2><span class="mono muted">${esc(p.id)}</span></div>
-  ${S.err?`<div class="err">${esc(S.err)}</div>`:''}
+  ${S.err?`<div class="err">${esc(S.err)}</div>`:''}${S.flash?`<div class="note">${esc(S.flash)}</div>`:''}
   <section class="panel stack">
     <div class="grid-f">${inp('name','Name *',p.name)}
       <label class="fld"><span>Kategorie</span><select data-f="pe:cat" data-r>${ORDER.map(x=>`<option value="${x}" ${c===x?'selected':''}>${CATS[x].label}</option>`).join('')}</select></label>
@@ -955,12 +1318,46 @@ function providerForm(){
       <label class="fld"><span>Preisquelle</span><select data-f="pe:price.src">${['geschätzt','öffentlicher Ab-Preis','vom Anbieter bestätigt','Partnervertrag'].map(s=>`<option ${pr.src===s?'selected':''}>${s}</option>`).join('')}</select></label></div>
     ${c==='location'?`<div class="checks"><label class="chk"><input type="checkbox" data-f="pebool:kitchen" ${p.kitchen?'checked':''}>Küche vorhanden</label><label class="chk"><input type="checkbox" data-f="pebool:ext" ${p.ext!==false?'checked':''}>Fremd-Catering erlaubt</label></div>`:''}
     ${c==='catering'?`<div class="fld"><span>Ernährung</span><div class="checks">${DIETS.map(d=>`<label class="chk"><input type="checkbox" data-f="pediet:${d}" ${(p.diets||[]).includes(d)?'checked':''}>${d}</label>`).join('')}<label class="chk"><input type="checkbox" data-f="pebool:mobile" ${p.mobile!==false?'checked':''}>Mobile Küche</label></div></div>`:''}
+    ${providerExtras(p)}
     <h3>Intern</h3>
     <div class="grid-f">${inp('blocked','Gesperrte Tage (JJJJ-MM-TT, Komma)',(p.blocked||[]).join(', '))}${inp('check','Noch zu prüfen (Komma)',(p.check||[]).join(', '))}${inp('src','Quelle / Fundstelle',p.src,'url')}</div>
     <label class="fld"><span>Notizen (nur Admin)</span><textarea data-f="pe:notes">${esc(p.notes||'')}</textarea></label>
     ${p.src?`<p><a href="${esc(p.src)}" target="_blank" rel="noopener">Fundstelle öffnen</a></p>`:''}
     <div class="row"><button class="btn accent" data-act="saveP">Speichern</button><button class="btn ghost" data-act="cancelP">Abbrechen</button><span class="sp"></span>${!isNew?`<button class="btn danger" data-act="delP">Löschen</button>`:''}</div>
   </section>`;
+}
+function providerExtras(p){
+  const c=p.cat,O=OPTS[c]||{},opts=p.opts||[],op=p.optPrice||{};
+  const row=(o,kind)=>{const on=opts.includes(o[0]),ov=op[o[0]]||{},pr=kind!=='role'&&!(c==='location');
+    const def=kind==='extra'?`Standard ca. ${fmt(extraPrice(null,o,50))} bei 50 Gästen`:kind==='style'&&o[4]!==1?`Standard: Grundpreis × ${String(o[4]).replace('.',',')}`:'';
+    return`<div class="aopt"><label class="chk"><input type="checkbox" data-f="peopt:${o[0]}" data-r ${on?'checked':''}>${esc(o[1])}</label>
+      ${on&&pr?`<input type="number" step="any" min="0" placeholder="Preis € pauschal" data-f="peop:${o[0]}:base" value="${ov.base!=null?ov.base:''}"><input type="number" step="any" min="0" placeholder="€ pro Gast" data-f="peop:${o[0]}:pp" value="${ov.pp!=null?ov.pp:''}">${def?`<small class="muted">${esc(def)}</small>`:''}`:''}</div>`};
+  const imgs=p.imgs||[],rooms=p.rooms||[];
+  return`<h3>Angebot (sieht der Kunde als Auswahl)</h3>
+    <p class="muted" style="font-size:.88rem">Häkchen = bietet der Anbieter an. Wählt der Kunde eine Art, die hier fehlt, wird der Anbieter nicht angezeigt. Eigene Preise sind optional, leer = Richtwert.</p>
+    ${O.styles?`<div class="fld"><span>${c==='location'?'Art der Location':'Art'}</span><div class="aopts">${O.styles.map(o=>row(o,'style')).join('')}</div></div>`:''}
+    ${O.extras&&O.extras.length?`<div class="fld"><span>Extras</span><div class="aopts">${O.extras.map(o=>row(o,'extra')).join('')}</div></div>`:''}
+    ${O.roles?`<div class="fld"><span>Rollen</span><div class="aopts">${O.roles.map(o=>row(o,'role')).join('')}</div></div>`:''}
+    <h3>Bilder (sieht der Kunde)</h3>
+    ${imgs.length?`<div class="aimgs">${imgs.map((u,i)=>`<figure><div class="fi">${imgTag(u)}</div><figcaption>${i===0?'<b>Titelbild</b>':`<button class="linkbtn" data-act="imgFirst" data-i="${i}">Als Titelbild</button>`}<button class="linkbtn" data-act="imgDel" data-i="${i}">Entfernen</button></figcaption></figure>`).join('')}</div>`:'<p class="muted">Noch keine Bilder. Der Kunde sieht solange einen Platzhalter.</p>'}
+    <div class="row"><label class="btn sm">Bilder hochladen<input type="file" accept="image/jpeg,image/png,image/webp" multiple hidden data-act-change="upload" data-to="pe"></label>
+      <input type="url" data-f="imgurl" value="${esc(S.imgUrl)}" placeholder="oder Bild-Link (https://…)" style="flex:1;min-width:200px"><button class="btn sm ghost" data-act="imgAddUrl">Link hinzufügen</button></div>
+    <small class="muted">Nur eigene Fotos oder Fotos mit Erlaubnis des Anbieters verwenden. Bilder werden automatisch verkleinert.</small>
+    ${c==='location'?`<h3>Räume</h3><p class="muted" style="font-size:.88rem">Sind Räume eingetragen, zeigt die Seite nur Räume, in die die Gästezahl passt, und rechnet die Kapazität aus den Räumen.</p>
+      ${rooms.map((r,i)=>`<div class="aroom"><div class="grid-f">
+        <label class="fld"><span>Raum</span><input type="text" data-f="peroom:${i}:name" value="${esc(r.name||'')}" placeholder="z. B. Großer Saal"></label>
+        <label class="fld"><span>Ab Personen</span><input type="number" min="0" data-f="peroom:${i}:min" value="${r.min!=null?r.min:''}"></label>
+        <label class="fld"><span>Bis Personen</span><input type="number" min="0" data-f="peroom:${i}:max" value="${r.max!=null?r.max:''}"></label></div>
+        <label class="fld"><span>Beschreibung</span><input type="text" data-f="peroom:${i}:desc" value="${esc(r.desc||'')}" placeholder="z. B. mit Bühne und Terrasse"></label>
+        <div class="row">${r.img?`<span class="rimg">${imgTag(r.img)}</span>`:''}<label class="btn sm ghost">${r.img?'Bild ersetzen':'Bild hochladen'}<input type="file" accept="image/jpeg,image/png,image/webp" hidden data-act-change="upload" data-to="room:${i}"></label><span class="sp"></span><button class="btn sm danger" data-act="roomDel" data-i="${i}">Raum entfernen</button></div></div>`).join('')}
+      <div><button class="btn sm ghost" data-act="roomAdd">+ Raum hinzufügen</button></div>`:''}`;
+}
+function optImgSection(){
+  const st=SET(),oi=st.optImg||{};
+  return`<section class="panel stack" style="margin-top:22px"><h3>Bilder für die Auswahl-Optionen</h3>
+    <p class="muted">Diese Bilder sieht der Kunde bei „Wie soll es sein?“ und bei den Extras. Ohne Bild erscheint ein Symbol.</p>
+    ${ORDER.filter(c=>(OPTS[c].styles||[]).length||(OPTS[c].extras||[]).length).map(c=>`<div class="fld"><span>${CATS[c].label}</span><div class="aimgs">${[...(OPTS[c].styles||[]),...(OPTS[c].extras||[])].map(o=>{const k=c+':'+o[0],u=oi[k];
+      return`<figure><div class="fi">${u?imgTag(u,o[1]):ph(o[3])}</div><figcaption><b style="width:100%">${esc(o[1])}</b><label class="linkbtn" style="cursor:pointer">${u?'Ersetzen':'Hochladen'}<input type="file" accept="image/jpeg,image/png,image/webp" hidden data-act-change="upload" data-to="opt:${k}"></label>${u?`<button class="linkbtn" data-act="optImgDel" data-k="${k}">Entfernen</button>`:''}</figcaption></figure>`}).join('')}</div></div>`).join('')}</section>`;
 }
 function gewinnView(){
   const st=SET(),cv=st.calc,bs=S.db.bookings.filter(k=>k.stage!=='storniert'&&!k.example);
@@ -1014,12 +1411,13 @@ function settingsView(){
       <label class="fld"><span>Neues Passwort</span><input type="password" data-f="pw:new1" autocomplete="new-password" placeholder="mind. 10 Zeichen"></label>
       <label class="fld"><span>Neues Passwort wiederholen</span><input type="password" data-f="pw:new2" autocomplete="new-password"></label></div>
       <button class="btn sm" data-act="changePw">Passwort ändern</button>
-      <p class="info">Die Daten liegen auf dem Server (Railway, eigenes Volume) und sind nur nach Login sichtbar. Kunden bekommen nur Name, Ort, Beschreibung und Preis der Dienstleister – keine Kontakte, Provisionen oder Notizen.</p>
+      <p class="info">Die Daten liegen auf dem Server (Railway, eigenes Volume) und sind nur nach Login sichtbar. Kunden bekommen nur Name, Ort, Beschreibung, Preis und Bilder der Dienstleister – keine Kontakte, Provisionen oder Notizen.</p>
       <h3>Daten</h3>
       <div class="row"><button class="btn sm" data-act="export">Export (JSON)</button><label class="btn sm ghost">Import<input type="file" accept="application/json" data-act-change="import" hidden></label>
         <button class="btn sm ghost" data-act="exportCsv">Dienstleister als CSV</button></div>
       <div class="row"><button class="btn sm danger" data-act="delDemo">Beispiel-Akte löschen</button><button class="btn sm danger" data-act="resetP">Datenbank auf Startstand</button></div>
-      <small class="muted">Daten werden automatisch auf dem Server gespeichert, dazu täglich ein Backup. Ein gelegentlicher Export schadet trotzdem nicht.</small></section></div>`;
+      <small class="muted">Daten werden automatisch auf dem Server gespeichert, dazu täglich ein Backup. Ein gelegentlicher Export schadet trotzdem nicht.</small></section></div>
+  ${optImgSection()}`;
 }
 
 /* ---------- Eingaben ---------- */
@@ -1030,7 +1428,11 @@ function setField(el){
   if(f==='pin'){S.pinInput=v;return}
   if(f.startsWith('pw:')){S.pw[f.slice(3)]=v;return}
   if(f==='note'){S.note=v;return}
-  if(f.startsWith('b:')){const k=f.slice(2);b[k]=['hours','radius','guests','budget'].includes(k)?+v:v;return}
+  if(f==='imgurl'){S.imgUrl=v;return}
+  if(f.startsWith('peopt:')){const k=f.slice(6),p=S.pe;p.opts=(p.opts||[]).filter(x=>x!==k);if(el.checked)p.opts.push(k);return}
+  if(f.startsWith('peop:')){const [,k,fl]=f.split(':'),p=S.pe;p.optPrice=p.optPrice||{};const o=p.optPrice[k]=p.optPrice[k]||{};if(v==='')delete o[fl];else o[fl]=+v;return}
+  if(f.startsWith('peroom:')){const [,i,fl]=f.split(':'),r=(S.pe.rooms||[])[+i];if(r)r[fl]=(fl==='min'||fl==='max')?(v===''?'':+v):v;return}
+  if(f.startsWith('b:')){const k=f.slice(2);b[k]=['hours','radius','guests','budget'].includes(k)?(v===''?'':+v):v;return}
   if(f.startsWith('cat:')){b.cats[f.slice(4)]=el.checked;return}
   if(f.startsWith('diet:')){const d=f.slice(5);b.diets=b.diets.filter(x=>x!==d);if(el.checked)b.diets.push(d);return}
   if(f.startsWith('co:')){S.co[f.slice(3)]=v;updateReady();return}
@@ -1054,40 +1456,44 @@ function setField(el){
   }
 }
 function scrollTop(){try{window.scrollTo(0,0)}catch(e){}}
-function chooseTier(t){const pk=S.packages.find(p=>p.tier===t);if(!pk)return;S.sel={};ORDER.forEach(c=>{if(pk.sel[c])S.sel[c]={...pk.sel[c]}});S.tier=t;S.step=3;S.notice=null;scrollTop()}
-function revalidateCatering(){
-  const b=S.brief;if(!S.sel.catering)return;
-  const loc=S.sel.location&&S.sel.location.p,cc=cands('catering',b,{loc});
-  const cur=cc.find(y=>y.p.id===S.sel.catering.p.id);
-  if(!cur||cur.reason){const ok=cc.filter(y=>!y.reason);
-    if(ok.length){S.sel.catering=pick(ok,'beliebt',b);S.notice=`Catering angepasst: ${S.sel.catering.p.name} passt zur gewählten Location.`}
-    else{delete S.sel.catering;S.notice='Catering entfernt: Mit dieser Location ist kein Catering verfügbar.'}}
-  else S.sel.catering=cur;
-}
-function swap(c,id){
-  const b=S.brief,ctx={loc:c==='location'?null:S.sel.location&&S.sel.location.p};
-  const x=cands(c,b,ctx).find(y=>y.p.id===id);if(!x||x.reason)return;
-  S.sel[c]=x;if(c==='location')revalidateCatering();
-}
-function addCat(c){
-  const b=S.brief,ok=cands(c,b,{loc:S.sel.location&&S.sel.location.p}).filter(x=>!x.reason);
-  if(!ok.length){S.notice=`Für ${CATS[c].label} ist an diesem Datum niemand frei.`;return}
-  S.sel[c]=pick(ok,'beliebt',b);if(c==='location')revalidateCatering();
-}
+function freshBrief(){return{occasion:'',date:'',start:'17:00',hours:6,city:'',radius:25,guests:'',budget:'',style:'',diets:[],cats:{location:false,catering:false,getraenke:false,dj:false,foto:false,deko:false,personal:false}}}
 function validateBrief(){
   const b=S.brief;
+  if(!ORDER.some(c=>b.cats[c]))return'Wähle mindestens einen Punkt aus.';
+  if(!b.occasion)return'Bitte wähle einen Anlass.';
   if(!b.date||b.date<today())return'Bitte wähle ein Datum in der Zukunft.';
+  if(!b.city)return'Bitte wähle den Ort deiner Feier.';
   if(!(b.guests>=10&&b.guests<=400))return'Die Gästezahl muss zwischen 10 und 400 liegen.';
-  if(!(b.budget>=300))return'Bitte gib ein Budget von mindestens 300 € an.';
-  if(!ORDER.some(c=>b.cats[c]))return'Wähle mindestens einen Baustein.';
+  if(b.budget&&b.budget<300)return'Das Budget muss mindestens 300 € sein, oder lass das Feld leer.';
   return null;
+}
+/* Bilder: im Browser verkleinern und auf den Server laden */
+async function resizeImg(file){
+  const url=URL.createObjectURL(file);
+  try{
+    const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('Bild konnte nicht gelesen werden'));i.src=url});
+    const M=1600,sc=Math.min(1,M/Math.max(img.width,img.height)),cv=document.createElement('canvas');
+    cv.width=Math.round(img.width*sc);cv.height=Math.round(img.height*sc);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+    return cv.toDataURL('image/jpeg',.84);
+  }finally{URL.revokeObjectURL(url)}
+}
+function addImg(to,url){
+  if(to==='pe'){S.pe.imgs=(S.pe.imgs||[]).concat(url);return'Bild hinzugefügt. Bitte unten auf „Speichern“ drücken.'}
+  if(to.startsWith('room:')){const r=(S.pe.rooms||[])[+to.slice(5)];if(r)r.img=url;return'Raumbild hinzugefügt. Bitte unten auf „Speichern“ drücken.'}
+  if(to.startsWith('opt:')){const st=SET();st.optImg=st.optImg||{};st.optImg[to.slice(4)]=url;save();return'Bild gespeichert.'}
+}
+async function uploadFiles(files,to){
+  S.flash='Bild wird hochgeladen …';render();let msg='';
+  try{for(const f of files){const data=await resizeImg(f);const d=await api('/api/admin/media',{method:'POST',body:{data}});msg=addImg(to,d.url)}S.flash=msg}
+  catch(e){S.flash='Hochladen fehlgeschlagen: '+e.message}
+  render();
 }
 function download(name,text,type){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
 }
 function csv(){
-  const cols=['id','cat','name','city','addr','tel','mail','web','status','desc','price.base','price.pp','price.hourly','price.min','price.src','comm','km','src','check','notes'];
+  const cols=['id','cat','name','city','addr','tel','mail','web','status','desc','price.base','price.pp','price.hourly','price.min','price.src','comm','km','opts','imgs','src','check','notes'];
   const g=(p,c)=>{const v=c.split('.').reduce((a,k)=>a==null?a:a[k],p);return Array.isArray(v)?v.join('; '):v==null?'':v};
   const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
   return'﻿'+cols.join(';')+'\n'+S.db.providers.map(p=>cols.map(c=>q(g(p,c))).join(';')).join('\n');
@@ -1099,7 +1505,7 @@ document.addEventListener('click',e=>{
   if(t.tagName==='A'&&a==='mailP'){const k=S.db.bookings.find(x=>x.id===t.dataset.k),i=k&&k.items[+t.dataset.i];if(i&&i.status==='offen'){i.status='angefragt';logB(k,`Anfrage-Mail an ${i.name} geöffnet.`);if(k.stage==='neu')k.stage='angefragt';save();setTimeout(render,50)}return}
   if(t.tagName==='A')return;
   if(t.tagName==='SELECT'||t.tagName==='INPUT')return;
-  S.notice=a==='swap'||a==='add'?null:S.notice;S.flash=null;
+  S.notice=null;S.flash=null;
   const K=()=>S.db.bookings.find(x=>x.id===t.dataset.k);
   switch(a){
     case 'home':S.view='host';S.akte=null;break;
@@ -1113,18 +1519,35 @@ document.addEventListener('click',e=>{
     case 'changePw':{const p=S.pw;S.pwMsg=null;if(p.new1!==p.new2){S.pwMsg={ok:false,t:'Die neuen Passwörter stimmen nicht überein.'};break}
       api('/api/admin/password',{method:'POST',body:{old:p.old,new:p.new1}}).then(()=>{S.pw={old:'',new1:'',new2:''};S.pwMsg={ok:true,t:'Passwort geändert. Andere Geräte wurden abgemeldet.'}})
         .catch(e=>{S.pwMsg={ok:false,t:e.message}}).then(render);return}
-    case 'goto':S.step=+t.dataset.step;S.err=null;scrollTop();break;
+    case 'goto':S.step=+t.dataset.step;S.open=null;S.err=null;if(S.step===3)refreshAll();scrollTop();break;
+    case 'toStep':{const n=+t.dataset.step;S.err=null;
+      if(n===2&&!chosenCats().length){S.err='Wähle mindestens einen Punkt aus.';break}
+      if(n===3){S.err=validateBrief();if(S.err)break;refreshAll()}
+      if(n===4&&!selItems(S.sel).length)break;
+      S.step=n;S.open=null;scrollTop();break}
+    case 'need':{const c=t.dataset.cat;S.brief.cats[c]=!S.brief.cats[c];if(!S.brief.cats[c])delete S.sel[c];S.err=null;break}
+    case 'occ':S.brief.occasion=t.dataset.v;break;
+    case 'bstyle':S.brief.style=S.brief.style===t.dataset.v?'':t.dataset.v;break;
+    case 'diet':{const d=t.dataset.v,b=S.brief;b.diets=b.diets.includes(d)?b.diets.filter(x=>x!==d):b.diets.concat(d);break}
     case 'parse':S.nlFound=parseBriefing(S.nlText);break;
-    case 'gen':S.err=validateBrief();if(!S.err){const ids=pk=>Object.values(pk.sel).map(x=>x.p.id),sp=buildPackage('spar',S.brief),be=buildPackage('beliebt',S.brief,ids(sp)),pr=buildPackage('premium',S.brief,ids(sp).concat(ids(be)));S.packages=[sp,be,pr];S.step=2;scrollTop()}break;
-    case 'choose':chooseTier(t.dataset.tier);break;
-    case 'swap':swap(t.dataset.cat,t.dataset.id);break;
-    case 'remove':delete S.sel[t.dataset.cat];if(t.dataset.cat==='location')revalidateCatering();break;
-    case 'add':addCat(t.dataset.cat);break;
+    case 'openCat':{const c=t.dataset.cat;if(!c)break;S.open=c;const cfg=S.cfg[c]=S.cfg[c]||{};if(c==='personal'&&!cfg.staff){cfg.staff=recStaff(S.brief,S.cfg);refreshSel(c)}scrollTop();break}
+    case 'closeCat':S.open=null;scrollTop();break;
+    case 'skipCat':{const c=t.dataset.cat;S.brief.cats[c]=false;delete S.sel[c];S.open=null;if(!chosenCats().length)S.step=1;scrollTop();break}
+    case 'style':{const c=t.dataset.cat,cfg=S.cfg[c]=S.cfg[c]||{};cfg.style=cfg.style===t.dataset.k?'':t.dataset.k;refreshSel(c);if(c==='catering'||c==='getraenke')refreshSel('personal');break}
+    case 'extra':{const c=t.dataset.cat,cfg=S.cfg[c]=S.cfg[c]||{},k=t.dataset.k;cfg.extras=(cfg.extras||[]).includes(k)?cfg.extras.filter(x=>x!==k):(cfg.extras||[]).concat(k);refreshSel(c);break}
+    case 'staff':{const cfg=S.cfg.personal=S.cfg.personal||{},st=Object.assign({},staffOf(cfg,S.brief)),k=t.dataset.k;st[k]=Math.max(0,Math.min(60,(+st[k]||0)+(+t.dataset.d)));cfg.staff=st;refreshSel('personal');break}
+    case 'staffRec':{const cfg=S.cfg.personal=S.cfg.personal||{};cfg.staff=recStaff(S.brief,S.cfg);refreshSel('personal');break}
+    case 'gal':S.gal[t.dataset.id]=+t.dataset.i;break;
+    case 'room':{S.roomPick[t.dataset.id]=t.dataset.v;if(S.sel.location&&S.sel.location.p.id===t.dataset.id)S.sel.location.room=t.dataset.v;break}
+    case 'pick':{const c=t.dataset.cat,x=cands(c,S.brief,ctxFor(c)).find(y=>y.p.id===t.dataset.id);if(!x||x.reason)break;
+      if(c==='location')x.room=roomSel(x.p);S.sel[c]=x;if(c==='location')refreshSel('catering');S.open=null;scrollTop();break}
+    case 'suggest':{const pk=suggestions().find(p=>p.tier===t.dataset.tier);if(!pk)break;S.sel={};ORDER.forEach(c=>{if(pk.sel[c])S.sel[c]=pk.sel[c]});
+      if(pk.missing.length)S.notice='Für '+pk.missing.map(c=>CATS[c].label).join(', ')+' ist an deinem Termin niemand frei.';break}
     case 'request':{if(S.sending)return;S.sending=true;t.disabled=true;t.textContent='Wird gesendet …';S.err=null;
-      const items=selItems(S.sel).map(i=>({cat:i.cat,pid:i.pid,price:i.price,calc:S.sel[i.cat].calc}));
-      api('/api/request',{method:'POST',body:{brief:S.brief,co:S.co,items}}).then(d=>{S.lastBooking=d.booking;S.bookingId=d.booking.id;S.step=4;scrollTop();
+      const items=selItems(S.sel).map(i=>({cat:i.cat,pid:i.pid,price:i.price,calc:S.sel[i.cat].calc,cfg:S.cfg[i.cat]||{},room:i.room||'',detail:detailOf(i.cat,S.cfg[i.cat],i.room)}));
+      api('/api/request',{method:'POST',body:{brief:S.brief,co:S.co,items}}).then(d=>{S.lastBooking=d.booking;S.bookingId=d.booking.id;S.step=5;scrollTop();
         if(S.admin)return loadAdmin();return loadPublic()}).catch(e=>{S.notice='Anfrage konnte nicht gesendet werden: '+e.message}).then(()=>{S.sending=false;render()});return}
-    case 'newEvent':S.step=1;S.sel={};S.packages=[];S.bookingId=null;S.co.privacy=false;scrollTop();break;
+    case 'newEvent':S.step=1;S.sel={};S.cfg={};S.open=null;S.roomPick={};S.brief=freshBrief();S.bookingId=null;S.co.privacy=false;scrollTop();break;
     case 'track':{const id=S.track.id.trim().toUpperCase(),m=S.track.mail.trim().toLowerCase();
       api('/api/track',{method:'POST',body:{id,mail:m}}).then(d=>{S.track.k=d.booking;S.track.res=d.booking?d.booking.id:'none'}).catch(e=>{S.track.k=null;S.track.res='none'}).then(render);return}
     case 'akte':S.view='admin';S.akte=t.dataset.k;S.note='';scrollTop();break;
@@ -1153,13 +1576,22 @@ document.addEventListener('click',e=>{
     case 'delB':{const k=K();if(!k)break;if(t.dataset.confirm!=='1'){t.dataset.confirm='1';t.textContent='Wirklich löschen?';return}
       S.db.bookings=S.db.bookings.filter(x=>x!==k);if(k.example)S.db.demoRemoved=true;S.akte=null;S.aview='anfragen';save();break}
     case 'print':try{window.print()}catch(e){}return;
-    case 'newP':S.pe={id:'X'+Date.now().toString(36).toUpperCase(),cat:S.flt.cat||'location',name:'',city:'Heidelberg',status:'Lead',tags:[],price:{src:'vom Anbieter bestätigt'},cap:[10,100],kitchen:true,ext:true,mobile:true,diets:['vegetarisch'],km:40,check:[],blocked:[]};S.err=null;break;
-    case 'editP':{const p=S.db.providers.find(x=>x.id===t.dataset.id);if(p){S.pe=clone(p);S.err=null;scrollTop()}break}
+    case 'newP':S.pe={id:'X'+Date.now().toString(36).toUpperCase(),cat:S.flt.cat||'location',name:'',city:'Heidelberg',status:'Lead',tags:[],price:{src:'vom Anbieter bestätigt'},cap:[10,100],kitchen:true,ext:true,mobile:true,diets:['vegetarisch'],km:40,check:[],blocked:[],opts:[],optPrice:{},imgs:[],rooms:[]};S.imgUrl='';S.err=null;break;
+    case 'editP':{const p=S.db.providers.find(x=>x.id===t.dataset.id);if(p){S.pe=clone(p);S.imgUrl='';S.err=null;scrollTop()}break}
     case 'cancelP':S.pe=null;S.err=null;break;
     case 'saveP':{const p=S.pe;if(!p.name||!p.name.trim()){S.err='Bitte einen Namen eingeben.';break}
       ['comm','inhouse','maxG','km'].forEach(k=>{if(p[k]===''||p[k]==null)delete p[k]});
-      if(p.cat!=='location'){delete p.cap;delete p.inhouse}
+      if(p.cat!=='location'){delete p.cap;delete p.inhouse;delete p.rooms}
+      else p.rooms=(p.rooms||[]).filter(r=>(r.name||'').trim()||+r.max);
+      p.opts=(p.opts||[]).filter(k=>{const O=OPTS[p.cat]||{};return[...(O.styles||[]),...(O.extras||[]),...(O.roles||[])].some(o=>o[0]===k)});
+      const op={};Object.entries(p.optPrice||{}).forEach(([k,v])=>{if(p.opts.includes(k)&&v&&(v.base!=null||v.pp!=null))op[k]=v});p.optPrice=op;p.imgs=p.imgs||[];
       const ix=S.db.providers.findIndex(x=>x.id===p.id);if(ix>=0)S.db.providers[ix]=p;else S.db.providers.push(p);S.pe=null;S.err=null;save();break}
+    case 'imgDel':S.pe.imgs.splice(+t.dataset.i,1);break;
+    case 'imgFirst':{const u=S.pe.imgs.splice(+t.dataset.i,1)[0];S.pe.imgs.unshift(u);break}
+    case 'imgAddUrl':{const u=(S.imgUrl||'').trim();if(!/^https:\/\/[^\s"'<>]+$/.test(u)){S.err='Bitte einen Bild-Link mit https:// eingeben.';break}S.err=null;S.pe.imgs=(S.pe.imgs||[]).concat(u);S.imgUrl='';S.flash='Bild hinzugefügt. Bitte unten auf „Speichern“ drücken.';break}
+    case 'roomAdd':S.pe.rooms=(S.pe.rooms||[]).concat({name:'',min:'',max:'',desc:'',img:''});break;
+    case 'roomDel':S.pe.rooms.splice(+t.dataset.i,1);break;
+    case 'optImgDel':{const st=SET();if(st.optImg)delete st.optImg[t.dataset.k];save();break}
     case 'delP':{if(t.dataset.confirm!=='1'){t.dataset.confirm='1';t.textContent='Wirklich löschen?';return}S.db.providers=S.db.providers.filter(x=>x.id!==S.pe.id);S.pe=null;save();break}
     case 'saveSet':{const d=S.setDraft||{},st=SET();
       for(const [k,v] of Object.entries(d))setPath(st,k,v);
@@ -1181,9 +1613,10 @@ document.addEventListener('change',e=>{
   else if(a==='paid'&&k){const i=k.items[+el.dataset.i];i.paid=el.checked;logB(k,`Provision ${i.name}: ${el.checked?'bezahlt':'offen'}`);save();render()}
   else if(a==='replace'&&k&&el.value){
     const i=k.items[+el.dataset.i],loc=getP((k.items.find(x=>x.cat==='location'&&x.status!=='abgelehnt'&&x!==i)||{}).pid);
-    const x=cands(i.cat,k.brief,{exclude:k.id,loc:i.cat==='location'?null:loc}).find(y=>y.p.id===el.value);
+    const x=cands(i.cat,k.brief,{exclude:k.id,cfg:i.cfg,loc:i.cat==='location'?null:loc}).find(y=>y.p.id===el.value);
     if(x){logB(k,`${i.name} ersetzt durch ${x.p.name}`);Object.assign(i,{pid:x.p.id,name:x.p.name,price:x.price,calc:x.calc,comm:commOf(x.p),status:'offen',rating:null,paid:false});save();render()}
   }
+  else if(a==='upload'&&el.files&&el.files.length){uploadFiles([...el.files],el.dataset.to)}
   else if(a==='import'&&el.files&&el.files[0]){
     const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.providers||!d.bookings)throw 0;S.db.providers=d.providers;S.db.bookings=d.bookings;S.db.set=Object.assign(clone(DEFAULT_SET),d.set||{});S.db.demoRemoved=!!d.demoRemoved;save();S.flash='Import erfolgreich.'}catch(err){S.flash='Datei konnte nicht gelesen werden.'}render()};r.readAsText(el.files[0]);
   }
