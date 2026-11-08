@@ -296,7 +296,8 @@ button.fbox:hover{border-color:var(--accent);transform:translateX(3px)}
 .opt{position:relative;text-align:left;display:flex;flex-direction:column;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;padding:0;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
 .opt:hover{border-color:var(--gold2)}
 .opt.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
-.opt-img{aspect-ratio:16/10;background:var(--surface2);overflow:hidden}
+.opt-img{aspect-ratio:16/10;background:var(--surface2);overflow:hidden;position:relative}
+.ex-tag{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.88);color:#5b5246}
 .opts.sm .opt-img{aspect-ratio:16/8}
 .opt-img img,.gal-main img,.fi img{width:100%;height:100%;object-fit:cover;display:block}
 .opt-b{padding:14px 16px 16px;display:grid;gap:4px}
@@ -941,7 +942,10 @@ function hostView(){return stepper()+[stepNeeds,stepBrief,stepPlan,stepRequest,s
 const chosenCats=()=>ORDER.filter(c=>S.brief.cats[c]);
 const imgTag=(u,alt)=>`<img src="${esc(u)}" alt="${esc(alt||'')}" loading="lazy">`;
 const ph=(icon,txt)=>`<div class="ph">${ico(icon)}${txt?`<span>${esc(txt)}</span>`:''}</div>`;
-function optPic(c,o){const u=(SET().optImg||{})[c+':'+o[0]];return u?imgTag(u,o[1]):ph(o[3])}
+/* KI-Beispielbilder, fest in /img/opts/ (zeigen keine echten Betriebe). Eigene Bilder aus den Einstellungen haben Vorrang. */
+const DEF_IMG=new Set(['location:saal','location:restaurant','location:bar','location:garten','location:historisch','catering:buffet','catering:menue','catering:fingerfood','catering:bbq','catering:foodtruck','catering:kaffee','catering:chafing','getraenke:lieferung','getraenke:mobilebar','getraenke:cocktail','getraenke:fass','getraenke:sekt','dj:dj','dj:djmc','dj:saenger','dj:band','foto:fotograf','foto:fotobox','foto:video','deko:komplett','deko:verleih','deko:blumen']);
+const defImg=k=>DEF_IMG.has(k)?'/img/opts/'+k.replace(':','-')+'.jpg':'';
+function optPic(c,o){const k=c+':'+o[0],u=(SET().optImg||{})[k];if(u)return imgTag(u,o[1]);const d=defImg(k);return d?imgTag(d,o[1])+'<span class="ex-tag">Beispielbild</span>':ph(o[3])}
 function ctxFor(c){return{loc:c==='location'?null:S.sel.location&&S.sel.location.p,cfg:S.cfg[c]||{}}}
 function detailOf(c,cfg,room){
   cfg=cfg||{};const parts=[],st=cfg.style&&styleOf(c,cfg.style);
@@ -1355,9 +1359,9 @@ function providerExtras(p){
 function optImgSection(){
   const st=SET(),oi=st.optImg||{};
   return`<section class="panel stack" style="margin-top:22px"><h3>Bilder für die Auswahl-Optionen</h3>
-    <p class="muted">Diese Bilder sieht der Kunde bei „Wie soll es sein?“ und bei den Extras. Ohne Bild erscheint ein Symbol.</p>
+    <p class="muted">Diese Bilder sieht der Kunde bei „Wie soll es sein?“ und bei den Extras. Ohne eigenes Bild erscheint ein KI-Beispielbild oder ein Symbol. Eigene Fotos haben immer Vorrang.</p>
     ${ORDER.filter(c=>(OPTS[c].styles||[]).length||(OPTS[c].extras||[]).length).map(c=>`<div class="fld"><span>${CATS[c].label}</span><div class="aimgs">${[...(OPTS[c].styles||[]),...(OPTS[c].extras||[])].map(o=>{const k=c+':'+o[0],u=oi[k];
-      return`<figure><div class="fi">${u?imgTag(u,o[1]):ph(o[3])}</div><figcaption><b style="width:100%">${esc(o[1])}</b><label class="linkbtn" style="cursor:pointer">${u?'Ersetzen':'Hochladen'}<input type="file" accept="image/jpeg,image/png,image/webp" hidden data-act-change="upload" data-to="opt:${k}"></label>${u?`<button class="linkbtn" data-act="optImgDel" data-k="${k}">Entfernen</button>`:''}</figcaption></figure>`}).join('')}</div></div>`).join('')}</section>`;
+      const d=defImg(k);return`<figure><div class="fi">${u?imgTag(u,o[1]):d?imgTag(d,o[1]):ph(o[3])}</div><figcaption><b style="width:100%">${esc(o[1])}${!u&&d?' <small class="muted">(KI-Beispiel)</small>':''}</b><label class="linkbtn" style="cursor:pointer">${u?'Ersetzen':'Hochladen'}<input type="file" accept="image/jpeg,image/png,image/webp" hidden data-act-change="upload" data-to="opt:${k}"></label>${u?`<button class="linkbtn" data-act="optImgDel" data-k="${k}">Entfernen</button>`:''}</figcaption></figure>`}).join('')}</div></div>`).join('')}</section>`;
 }
 function gewinnView(){
   const st=SET(),cv=st.calc,bs=S.db.bookings.filter(k=>k.stage!=='storniert'&&!k.example);
