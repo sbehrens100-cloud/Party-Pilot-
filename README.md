@@ -1,8 +1,10 @@
 # PartyPilot
 
 Vermittlungsplattform für Firmen- und Privatfeiern in Heidelberg, Mannheim und Rhein-Neckar.
-Kunden geben ihre Feier ein und bekommen drei Pakete (Spar / Beliebt / Premium) aus der Dienstleister-Datenbank,
-schicken eine unverbindliche Anfrage und können den Stand verfolgen. Der Admin-Bereich enthält Cockpit,
+Kunden wählen zuerst groß an, was sie brauchen (Location, Catering, Getränke, DJ, Foto, Deko, Personal), geben die Eckdaten ein
+und sehen ihre Feier als Flussdiagramm. Zu jedem Punkt wählen sie die Art (z. B. Buffet, Menü, BBQ), Extras (z. B. Chafing Dishes,
+Fassbier) bzw. die Anzahl Helfer und danach den Anbieter mit Bildern, Räumen und Preis. Spar / Beliebt / Premium gibt es als Vorschlag.
+Danach schicken sie eine unverbindliche Anfrage und können den Stand verfolgen. Der Admin-Bereich enthält Cockpit,
 Anfragen & Event-Akten (9 Stufen mit Checklisten), Dienstleister-Datenbank, Gewinnrechnung und Einstellungen.
 
 ## Aufbau
@@ -19,9 +21,16 @@ Anfragen & Event-Akten (9 Stufen mit Checklisten), Dienstleister-Datenbank, Gewi
 - Alle Daten liegen in `partypilot-db.json` im Ordner `DATA_DIR` (auf Railway das Volume unter `/data`).
   Vor jedem Speichern wird `partypilot-db.json.bak` angelegt, dazu ein Tages-Backup in `/data/backups` (30 Tage).
 - Admin-Login mit Passwort (scrypt-Hash) und HttpOnly-Session-Cookie (30 Tage).
-- Kunden bekommen über `/api/public` nur öffentliche Felder: Name, Ort, Beschreibung, Stil, Preise.
+- Kunden bekommen über `/api/public` nur öffentliche Felder: Name, Ort, Beschreibung, Stil, Preise, Bilder, Räume, Angebot (Optionen).
   Keine Telefonnummern, E-Mails, Adressen, Provisionen, Quellen oder Notizen.
 - Begrenzung gegen Massenanfragen: Login 8 Versuche / 15 Min., Anfragen 10 / Std. pro IP.
+
+## Optionen & Bilder
+
+- Der Options-Katalog je Kategorie steht in `public/index.html` (`OPTS`): Art (`styles`, mit Preisfaktor), Extras (`extras`, mit Richtpreis) und Rollen beim Personal.
+- Je Dienstleister: `opts` (was er anbietet), `optPrice` (eigene Preise je Option), `imgs` (Bilder), bei Locations `rooms` (Name, ab/bis Personen, Beschreibung, Bild).
+- Bilder werden im Admin hochgeladen, im Browser verkleinert und unter `DATA_DIR/media` gespeichert (`/media/...`). Bilder für die Optionen pflegt der Admin unter Einstellungen.
+- Beim Start ergänzt der Server fehlende Felder bei bestehenden Dienstleistern (Startwerte aus `server/seed.js`, markiert mit „Angebot/Optionen“ unter „Zu prüfen“).
 
 ## Variablen (Railway)
 

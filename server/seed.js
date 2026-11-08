@@ -48,5 +48,27 @@ const DEFAULT_PROVIDERS=[
  {id:'P04',cat:'personal',name:'SERVICE Allstars',city:'Mannheim',addr:'68165 Mannheim',tel:'',mail:'',web:'',src:'https://de.indeed.com/Bankett-Jobs-in-Deidesheim',desc:'Servicekräfte für Gastronomie, Bar und Events',tags:['modern','gemütlich','gartenparty'],km:50,price:{hourly:32,src:'geschätzt'},check:['Stundensatz','Kontakt']}
 ];
 
-DEFAULT_PROVIDERS.forEach(p=>{if(!p.status)p.status='Lead'});
-module.exports={DEFAULT_PROVIDERS};
+/* Angebot je Anbieter (Optionen aus dem Katalog in public/index.html, OPTS).
+   Aus den Beschreibungen abgeleitet – beim Anruf prüfen. */
+const DEFAULT_OPTS={
+ L01:['saal','restaurant','garten'],L02:['saal','historisch'],L03:['restaurant','garten','historisch'],L04:['saal','historisch'],L05:['bar'],
+ L06:['saal'],L07:['saal','garten'],L08:['restaurant','saal'],L09:['saal','garten'],L10:['saal','garten'],
+ C01:['buffet','fingerfood','bbq','chafing','geschirr','dessert'],C02:['menue','buffet','fingerfood','chafing','geschirr','dessert'],
+ C03:['buffet','fingerfood','chafing','geschirr'],C04:['buffet','kaffee','chafing'],C05:['buffet','menue','fingerfood','chafing','geschirr'],
+ C06:['buffet','menue','fingerfood','chafing','geschirr','dessert','mitternacht'],C07:['buffet','fingerfood','chafing'],C08:['buffet','bbq','chafing','mitternacht'],
+ G01:['mobilebar','cocktail','sekt','glaeser','alkoholfrei'],G02:['mobilebar','sekt'],G03:['lieferung','fass','kuehlung','glaeser','alkoholfrei'],
+ D01:['dj','djmc','licht','mikro','ambiente','empfang'],D02:['dj','djmc','mikro','empfang'],D03:['dj','licht','mikro'],D04:['dj','licht','mikro'],D05:['saenger','dj','mikro','empfang'],
+ F01:['fotobox','druck','requisiten','galerie'],F02:['fotograf','galerie'],F03:['fotograf','fotobox','galerie','album'],F04:['fotograf','video','galerie'],F05:['fotograf','galerie'],
+ K01:['verleih','komplett','tischwaesche','licht','stehtisch'],K02:['komplett','licht'],K03:['verleih','moebel','stehtisch','zelt'],K04:['blumen','komplett'],
+ P01:['service','bar','kueche','aufbau','einlass'],P02:['service','bar','kueche'],P03:['service','aufbau','einlass'],P04:['service','bar']
+};
+const DEFAULT_OPTPRICE={ F03:{fotobox:{base:390}}, D05:{dj:{base:850}} };
+
+DEFAULT_PROVIDERS.forEach(p=>{
+  if(!p.status)p.status='Lead';
+  p.opts=DEFAULT_OPTS[p.id]||[];
+  p.optPrice=DEFAULT_OPTPRICE[p.id]||{};
+  p.imgs=[];
+  if(p.cat==='location')p.rooms=[];
+});
+module.exports={DEFAULT_PROVIDERS,DEFAULT_OPTS,DEFAULT_OPTPRICE};
