@@ -45,3 +45,7 @@ Anfragen & Event-Akten (9 Stufen mit Checklisten), Dienstleister-Datenbank, Gewi
 ```bash
 npm run dev   # http://localhost:8080, Passwort: test-passwort-123
 ```
+
+## Offline-Demo als einzelne Datei
+
+`node tools/build-standalone.js <public.json> PartyPilot.html` baut die Kundenansicht als eine HTML-Datei mit eingebetteten Beispielbildern. `public.json` ist die Antwort von `GET /api/public` (nur öffentliche Felder, keine Kontakte oder Provisionen). Anfragen bleiben in der Demo nur im Browser, den Admin-Bereich gibt es dort nicht.
